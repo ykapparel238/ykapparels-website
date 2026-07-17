@@ -1,9 +1,6 @@
 import type { ImageKey } from './images';
 
-/*
-  All page copy lives here so text edits never touch markup.
-  Values marked TODO are placeholders awaiting real figures from YK Apparels.
-*/
+/* All shared page copy lives here so text edits never touch markup. */
 
 export interface Capability {
   slug: string;
@@ -113,11 +110,10 @@ export const processSteps = [
 ] as const;
 
 export const stats = [
-  // TODO: replace placeholder figures with real numbers from YK Apparels
   { value: '2015', label: 'Operating since' },
   { value: '10+', label: 'Years of production' },
-  { value: '30+', label: 'Brands served' },
-  { value: '1000s', label: 'Of orders delivered' },
+  { value: '7', label: 'Production capabilities' },
+  { value: '5', label: 'Steps from brief to delivery' },
 ] as const;
 
 export const clients = [
@@ -133,7 +129,6 @@ export const clients = [
     name: 'Fitted',
     note: 'Contemporary menswear essentials brand.',
   },
-  // TODO: add remaining client brands (with permission to display)
 ] as const;
 
 export const qualityPoints = [
@@ -156,21 +151,21 @@ export const qualityPoints = [
 ] as const;
 
 export const orderInfo = [
-  { label: 'Minimum order (MOQ)', value: 'From 5 pieces', note: 'One of the lowest MOQs among clothing manufacturers in Pakistan — and sampling starts from a single piece.' },
-  { label: 'Sampling', value: '7–14 days', note: 'Proto and fit samples, revised until approved.' },
-  { label: 'Production lead time', value: '30–60 days', note: 'Depending on style complexity and quantity.' },
+  { label: 'Minimum order (MOQ)', value: 'Confirmed per style', note: 'Quantity depends on construction, yarn, colour, trims and material minimums.' },
+  { label: 'Sampling', value: 'Before production', note: 'Proto and fit samples are reviewed and revised before bulk approval.' },
+  { label: 'Production lead time', value: 'Quoted per program', note: 'Timing is confirmed after the style, quantity, materials and approvals are understood.' },
 ] as const;
 
 export const smallRuns = [
   {
     audience: 'Sampling & prototypes',
-    moq: 'It starts with one.',
-    text: 'Every partnership begins with a single sample. A prototype, a special piece, an idea you want to hold in your hands — we develop it with you, one or two pieces at a time, until it’s exactly right.',
+    moq: 'Start with a sample',
+    text: 'Begin with a physical prototype so fit, construction, material and finishing decisions can be reviewed before production.',
   },
   {
     audience: 'Your first production run',
-    moq: 'From 5 pieces',
-    text: 'A launch collection, a team in its colours, festival or event merch — five pieces per style is enough to begin, produced with the same care as our largest programs.',
+    moq: 'A focused first run',
+    text: 'For a launch collection, team or event program, ask us to evaluate the smallest practical quantity for the actual style and materials.',
   },
   {
     audience: 'Growing together',
@@ -182,20 +177,19 @@ export const smallRuns = [
 export const faqs = [
   {
     q: 'What is your minimum order quantity (MOQ)?',
-    a: 'Our MOQ is 5 pieces per style — one of the lowest minimum order quantities among clothing manufacturers in Pakistan. Startups can launch a collection with five pieces per style, and event or team orders can start from as few as two. When you are ready to scale, the same lines run hundreds or thousands of pieces.',
+    a: 'MOQ is confirmed per style because construction, yarn, colour, trims and supplier minimums all affect the practical quantity. Send the product and target quantity for an honest feasibility review.',
   },
   {
     q: 'How does sampling work?',
-    a: 'Every program starts with a sample. Send us your tech pack — or even a reference photo — and we develop a proto sample within roughly 7–14 days, then revise it with you until it is approved for production. One-off samples and prototypes are welcome; you do not need a production commitment to sample with us.',
+    a: 'Send a tech pack, reference garment or clear product images. We confirm the missing decisions, develop a prototype and consolidate revisions until the sample and production specification are approved.',
   },
   {
     q: 'What are your production lead times?',
-    a: 'Typical production lead time is 30–60 days after sample approval, depending on style complexity, quantity and yarn availability. We track output daily by style, stage and shift, so the date we commit to is a date we can defend — and you get honest updates, not surprises.',
+    a: 'Lead time is quoted after the style, quantity, material availability, sampling status and required delivery date are understood. The agreed schedule should identify buyer approvals as well as factory production time.',
   },
-  // TODO: confirm real shipping terms (FOB/CIF, ports) with YK Apparels
   {
     q: 'Do you ship internationally?',
-    a: 'Yes. We regularly work with international brands and ship worldwide from Lahore, Pakistan, with full export documentation. Shipping terms are agreed per order — ask us about FOB or door-to-door options for your destination when you send your inquiry.',
+    a: 'International inquiries are welcome. Destination, shipping responsibility, commercial terms and required documentation are confirmed for each order before production is committed.',
   },
   {
     q: 'What products do you manufacture?',
@@ -203,10 +197,10 @@ export const faqs = [
   },
   {
     q: 'Do you work with new brands and startups?',
-    a: 'Gladly — some of our strongest partnerships began with a founder and a handful of pieces. With a 5-piece MOQ, sampling from a single piece and honest feasibility feedback before you commit, we are built to be the first manufacturer a new brand works with, and the last one it needs.',
+    a: 'Yes. New brands can begin with a clear product brief and sampling. Share the target quantity and launch plan so the team can explain what is feasible, which material minimums apply and how the style could scale.',
   },
   {
     q: 'How do I start working with YK Apparels?',
-    a: 'Send an inquiry through our contact form or WhatsApp with whatever you have — a tech pack is ideal, but a reference photo and a target quantity is enough. We reply within 1–2 business days with honest feedback on feasibility, pricing and timelines, then move to sampling.',
+    a: 'Send an inquiry or WhatsApp message with your product type, reference or tech pack, target quantity and required date. The team will review feasibility, clarify missing specifications and outline the next step.',
   },
 ] as const;

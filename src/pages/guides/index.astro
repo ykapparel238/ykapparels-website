@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import CTA from '../../components/CTA.astro';
+import { guides } from '../../data/guides';
+---
+
+<Base
+  title="Garment Manufacturing Guides for Brands | YK Apparels"
+  description="Practical guides for brands planning custom knitwear, private-label garments, tech packs, sampling, quality control and apparel sourcing in Asia."
+  canonicalPath="/guides/"
+  breadcrumbs={[{ name: 'Guides', href: '/guides/' }]}
+>
+  <section class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+    <SectionHeading
+      as="h1"
+      eyebrow="Resources for brands"
+      title="Make better manufacturing decisions before you order"
+      lead="Practical, product-focused guides for preparing a brief, comparing factories and controlling approvals from sampling through repeat production."
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
+      {guides.map((guide) => (
+        <article class="rounded-3xl border border-line bg-surface p-7 sm:p-9">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent-2">{guide.readTime}</p>
+          <h2 class="font-display mt-3 text-2xl font-semibold leading-snug text-ink">
+            <a href={`/guides/${guide.slug}/`} class="transition-colors hover:text-accent-2">{guide.h1}</a>
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-muted">{guide.description}</p>
+          <a href={`/guides/${guide.slug}/`} class="mt-6 inline-block text-sm font-semibold text-accent">Read the guide →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CTA title="Have a product question the guides do not answer?" text="Send the product type, reference or tech pack, quantity and target date for a direct feasibility discussion." />
+</Base>

@@ -4,15 +4,12 @@ import { site, nav, gaMeasurementId } from '../data/site';
 
 const year = new Date().getFullYear();
 
-// keyword-anchored internal links to capability sections
-const whatWeMake = [
-  { slug: 'sweaters-knitwear', label: 'Sweater manufacturing' },
-  { slug: 'knitted-polos', label: 'Knitted polo shirts' },
-  { slug: 'event-team-knits', label: 'Event & team knits' },
-  { slug: 'kids-wear', label: 'Kids wear manufacturing' },
-  { slug: 'kurta-shalwar', label: 'Kurta shalwar & traditional wear' },
-  { slug: 'embroidery', label: 'Embroidery services' },
-  { slug: 'fabric-sourcing', label: 'Yarn & fabric sourcing' },
+const forBrands = [
+  { href: '/custom-knitwear-manufacturer/', label: 'Custom knitwear manufacturing' },
+  { href: '/private-label-clothing-manufacturer/', label: 'Private-label production' },
+  { href: '/low-moq-clothing-manufacturer/', label: 'Low-MOQ manufacturing' },
+  { href: '/garment-manufacturer-pakistan/', label: 'Manufacturing in Pakistan' },
+  { href: '/garment-manufacturer-asia/', label: 'Sourcing garments in Asia' },
 ] as const;
 ---
 
@@ -21,8 +18,8 @@ const whatWeMake = [
     <div>
       <a href="/" aria-label="YK Apparels — home"><Logo /></a>
       <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-        A knitwear manufacturer and production facility in Lahore, Pakistan — producing for
-        international and Pakistani brands since {site.founded}.
+        A knitwear manufacturer and production facility in Lahore, Pakistan — supporting custom
+        garment programs for growing brands since {site.founded}.
       </p>
       <div class="mt-5 flex gap-3">
         <span class="social-link" aria-label="Facebook — profile coming soon" aria-disabled="true" title="Facebook profile coming soon">
@@ -52,13 +49,13 @@ const whatWeMake = [
       </ul>
     </nav>
 
-    <nav aria-label="What we make">
-      <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">What we make</h3>
+    <nav aria-label="For brands">
+      <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">For brands</h3>
       <ul class="mt-4 space-y-2.5">
         {
-          whatWeMake.map((item) => (
+          forBrands.map((item) => (
             <li>
-              <a href={`/capabilities/#${item.slug}`} class="text-sm text-body transition-colors hover:text-accent">
+              <a href={item.href} class="text-sm text-body transition-colors hover:text-accent">
                 {item.label}
               </a>
             </li>
@@ -71,13 +68,13 @@ const whatWeMake = [
       <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Contact</h3>
       <ul class="mt-4 space-y-3 text-sm text-body">
         <li>
-          <a href={`mailto:${site.email}`} class="transition-colors hover:text-accent">{site.email}</a>
+          <a href={`mailto:${site.email}`} data-track-event="email_click" data-track-location="footer" class="transition-colors hover:text-accent">{site.email}</a>
         </li>
         <li>
-          <a href={site.phoneHref} class="transition-colors hover:text-accent">{site.phone}</a>
+          <a href={site.phoneHref} data-track-event="phone_click" data-track-location="footer" class="transition-colors hover:text-accent">{site.phone}</a>
         </li>
         <li>
-          <a href={site.whatsappHref} class="transition-colors hover:text-accent" rel="noopener" target="_blank">
+          <a href={site.whatsappHref} data-track-event="whatsapp_click" data-track-location="footer" class="transition-colors hover:text-accent" rel="noopener" target="_blank">
             WhatsApp us
           </a>
         </li>

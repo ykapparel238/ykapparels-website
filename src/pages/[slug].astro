@@ -1,0 +1,19 @@
+---
+import CommercialLanding from '../components/CommercialLanding.astro';
+import { commercialPages, type CommercialPage } from '../data/commercial-pages';
+
+export function getStaticPaths() {
+  return commercialPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: CommercialPage;
+}
+
+const { page } = Astro.props;
+---
+
+<CommercialLanding page={page} />

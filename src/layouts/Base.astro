@@ -6,16 +6,34 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { site, defaultTheme } from '../data/site';
-import { faqs } from '../data/content';
 
 interface Props {
   title: string;
   description: string;
+  canonicalPath?: string;
+  image?: string;
+  imageAlt?: string;
+  robots?: string;
+  ogType?: 'website' | 'article';
+  breadcrumbs?: Array<{ name: string; href: string }>;
+  faqItems?: ReadonlyArray<{ q: string; a: string }>;
+  structuredData?: Array<Record<string, unknown>>;
 }
 
-const { title, description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/og.png', Astro.site);
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  image = '/og.png',
+  imageAlt = 'YK Apparels — knitwear manufacturer in Lahore, Pakistan',
+  robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+  ogType = 'website',
+  breadcrumbs: suppliedBreadcrumbs,
+  faqItems,
+  structuredData = [],
+} = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+const ogImage = new URL(image, Astro.site);
 const logoImage = new URL('/apple-touch-icon.png', Astro.site);
 const verifiedSocialProfiles = Object.values(site.socials).filter(Boolean);
 
@@ -55,6 +73,28 @@ const organization = {
   ...(verifiedSocialProfiles.length > 0 ? { sameAs: verifiedSocialProfiles } : {}),
 };
 
+const website = {
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: `${site.url}/`,
+  name: site.name,
+  description: site.description,
+  publisher: { '@id': `${site.url}/#organization` },
+  inLanguage: 'en',
+};
+
+const webPage = {
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  url: String(canonical),
+  name: title,
+  description,
+  isPartOf: { '@id': `${site.url}/#website` },
+  about: { '@id': `${site.url}/#organization` },
+  primaryImageOfPage: String(ogImage),
+  inLanguage: 'en',
+};
+
 // Breadcrumb trail for inner pages (Home → Page)
 const pageLabels: Record<string, string> = {
   '/capabilities/': 'Capabilities',
@@ -63,24 +103,33 @@ const pageLabels: Record<string, string> = {
   '/contact/': 'Contact',
   '/privacy/': 'Privacy Policy',
 };
-const path = Astro.url.pathname;
+const path = canonical.pathname;
+const breadcrumbItems = suppliedBreadcrumbs ??
+  (path !== '/' && pageLabels[path]
+    ? [{ name: pageLabels[path], href: path }]
+    : []);
 const breadcrumbs =
-  path !== '/' && pageLabels[path]
+  breadcrumbItems.length > 0
     ? {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
-          { '@type': 'ListItem', position: 2, name: pageLabels[path], item: `${site.url}${path}` },
-        ],
+          { name: 'Home', href: '/' },
+          ...breadcrumbItems,
+        ].map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: String(new URL(item.href, Astro.site)),
+        })),
       }
     : null;
 
-// FAQ schema only where the full FAQ section lives
+// FAQ schema is emitted only when the same questions are visible on the page.
 const faqSchema =
-  path === '/capabilities/'
+  faqItems && faqItems.length > 0
     ? {
         '@type': 'FAQPage',
-        mainEntity: faqs.map((f) => ({
+        mainEntity: faqItems.map((f) => ({
           '@type': 'Question',
           name: f.q,
           acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -90,7 +139,7 @@ const faqSchema =
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@graph': [organization, breadcrumbs, faqSchema].filter(Boolean),
+  '@graph': [organization, website, webPage, breadcrumbs, faqSchema, ...structuredData].filter(Boolean),
 };
 ---
 
@@ -101,6 +150,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
@@ -112,7 +162,7 @@ const jsonLd = {
     <link rel="preload" as="font" type="font/woff2" crossorigin href={interLatin} />
     <link rel="preload" as="font" type="font/woff2" crossorigin href={frauncesLatin} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
@@ -121,7 +171,7 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="YK Apparels — knitwear manufacturer in Lahore, Pakistan" />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -154,6 +204,24 @@ const jsonLd = {
     <Footer />
     <ConsentBanner />
     <script>
+      type ConversionDetail = { name: string; location?: string };
+      const trackConversion = ({ name, location }: ConversionDetail) => {
+        const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+        gtag?.('event', name, location ? { link_location: location } : undefined);
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = (event.target as Element | null)?.closest<HTMLElement>('[data-track-event]');
+        if (!target) return;
+        trackConversion({
+          name: target.dataset.trackEvent ?? 'interaction',
+          location: target.dataset.trackLocation,
+        });
+      });
+      window.addEventListener('yk:conversion', (event) => {
+        trackConversion((event as CustomEvent<ConversionDetail>).detail);
+      });
+
       // Scroll reveal for elements carrying .reveal
       const revealables = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {

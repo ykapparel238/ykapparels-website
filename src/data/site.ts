@@ -11,17 +11,19 @@ const envTheme = import.meta.env.PUBLIC_DEFAULT_THEME as ThemeChoice | undefined
 export const defaultTheme: ThemeChoice =
   envTheme && themeChoices.includes(envTheme) ? envTheme : 'light';
 
-// TODO: paste your GA4 Measurement ID (looks like "G-XXXXXXXXXX") from
-// analytics.google.com → Admin → Data streams. While this is empty, the site
-// loads NO analytics and shows NO cookie banner (fully cookie-free).
-export const gaMeasurementId = '';
+// Configure PUBLIC_GA_MEASUREMENT_ID in the deployment environment. Invalid or
+// missing IDs keep the site cookie-free and prevent the analytics script/banner.
+const envGaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
+export const gaMeasurementId = /^G-[A-Z0-9]+$/.test(envGaMeasurementId)
+  ? envGaMeasurementId
+  : '';
 
 export const site = {
   name: 'YK Apparels',
   legalName: 'YK Apparels',
   tagline: 'Knitwear manufacturer in Lahore, Pakistan',
   description:
-    'YK Apparels is a knitwear and garment manufacturer in Lahore, Pakistan, producing sweaters, knitted polos, kids wear and traditional wear for international and Pakistani brands since 2015 — with low MOQs from 5 pieces per style.',
+    'YK Apparels is a knitwear and garment manufacturer in Lahore, Pakistan, producing custom sweaters, knitted polos, kids wear and traditional wear for growing brands since 2015.',
   url: 'https://ykapparels.com',
   founded: 2015,
   email: 'contact@ykapparels.com',
@@ -47,7 +49,9 @@ export const site = {
 
 export const nav = [
   { label: 'Home', href: '/' },
+  { label: 'Custom Knitwear', href: '/custom-knitwear-manufacturer/' },
   { label: 'Capabilities', href: '/capabilities/' },
+  { label: 'Guides', href: '/guides/' },
   { label: 'About & Facility', href: '/about/' },
   { label: 'Clients', href: '/clients/' },
   { label: 'Contact', href: '/contact/' },

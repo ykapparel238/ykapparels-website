@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import CTA from '../components/CTA.astro';
-import { capabilities, orderInfo } from '../data/content';
+import { capabilities, orderInfo, faqs } from '../data/content';
 import GrowthJourney from '../components/GrowthJourney.astro';
 import FAQ from '../components/FAQ.astro';
 ---
@@ -11,6 +11,7 @@ import FAQ from '../components/FAQ.astro';
 <Base
   title="Sweater & Knitwear Manufacturing Capabilities | YK Apparels"
   description="Sweater manufacturing, knitted polos, kids wear, traditional wear, embroidery and yarn sourcing — seven garment manufacturing capabilities in Lahore, Pakistan."
+  faqItems={faqs}
 >
   <section class="mx-auto max-w-6xl px-5 pt-16 pb-4 sm:px-8 lg:pt-20">
     <SectionHeading

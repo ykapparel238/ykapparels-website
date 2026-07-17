@@ -3,14 +3,15 @@
   Zero-JS FAQ accordion using native <details>/<summary>.
   All answer text is in the DOM — fully crawlable.
 */
-import { faqs } from '../data/content';
+import { faqs as defaultFaqs } from '../data/content';
 
 interface Props {
+  items?: ReadonlyArray<{ q: string; a: string }>;
   limit?: number;
   class?: string;
 }
-const { limit, class: className = '' } = Astro.props;
-const items = limit ? faqs.slice(0, limit) : faqs;
+const { items: suppliedItems = defaultFaqs, limit, class: className = '' } = Astro.props;
+const items = limit ? suppliedItems.slice(0, limit) : suppliedItems;
 ---
 
 <div class:list={['space-y-3', className]}>

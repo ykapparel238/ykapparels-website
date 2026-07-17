@@ -3,6 +3,7 @@ import Logo from './Logo.astro';
 import { nav } from '../data/site';
 
 const current = Astro.url.pathname;
+const headerNav = nav.filter((item) => item.href !== '/' && item.href !== '/contact/');
 const isActive = (href: string) =>
   href === '/' ? current === '/' : current.startsWith(href.replace(/\/$/, ''));
 ---
@@ -15,7 +16,7 @@ const isActive = (href: string) =>
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">
       {
-        nav.map((item) => (
+        headerNav.map((item) => (
           <a
             href={item.href}
             class:list={[
@@ -71,7 +72,7 @@ const isActive = (href: string) =>
   <div id="mobile-menu" class="hidden border-t border-line bg-bg lg:hidden">
     <nav class="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8" aria-label="Mobile">
       {
-        nav.map((item) => (
+        headerNav.map((item) => (
           <a
             href={item.href}
             class:list={[

@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import FAQ from './FAQ.astro';
+import CTA from './CTA.astro';
+import type { Guide } from '../data/guides';
+import { site } from '../data/site';
+
+interface Props {
+  guide: Guide;
+}
+
+const { guide } = Astro.props;
+const canonicalPath = `/guides/${guide.slug}/`;
+const articleSchema = {
+  '@type': 'Article',
+  '@id': `${site.url}${canonicalPath}#article`,
+  headline: guide.h1,
+  description: guide.description,
+  datePublished: guide.published,
+  dateModified: guide.updated,
+  mainEntityOfPage: { '@id': `${site.url}${canonicalPath}#webpage` },
+  author: { '@id': `${site.url}/#organization` },
+  publisher: { '@id': `${site.url}/#organization` },
+  inLanguage: 'en',
+};
+---
+
+<Base
+  title={guide.title}
+  description={guide.description}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  breadcrumbs={[
+    { name: 'Guides', href: '/guides/' },
+    { name: guide.h1, href: canonicalPath },
+  ]}
+  faqItems={guide.faqs}
+  structuredData={[articleSchema]}
+>
+  <article>
+    <header class="border-b border-line bg-sunken">
+      <div class="mx-auto max-w-4xl px-5 py-16 sm:px-8 lg:py-20">
+        <nav aria-label="Breadcrumb" class="text-xs text-muted">
+          <a href="/" class="hover:text-accent">Home</a><span class="mx-2" aria-hidden="true">/</span>
+          <a href="/guides/" class="hover:text-accent">Guides</a>
+        </nav>
+        <p class="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-accent-2">Buyer guide</p>
+        <h1 class="font-display mt-4 text-4xl font-semibold leading-tight text-ink sm:text-5xl">{guide.h1}</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted">{guide.lead}</p>
+        <p class="mt-7 text-xs font-medium text-muted">
+          Published <time datetime={guide.published}>17 July 2026</time> · {guide.readTime}
+        </p>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-4xl space-y-14 px-5 py-16 sm:px-8">
+      {guide.sections.map((section, index) => (
+        <section id={`section-${index + 1}`}>
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent-2">Step {index + 1}</p>
+          <h2 class="font-display mt-3 text-3xl font-semibold text-ink">{section.title}</h2>
+          <p class="mt-5 text-base leading-relaxed text-muted">{section.text}</p>
+          <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+            {section.points.map((point) => (
+              <li class="flex gap-3 rounded-xl border border-line bg-surface p-4 text-sm leading-relaxed text-body">
+                <span class="mt-2 size-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <section class="border-t border-line pt-14">
+        <h2 class="font-display text-3xl font-semibold text-ink">Frequently asked questions</h2>
+        <div class="mt-7"><FAQ items={guide.faqs} /></div>
+      </section>
+    </div>
+  </article>
+
+  <section class="border-y border-line bg-sunken">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-2">Next step</p>
+      <h2 class="font-display mt-3 text-3xl font-semibold text-ink">Continue planning your product</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        {guide.related.map((item) => (
+          <a href={item.href} class="rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent-2">
+            <h3 class="font-display text-lg font-semibold text-ink">{item.label}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-accent">Read more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="pt-20"><CTA /></div>
+</Base>

@@ -28,6 +28,8 @@ const {
     <div class="relative mt-9 flex flex-wrap items-center justify-center gap-3.5">
       <a
         href="/contact/"
+        data-track-event="inquiry_cta_click"
+        data-track-location="sitewide_cta"
         class="rounded-full px-8 py-3.5 text-sm font-bold transition-transform hover:-translate-y-0.5"
         style="background: #d9ab52; color: #1c1503;"
       >
@@ -37,6 +39,8 @@ const {
         href={site.whatsappHref}
         rel="noopener"
         target="_blank"
+        data-track-event="whatsapp_click"
+        data-track-location="sitewide_cta"
         class="flex items-center gap-2 rounded-full border px-8 py-3.5 text-sm font-semibold text-panel-ink transition-colors hover:border-panel-ink"
         style="border-color: color-mix(in srgb, var(--panel-ink) 30%, transparent);"
       >

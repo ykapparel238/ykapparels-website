@@ -3,28 +3,6 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ClientLogos from '../components/ClientLogos.astro';
 import CTA from '../components/CTA.astro';
-
-const testimonials = [
-  // TODO: replace with final client quotes (names confirmed, quotes to be updated)
-  {
-    quote:
-      'They treat a fifty-piece order with the same seriousness as a five-hundred-piece one. Sampling was quick, feedback was honest, and delivery came exactly when they said it would.',
-    name: 'Muda',
-    role: 'Brand founder',
-  },
-  {
-    quote:
-      'What stood out was the communication. When a yarn shade came in slightly off, they flagged it before production instead of shipping the problem to us. That’s rare.',
-    name: 'Akbar',
-    role: 'Sourcing lead',
-  },
-  {
-    quote:
-      'We started with a small trial run and never looked back. Quality has stayed consistent across every repeat order — the size charts just hold, season after season.',
-    name: 'Hassan',
-    role: 'Production manager',
-  },
-] as const;
 ---
 
 <Base
@@ -49,22 +27,20 @@ const testimonials = [
 
   <section class="border-y border-line bg-sunken">
     <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-      <SectionHeading eyebrow="In their words" title="What clients say" align="center" />
+      <SectionHeading eyebrow="A dependable process" title="What a brand can evaluate before ordering" align="center" />
       <div class="mx-auto mt-11 grid max-w-5xl gap-4 sm:grid-cols-3">
-        {
-          testimonials.map((t) => (
-            <figure class="rounded-2xl border border-line bg-surface p-8">
-              <svg class="size-7 text-accent opacity-40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M10.5 5C7 6.5 4.8 9.4 4.8 13.2c0 3 1.8 5 4.2 5 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.4-3.3-3.4h-.6c.4-1.9 1.6-3.4 3.5-4.4L10.5 5Zm9 0c-3.5 1.5-5.7 4.4-5.7 8.2 0 3 1.8 5 4.2 5 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.4-3.3-3.4h-.6c.4-1.9 1.6-3.4 3.5-4.4L19.5 5Z" />
-              </svg>
-              <blockquote class="mt-4 text-[15px] leading-relaxed text-body">{t.quote}</blockquote>
-              <figcaption class="mt-5">
-                <p class="text-sm font-semibold text-ink">{t.name}</p>
-                <p class="text-xs text-muted">{t.role}</p>
-              </figcaption>
-            </figure>
-          ))
-        }
+        <article class="rounded-2xl border border-line bg-surface p-8">
+          <h2 class="font-display text-xl font-semibold text-ink">Relevant product experience</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted">Ask for examples aligned with your garment type, construction and quality level before development begins.</p>
+        </article>
+        <article class="rounded-2xl border border-line bg-surface p-8">
+          <h2 class="font-display text-xl font-semibold text-ink">A controlled approval path</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted">Use a written specification and approved physical sample to define what production must reproduce.</p>
+        </article>
+        <article class="rounded-2xl border border-line bg-surface p-8">
+          <h2 class="font-display text-xl font-semibold text-ink">Clear production communication</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted">Agree the owner, checkpoints and evidence for material, quality, packing and delivery decisions.</p>
+        </article>
       </div>
     </div>
   </section>
