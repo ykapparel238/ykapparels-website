@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/fraunces/wght-italic.css';
+
+/*
+  Design tokens — one brand, two tones.
+  Light: warm cream + deep emerald ink, gold details
+  Dark: green-black + cream, gold as the interactive accent
+  Components only ever use the semantic names below.
+*/
+:root {
+  --bg: #f8f5ec;
+  --surface: #fffdf6;
+  --sunken: #efeadb;
+  --ink: #10291f;
+  --body: #37473e;
+  --muted: #64735f;
+  --line: #ded6bf;
+  --accent: #14563e;
+  --accent-strong: #0d3f2d;
+  --accent-ink: #f8f5ec;
+  --accent-soft: #e6e8d3;
+  --accent-2: #96702a;
+  --panel: #0e291f;
+  --panel-ink: #f4efdd;
+  --panel-muted: #a9bcaa;
+  --hero-grad-a: #ece6d0;
+  --hero-grad-b: #f8f5ec;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0a1512;
+  --surface: #122019;
+  --sunken: #071009;
+  --ink: #f2edda;
+  --body: #c3cbb4;
+  --muted: #87957f;
+  --line: #24382c;
+  --accent: #d9ab52;
+  --accent-strong: #e6bd6c;
+  --accent-ink: #1c1503;
+  --accent-soft: #26301d;
+  --accent-2: #d9ab52;
+  --panel: #0e291f;
+  --panel-ink: #f4efdd;
+  --panel-muted: #a9bcaa;
+  --hero-grad-a: #10211a;
+  --hero-grad-b: #0a1512;
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-panel: var(--panel);
+  --color-panel-ink: var(--panel-ink);
+  --color-panel-muted: var(--panel-muted);
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Fraunces optical sizing + soft "wonk" for display headings */
+.font-display {
+  font-variation-settings: 'opsz' 72, 'SOFT' 40;
+  letter-spacing: -0.015em;
+}
+
+/* ————— Motion ————— */
+
+/* Scroll reveal: elements with .reveal fade/rise in when they enter the viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Capabilities marquee strip */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Faint knit texture for decorative surfaces */
+.knit-texture {
+  background-image: repeating-linear-gradient(
+      115deg,
+      transparent 0,
+      transparent 14px,
+      color-mix(in srgb, var(--muted) 12%, transparent) 14px,
+      color-mix(in srgb, var(--muted) 12%, transparent) 15px
+    ),
+    repeating-linear-gradient(
+      65deg,
+      transparent 0,
+      transparent 14px,
+      color-mix(in srgb, var(--muted) 12%, transparent) 14px,
+      color-mix(in srgb, var(--muted) 12%, transparent) 15px
+    );
+}

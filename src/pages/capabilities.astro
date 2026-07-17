@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import CTA from '../components/CTA.astro';
+import { capabilities, orderInfo } from '../data/content';
+import GrowthJourney from '../components/GrowthJourney.astro';
+---
+
+<Base
+  title="Capabilities — Sweaters, Knitted Polos, Kids Wear & More | YK Apparels"
+  description="Production capabilities at YK Apparels: flat-knit sweaters, knitted polo shirts, kids wear, kurta shalwar, in-house embroidery and fabric sourcing in Lahore, Pakistan."
+>
+  <section class="mx-auto max-w-6xl px-5 pt-16 pb-4 sm:px-8 lg:pt-20">
+    <SectionHeading
+      eyebrow="Capabilities"
+      title="What we produce"
+      lead="Seven capabilities under one roof, one quality loop from yarn to carton. Every program below runs with inline inspection and daily production tracking."
+    />
+  </section>
+
+  <section class="mx-auto max-w-6xl space-y-6 px-5 py-12 sm:px-8">
+    {
+      capabilities.map((cap, i) => (
+        <article
+          id={cap.slug}
+          class="grid scroll-mt-24 items-center gap-8 rounded-3xl border border-line bg-surface p-7 sm:p-10 lg:grid-cols-2 lg:gap-14"
+        >
+          <div class:list={[i % 2 === 1 && 'lg:order-2']}>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              {String(i + 1).padStart(2, '0')}
+            </p>
+            <h2 class="font-display mt-3 text-2xl font-semibold text-ink sm:text-3xl">{cap.title}</h2>
+            <p class="mt-4 leading-relaxed text-muted">{cap.long}</p>
+            <ul class="mt-6 space-y-2.5">
+              {cap.details.map((detail) => (
+                <li class="flex items-center gap-3 text-sm text-body">
+                  <span class="size-1.5 shrink-0 rounded-full bg-accent" />
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <PhotoSlot
+            variant={cap.art}
+            src={cap.photo}
+            alt={cap.photoAlt}
+            label={cap.title}
+            ratio="4 / 3"
+            class:list={[i % 2 === 1 && 'lg:order-1']}
+          />
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="border-y border-line bg-sunken">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+      <SectionHeading
+        eyebrow="Working with us"
+        title="Order basics"
+        lead="Every program is different — these are honest starting points, not fine print."
+        align="center"
+      />
+      <div class="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-3">
+        {
+          orderInfo.map((info) => (
+            <div class="rounded-2xl border border-line bg-surface p-7 text-center">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{info.label}</p>
+              <p class="font-display mt-3 text-2xl font-semibold text-ink">{info.value}</p>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{info.note}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mx-auto mt-12 max-w-4xl rounded-3xl border border-line bg-surface p-8 sm:p-10">
+        <h3 class="font-display text-2xl font-semibold text-ink">Growing together, from the first piece</h3>
+        <p class="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
+          A partnership doesn't begin at a thousand pieces — it begins with trust. Whether you're
+          launching a brand, dressing a team or testing one idea, we produce it with full care and
+          stay with you as you scale.
+        </p>
+        <GrowthJourney class="mt-9" />
+      </div>
+    </div>
+  </section>
+
+  <div class="pt-20">
+    <CTA
+      title="Don't see your product here?"
+      text="If it's knit or sewn, chances are we can produce it or point you to someone who can. Ask us — we answer honestly."
+    />
+  </div>
+</Base>

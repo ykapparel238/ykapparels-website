@@ -1,0 +1,118 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../data/site';
+
+const current = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : current.startsWith(href.replace(/\/$/, ''));
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
+  <div class="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+    <a href="/" class="rounded-md focus:outline-2 focus:outline-accent" aria-label="YK Apparels — home">
+      <Logo />
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm font-medium transition-colors hover:text-ink',
+              isActive(item.href) ? 'text-ink' : 'text-muted',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <button
+        id="theme-toggle"
+        type="button"
+        class="grid size-9 place-items-center rounded-full border border-line text-muted transition-colors hover:text-ink"
+        aria-label="Toggle dark mode"
+      >
+        <svg class="size-4 dark-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5"></circle>
+          <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"></path>
+        </svg>
+        <svg class="size-4 light-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+      </button>
+
+      <a
+        href="/contact/"
+        class="hidden rounded-full bg-accent px-4.5 py-2 text-sm font-semibold text-accent-ink transition-colors hover:bg-accent-strong sm:inline-block"
+      >
+        Start an inquiry
+      </a>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="grid size-9 place-items-center rounded-full border border-line text-ink lg:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-line bg-bg lg:hidden">
+    <nav class="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8" aria-label="Mobile">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'border-b border-line py-3.5 text-[15px] font-medium last:border-b-0',
+              isActive(item.href) ? 'text-accent' : 'text-ink',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact/" class="mt-3 mb-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-ink">
+        Start an inquiry
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* icon swap driven by the html[data-theme] attribute */
+  :global([data-theme='dark']) .dark-hidden {
+    display: none;
+  }
+  :global(:root:not([data-theme='dark'])) .light-hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const themeBtn = document.getElementById('theme-toggle');
+  themeBtn?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('theme', next);
+  });
+
+  const menuBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  menuBtn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+</script>

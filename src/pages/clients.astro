@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ClientLogos from '../components/ClientLogos.astro';
+import CTA from '../components/CTA.astro';
+
+const testimonials = [
+  // TODO: replace with final client quotes (names confirmed, quotes to be updated)
+  {
+    quote:
+      'They treat a fifty-piece order with the same seriousness as a five-hundred-piece one. Sampling was quick, feedback was honest, and delivery came exactly when they said it would.',
+    name: 'Muda',
+    role: 'Brand founder',
+  },
+  {
+    quote:
+      'What stood out was the communication. When a yarn shade came in slightly off, they flagged it before production instead of shipping the problem to us. That’s rare.',
+    name: 'Akbar',
+    role: 'Sourcing lead',
+  },
+  {
+    quote:
+      'We started with a small trial run and never looked back. Quality has stayed consistent across every repeat order — the size charts just hold, season after season.',
+    name: 'Hassan',
+    role: 'Production manager',
+  },
+] as const;
+---
+
+<Base
+  title="Clients — Brands That Produce With YK Apparels"
+  description="YK Apparels manufactures for leading Pakistani brands including Breakout, Hopscotch and Fitted — and partners with international labels."
+>
+  <section class="mx-auto max-w-6xl px-5 pt-16 pb-4 sm:px-8 lg:pt-20">
+    <SectionHeading
+      eyebrow="Clients"
+      title="Brands that produce with us"
+      lead="Manufacturing is a trust business. Ours has been earned order by order with some of Pakistan's most recognised brands — the same standard we bring to international partners."
+    />
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+    <ClientLogos showNotes />
+    <p class="mt-6 text-sm text-muted">
+      …and more. We're happy to share references relevant to your product category on request.
+    </p>
+  </section>
+
+  <section class="border-y border-line bg-sunken">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+      <SectionHeading eyebrow="In their words" title="What clients say" align="center" />
+      <div class="mx-auto mt-11 grid max-w-5xl gap-4 sm:grid-cols-3">
+        {
+          testimonials.map((t) => (
+            <figure class="rounded-2xl border border-line bg-surface p-8">
+              <svg class="size-7 text-accent opacity-40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10.5 5C7 6.5 4.8 9.4 4.8 13.2c0 3 1.8 5 4.2 5 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.4-3.3-3.4h-.6c.4-1.9 1.6-3.4 3.5-4.4L10.5 5Zm9 0c-3.5 1.5-5.7 4.4-5.7 8.2 0 3 1.8 5 4.2 5 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.4-3.3-3.4h-.6c.4-1.9 1.6-3.4 3.5-4.4L19.5 5Z" />
+              </svg>
+              <blockquote class="mt-4 text-[15px] leading-relaxed text-body">{t.quote}</blockquote>
+              <figcaption class="mt-5">
+                <p class="text-sm font-semibold text-ink">{t.name}</p>
+                <p class="text-xs text-muted">{t.role}</p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="pt-20">
+    <CTA
+      title="Your brand could be on this page"
+      text="Start with a single style or a sample run — that's how most of our longest client relationships began."
+    />
+  </div>
+</Base>

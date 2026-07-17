@@ -1,0 +1,24 @@
+---
+import { capabilities } from '../data/content';
+
+const items = capabilities.map((cap) => cap.title);
+---
+
+<div class="marquee border-y border-line bg-surface py-4" aria-hidden="true">
+  <div class="marquee-track">
+    {
+      [0, 1].map(() => (
+        <div class="flex shrink-0 items-center">
+          {items.map((item) => (
+            <span class="flex items-center">
+              <span class="font-display px-6 text-lg font-semibold text-ink sm:text-xl">{item}</span>
+              <svg class="size-3 text-accent-2" viewBox="0 0 12 12" fill="currentColor">
+                <path d="M6 0l1.5 4.5L12 6 7.5 7.5 6 12 4.5 7.5 0 6l4.5-1.5L6 0z" />
+              </svg>
+            </span>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>

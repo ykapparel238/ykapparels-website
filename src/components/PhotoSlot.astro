@@ -1,0 +1,59 @@
+---
+/*
+  Illustrated figure that becomes a photo the moment `src` is provided —
+  the layout never changes. Until then it shows themed knitwear line art,
+  so the site looks finished without photography.
+*/
+import Illustration from './Illustration.astro';
+import type { IllustrationVariant } from '../data/illustrations';
+
+interface Props {
+  variant?: IllustrationVariant;
+  src?: string;
+  alt?: string;
+  label: string;
+  ratio?: string; // CSS aspect-ratio value, e.g. "4 / 3"
+  class?: string;
+}
+const { variant = 'sweater', src, alt = '', label, ratio = '4 / 3', class: className = '' } = Astro.props;
+---
+
+<figure
+  class:list={['relative overflow-hidden rounded-2xl border border-line bg-sunken', className]}
+  style={`aspect-ratio: ${ratio};`}
+>
+  {
+    src ? (
+      <>
+        <img src={src} alt={alt} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+        <figcaption class="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/20 bg-black/45 px-3.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+          {label}
+        </figcaption>
+      </>
+    ) : (
+      <div class="knit-texture absolute inset-0 flex flex-col p-5">
+        <span class="corner-tick top-3.5 left-3.5" />
+        <span class="corner-tick top-3.5 right-3.5 rotate-90" />
+        <span class="corner-tick bottom-3.5 left-3.5 -rotate-90" />
+        <span class="corner-tick bottom-3.5 right-3.5 rotate-180" />
+        <div class="mx-auto my-auto w-full max-w-[15rem]" style="aspect-ratio: 1;">
+          <Illustration variant={variant} />
+        </div>
+        <figcaption class="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-line bg-surface px-3.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">
+          {label}
+        </figcaption>
+      </div>
+    )
+  }
+</figure>
+
+<style>
+  .corner-tick {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-top: 1.5px solid var(--accent-2);
+    border-left: 1.5px solid var(--accent-2);
+    opacity: 0.55;
+  }
+</style>

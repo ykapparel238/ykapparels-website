@@ -1,0 +1,111 @@
+---
+/*
+  GDPR-compliant analytics consent banner (Google Consent Mode v2).
+  Only rendered when a GA4 measurement ID is configured. Analytics never
+  loads before opt-in; Decline is as prominent as Accept (GDPR requirement).
+*/
+import { gaMeasurementId } from '../data/site';
+---
+
+{
+  gaMeasurementId && (
+    <div
+      id="consent-banner"
+      class="fixed inset-x-0 bottom-0 z-[60] hidden border-t border-line bg-surface/95 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md"
+      role="dialog"
+      aria-label="Cookie consent"
+    >
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:px-8">
+        <p class="flex-1 text-sm leading-relaxed text-body">
+          We'd like to use <strong class="text-ink">Google Analytics</strong> to understand how
+          visitors use this site. It only runs if you agree, and you can change your mind anytime
+          via “Cookie settings” in the footer.
+          <a href="/privacy/" class="font-semibold text-accent-2 underline underline-offset-2">
+            Privacy Policy
+          </a>
+        </p>
+        <div class="flex shrink-0 gap-3">
+          <button
+            id="consent-decline"
+            type="button"
+            class="rounded-full border border-line px-6 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent-2"
+          >
+            Decline
+          </button>
+          <button
+            id="consent-accept"
+            type="button"
+            class="rounded-full bg-accent px-6 py-2.5 text-sm font-bold text-accent-ink transition-colors hover:bg-accent-strong"
+          >
+            Accept analytics
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  gaMeasurementId && (
+    <script is:inline define:vars={{ gaMeasurementId }}>
+      (() => {
+        const KEY = 'analytics-consent';
+        const banner = document.getElementById('consent-banner');
+
+        // Consent Mode v2: everything denied until the visitor opts in.
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+        });
+
+        let gaLoaded = false;
+        function loadAnalytics() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaMeasurementId;
+          document.head.appendChild(s);
+          gtag('js', new Date());
+          gtag('config', gaMeasurementId, { anonymize_ip: true });
+        }
+
+        function hideBanner() {
+          banner?.classList.add('hidden');
+        }
+        function showBanner() {
+          banner?.classList.remove('hidden');
+        }
+
+        function applyChoice(choice) {
+          localStorage.setItem(KEY, choice);
+          hideBanner();
+          if (choice === 'granted') loadAnalytics();
+        }
+
+        document.getElementById('consent-accept')?.addEventListener('click', () => applyChoice('granted'));
+        document.getElementById('consent-decline')?.addEventListener('click', () => applyChoice('denied'));
+
+        // Footer "Cookie settings" reopens the banner so consent can be changed.
+        document.querySelectorAll('[data-cookie-settings]').forEach((el) =>
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            showBanner();
+          }),
+        );
+
+        const stored = localStorage.getItem(KEY);
+        if (stored === 'granted') loadAnalytics();
+        else if (stored !== 'denied') showBanner();
+      })();
+    </script>
+  )
+}

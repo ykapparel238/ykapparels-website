@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<span class:list={['flex items-center gap-2.5', className]}>
+  <svg
+    width="34"
+    height="34"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    class="shrink-0"
+  >
+    <rect width="48" height="48" rx="12" class="fill-accent" />
+    <!-- knit-stitch V rows -->
+    <path d="M11 14 L24 24 L37 14" stroke="var(--accent-ink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M11 27 L24 37 L37 27" stroke="var(--accent-ink)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" />
+  </svg>
+  <span class="flex flex-col leading-none">
+    <span class="font-display text-[1.15rem] font-semibold text-ink">YK Apparels</span>
+    <span class="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.22em] text-muted">Knitwear · Lahore</span>
+  </span>
+</span>

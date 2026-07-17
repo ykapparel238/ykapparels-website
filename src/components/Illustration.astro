@@ -1,0 +1,35 @@
+---
+import { illustrationArt, type IllustrationVariant } from '../data/illustrations';
+
+interface Props {
+  variant: IllustrationVariant;
+  class?: string;
+}
+const { variant, class: className = '' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 160 160"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  class:list={['ill', className]}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  set:html={illustrationArt[variant]}
+/>
+
+<style>
+  .ill {
+    width: 100%;
+    height: 100%;
+  }
+  .ill :global(.s) {
+    stroke: color-mix(in srgb, var(--ink) 82%, transparent);
+    stroke-width: 2.6;
+  }
+  .ill :global(.d) {
+    stroke: var(--accent-2);
+    stroke-width: 2.6;
+  }
+</style>

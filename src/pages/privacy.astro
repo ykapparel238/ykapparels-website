@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { site } from '../data/site';
+
+const lastUpdated = 'July 17, 2026';
+---
+
+<Base
+  title="Privacy Policy — YK Apparels"
+  description="How YK Apparels collects, uses and protects your personal data, and the rights you have under GDPR, CCPA and other privacy laws."
+>
+  <section class="mx-auto max-w-3xl px-5 pt-16 pb-20 sm:px-8 lg:pt-20">
+    <SectionHeading eyebrow="Legal" title="Privacy Policy" lead={`Last updated: ${lastUpdated}`} />
+
+    <div class="prose-legal mt-10">
+      <p>
+        YK Apparels ("we", "us", "our") respects your privacy. This policy explains what personal
+        data we collect through <strong>ykapparels.com</strong>, how we use it, and the rights you
+        have — wherever in the world you are contacting us from.
+      </p>
+
+      <h2>The short version</h2>
+      <ul>
+        <li>We only collect the information you choose to send us through our inquiry form or by contacting us directly.</li>
+        <li>We use it for one purpose: responding to you and working on your production inquiry.</li>
+        <li>We use <strong>no advertising and no tracking without your consent</strong>. Analytics cookies run only if you opt in via our consent banner — and the site works fully if you decline.</li>
+        <li>We never sell, rent or trade your personal information. To anyone.</li>
+        <li>We do not use automated decision-making or profiling.</li>
+      </ul>
+
+      <h2>Who we are (data controller)</h2>
+      <p>
+        YK Apparels, {site.address.street}, {site.address.city}, {site.address.country}.<br />
+        Privacy contact: <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+
+      <h2>What we collect and why</h2>
+      <h3>1. Inquiry form</h3>
+      <p>
+        When you submit our contact form we receive the details you enter: your name, brand or
+        company, email address, country, product interest, estimated quantity and message. We use
+        this solely to respond to your inquiry, prepare quotations and manage the resulting
+        business relationship.
+      </p>
+      <p>
+        <strong>Legal basis (GDPR):</strong> taking pre-contractual steps at your request
+        (Art. 6(1)(b)) — you are contacting a manufacturer about producing goods, and we process
+        your details to answer that request. The checkbox on the form records your informed
+        acknowledgment of this policy. Where Art. 6(1)(b) does not apply (for example, general
+        questions unrelated to an order), we rely on our legitimate interest in responding to
+        correspondence addressed to us (Art. 6(1)(f)), against which you may object at any time.
+      </p>
+      <h3>2. Direct contact</h3>
+      <p>
+        If you email, phone or WhatsApp us, we process the contact details and message content you
+        provide in order to reply. WhatsApp is a service of Meta Platforms; their own privacy
+        policy applies to the transmission of messages on their platform.
+      </p>
+      <h3>3. Technical data</h3>
+      <p>
+        Our hosting infrastructure keeps standard server logs (IP address, request time, user
+        agent) for security and operations (legitimate interest, Art. 6(1)(f)). These are not used
+        to profile visitors and are retained only briefly. Your theme preference (light/dark) and
+        your cookie choice are stored locally in your own browser and never leave your device.
+      </p>
+      <h3>4. Analytics (only with your consent)</h3>
+      <p>
+        If — and only if — you click "Accept analytics" on our consent banner, we use
+        <strong>Google Analytics 4</strong> (Google LLC / Google Ireland Ltd.) to understand how
+        visitors use the site: pages viewed, approximate region, device type. Before you consent,
+        no analytics code loads and no analytics cookies are set (we use Google Consent Mode v2
+        with all storage denied by default). <strong>Legal basis:</strong> your consent
+        (Art. 6(1)(a)), which you can withdraw at any time via "Cookie settings" in the footer —
+        withdrawal is as easy as giving consent.
+      </p>
+
+      <h2>Cookies and tracking</h2>
+      <p>
+        This website sets no cookies by default. The only cookies it can ever set are Google
+        Analytics cookies, and those require your prior opt-in via the consent banner. Declining
+        (or ignoring) the banner leaves the site fully functional and cookie-free. You can change
+        your choice at any time via "Cookie settings" in the footer of every page.
+      </p>
+
+      <h2>Who receives your data</h2>
+      <p>Your inquiry data is handled by a small number of service providers acting on our behalf:</p>
+      <ul>
+        <li><strong>Web3Forms</strong> (United States) — relays your form submission to our email inbox.</li>
+        <li><strong>Our email provider</strong> — stores the resulting correspondence.</li>
+        <li><strong>Our hosting provider</strong> — serves this website and keeps standard server logs.</li>
+        <li><strong>Google LLC / Google Ireland Ltd.</strong> — analytics, only if you have opted in via the consent banner.</li>
+      </ul>
+      <p>We share personal data with no one else, unless required by law.</p>
+
+      <h2>International transfers</h2>
+      <p>
+        <strong>We are located in Pakistan</strong>, so when you contact us your inquiry data is
+        transferred to and processed in Pakistan, which has not received an EU adequacy decision.
+        For visitors in the EU/EEA and UK, this transfer is based on Art. 49(1)(b) GDPR: it is
+        necessary to take the pre-contractual steps you yourself request by sending us an inquiry.
+        You are never obliged to use the form — but there is no way for a Pakistani manufacturer to
+        answer your inquiry without receiving it in Pakistan.
+      </p>
+      <p>
+        Our service providers may additionally process data in the United States or the European
+        Union. Where GDPR applies, those transfers rely on the EU–US Data Privacy Framework, the
+        EU Standard Contractual Clauses, or an adequacy decision, as applicable to each provider.
+      </p>
+
+      <h2>How long we keep it</h2>
+      <ul>
+        <li><strong>Inquiries that don't lead to an order:</strong> deleted no later than 24 months after our last exchange — or immediately on request.</li>
+        <li><strong>Business and contractual records:</strong> retained for the periods required by commercial and tax law (typically up to 6 years).</li>
+        <li><strong>Server logs:</strong> retained briefly (days to a few weeks) for security purposes.</li>
+        <li><strong>Analytics data:</strong> if you opted in, retained in aggregate form per Google Analytics settings (14 months), and never merged with your inquiry data.</li>
+      </ul>
+
+      <h2>No automated decision-making</h2>
+      <p>
+        We do not use your personal data for automated decision-making or profiling within the
+        meaning of Art. 22 GDPR. Every inquiry is read and answered by a person.
+      </p>
+
+      <h2>Your rights</h2>
+      <h3>European Union & United Kingdom (GDPR / UK GDPR)</h3>
+      <p>
+        You have the right to access, rectify and erase your personal data; to restrict or object
+        to its processing; to data portability; and to withdraw consent at any time without
+        affecting prior processing. You may also lodge a complaint with your local supervisory
+        authority. To exercise any right, email <a href={`mailto:${site.email}`}>{site.email}</a> —
+        we respond within one month.
+      </p>
+      <h3>United States (CCPA/CPRA and similar state laws)</h3>
+      <p>
+        The categories of personal information we collect are: <strong>identifiers</strong> (name,
+        email, company, country) and <strong>commercial information</strong> (the inquiry details
+        you provide) — and, only with your opt-in, <strong>internet activity</strong> (analytics
+        data). California residents (and residents of states with similar laws) have the right to
+        know what personal information we collect, to request its deletion or correction, and to
+        non-discrimination for exercising those rights. <strong>We do not sell or share personal
+        information</strong> as defined by the CCPA/CPRA, and have not done so in the preceding 12
+        months, so there is nothing to opt out of. To exercise your rights, email us at the address
+        above — you may also use an authorized agent; we will verify requests via the email address
+        associated with your inquiry.
+      </p>
+      <h3>Other countries</h3>
+      <p>
+        We extend the same rights — access, correction, deletion and objection — to everyone who
+        contacts us, including under Canada's PIPEDA, Australia's Privacy Act, and Pakistan's data
+        protection framework. One email is enough.
+      </p>
+
+      <h2>Security</h2>
+      <p>
+        This site is served over HTTPS. Access to inquiry correspondence is limited to the people
+        who need it to respond to you.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        This website is a business-to-business service and is not directed at children. We do not
+        knowingly collect data from anyone under 16.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        If we add services that change how data is handled, we will update this policy and, where
+        required, ask for your consent first — as we already do for analytics. The date at the top
+        reflects the latest revision.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or requests: <a href={`mailto:${site.email}`}>{site.email}</a> or write to
+        YK Apparels, {site.address.street}, {site.address.city}, {site.address.country}.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose-legal :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 2.2rem;
+    margin-bottom: 0.7rem;
+  }
+  .prose-legal :global(h3) {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+  .prose-legal :global(p) {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--body);
+    margin-bottom: 0.9rem;
+  }
+  .prose-legal :global(ul) {
+    list-style: disc;
+    padding-left: 1.4rem;
+    margin-bottom: 0.9rem;
+  }
+  .prose-legal :global(li) {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--body);
+    margin-bottom: 0.35rem;
+  }
+  .prose-legal :global(a) {
+    color: var(--accent-2);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-legal :global(strong) {
+    color: var(--ink);
+  }
+</style>

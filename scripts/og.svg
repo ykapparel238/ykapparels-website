@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a1512"/>
+  <!-- knit texture -->
+  <g stroke="#24382c" stroke-width="1.5" fill="none" opacity="0.8">
+    <path d="M700 0 L950 210 L1200 0"/>
+    <path d="M700 140 L950 350 L1200 140"/>
+    <path d="M700 280 L950 490 L1200 280"/>
+    <path d="M700 420 L950 630 L1200 420"/>
+    <path d="M450 -140 L700 70 L950 -140"/>
+    <path d="M450 0 L700 210 L950 0" opacity="0.5"/>
+  </g>
+  <circle cx="1060" cy="120" r="260" fill="#d9ab52" opacity="0.06"/>
+  <!-- mark -->
+  <g transform="translate(90 92)">
+    <rect width="104" height="104" rx="26" fill="#14563e"/>
+    <path d="M24 30 L52 52 L80 30" stroke="#f8f5ec" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M24 58 L52 80 L80 58" stroke="#d9ab52" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <text x="90" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="#f2edda">YK Apparels</text>
+  <text x="94" y="400" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#d9ab52" letter-spacing="1">Knitwear &amp; apparel manufacturing</text>
+  <text x="94" y="452" font-family="Arial, Helvetica, sans-serif" font-size="27" fill="#87957f">Sweaters · Knitted polos · Kids wear · Embroidery</text>
+  <g transform="translate(94 508)" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold">
+    <rect width="248" height="52" rx="26" fill="#122019" stroke="#24382c"/>
+    <text x="124" y="33" text-anchor="middle" fill="#c3cbb4">Lahore, Pakistan</text>
+    <rect x="268" width="200" height="52" rx="26" fill="#122019" stroke="#24382c"/>
+    <text x="368" y="33" text-anchor="middle" fill="#c3cbb4">Since 2015</text>
+  </g>
+</svg>

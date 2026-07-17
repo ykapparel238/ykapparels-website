@@ -1,0 +1,50 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Have a style ready to produce?',
+  text = 'Send us your tech pack or even a reference photo — we’ll come back with honest feedback on feasibility, pricing and timelines.',
+} = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+  <div class="reveal relative overflow-hidden rounded-3xl bg-panel px-6 py-16 text-center sm:px-12">
+    <!-- decorative knit rows -->
+    <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.08]" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#f4efdd" stroke-width="1.5" fill="none">
+        <path d="M-40 40 L120 160 L280 40 L440 160 L600 40 L760 160 L920 40" />
+        <path d="M-40 160 L120 280 L280 160 L440 280 L600 160 L760 280 L920 160" />
+        <path d="M-40 280 L120 400 L280 280 L440 400 L600 280 L760 400 L920 280" />
+      </g>
+    </svg>
+    <div class="pointer-events-none absolute -top-28 left-1/2 h-64 w-[38rem] -translate-x-1/2 rounded-full opacity-20 blur-3xl" style="background: var(--accent-2);"></div>
+    <p class="relative text-xs font-semibold uppercase tracking-[0.24em]" style="color: var(--accent-2); filter: brightness(1.35);">Let's talk production</p>
+    <h2 class="font-display relative mx-auto mt-4 max-w-2xl text-3xl font-semibold text-panel-ink sm:text-[2.6rem] sm:leading-[1.15]">{title}</h2>
+    <p class="relative mx-auto mt-5 max-w-xl text-base leading-relaxed text-panel-muted">{text}</p>
+    <div class="relative mt-9 flex flex-wrap items-center justify-center gap-3.5">
+      <a
+        href="/contact/"
+        class="rounded-full px-8 py-3.5 text-sm font-bold transition-transform hover:-translate-y-0.5"
+        style="background: #d9ab52; color: #1c1503;"
+      >
+        Start an inquiry
+      </a>
+      <a
+        href={site.whatsappHref}
+        rel="noopener"
+        target="_blank"
+        class="flex items-center gap-2 rounded-full border px-8 py-3.5 text-sm font-semibold text-panel-ink transition-colors hover:border-panel-ink"
+        style="border-color: color-mix(in srgb, var(--panel-ink) 30%, transparent);"
+      >
+        <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/>
+        </svg>
+        WhatsApp us
+      </a>
+    </div>
+  </div>
+</section>

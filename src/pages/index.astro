@@ -1,0 +1,230 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ClientLogos from '../components/ClientLogos.astro';
+import GrowthJourney from '../components/GrowthJourney.astro';
+import Marquee from '../components/Marquee.astro';
+import CTA from '../components/CTA.astro';
+import { site } from '../data/site';
+import { capabilities, stats, qualityPoints } from '../data/content';
+---
+
+<Base
+  title="YK Apparels — Knitwear & Apparel Manufacturing in Lahore, Pakistan"
+  description="Knitwear and apparel production facility in Lahore, Pakistan. Sweaters, knitted polos, kids wear and traditional wear for local and international brands since 2015."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden" style="background: linear-gradient(160deg, var(--hero-grad-a), var(--hero-grad-b) 62%);">
+    <!-- oversized ghost knit rows -->
+    <svg class="pointer-events-none absolute -right-24 top-0 h-full w-[52rem] opacity-[0.05]" viewBox="0 0 800 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="2" fill="none" class="text-ink">
+        <path d="M-40 60 L200 260 L440 60 L680 260 L920 60" />
+        <path d="M-40 260 L200 460 L440 260 L680 460 L920 260" />
+        <path d="M-40 460 L200 660 L440 460 L680 660 L920 460" />
+      </g>
+    </svg>
+    <div class="pointer-events-none absolute -right-28 -top-28 size-[30rem] rounded-full opacity-[0.1] blur-3xl" style="background: var(--accent-2);"></div>
+
+    <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:py-28">
+      <div>
+        <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+          <span class="size-1.5 rounded-full bg-accent-2"></span>
+          Lahore, Pakistan · Since {site.founded}
+        </p>
+        <h1 class="text-[3rem] font-black uppercase leading-[0.95] tracking-tight text-ink sm:text-[4.2rem] lg:text-[4.8rem]">
+          Designs in.<br />
+          <span class="text-accent">Garments out.</span>
+        </h1>
+        <p class="mt-7 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+          We are a knitwear and apparel production facility partnering with growing brands — from
+          Pakistan's favourite high-street names to international labels — on sweaters, knitted
+          polos, kids wear and more.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3.5">
+          <a
+            href="/contact/"
+            class="rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-accent-ink transition-all hover:-translate-y-0.5 hover:bg-accent-strong"
+          >
+            Start an inquiry
+          </a>
+          <a
+            href="/capabilities/"
+            class="rounded-full border border-line bg-surface px-8 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-accent-2 hover:text-accent-2"
+          >
+            See our capabilities
+          </a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-5">
+        <PhotoSlot
+          variant="sweater"
+          src="/images/sweaters-pile.jpg"
+          alt="Cream and sage fine-gauge knit sweaters"
+          label="Fine-gauge knits"
+          ratio="3 / 4"
+          class="mt-10 -rotate-2 transition-transform duration-500 hover:rotate-0"
+        />
+        <PhotoSlot
+          variant="yarn"
+          src="/images/yarn-spools.jpg"
+          alt="Rows of colourful yarn cones in the facility"
+          label="Yarn to garment"
+          ratio="3 / 4"
+          class="rotate-2 transition-transform duration-500 hover:rotate-0"
+        />
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <!-- Stats -->
+  <section class="bg-surface">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-5 py-14 sm:px-8 lg:grid-cols-4">
+      {
+        stats.map((stat) => (
+          <div class="reveal text-center">
+            <p class="font-display text-4xl font-semibold text-ink sm:text-5xl">{stat.value}</p>
+            <p class="mt-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-accent-2">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <div class="reveal flex flex-wrap items-end justify-between gap-6">
+      <SectionHeading
+        eyebrow="What we make"
+        title="Capabilities built around knit"
+        lead="Seven production capabilities under one roof — so your program stays in one quality loop from yarn to carton."
+      />
+      <a href="/capabilities/" class="text-sm font-semibold text-accent-2 transition-colors hover:text-ink">
+        Explore capabilities →
+      </a>
+    </div>
+    <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        capabilities.map((cap, i) => (
+          <a
+            href={`/capabilities/#${cap.slug}`}
+            class:list={[
+              'reveal group relative overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent-2/60',
+              i === capabilities.length - 1 && capabilities.length % 3 === 1 && 'lg:col-span-3',
+            ]}
+            style={`transition-delay: ${(i % 3) * 70}ms;`}
+          >
+            <span class="font-display text-sm font-semibold text-accent-2 opacity-70">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="font-display mt-2 text-xl font-semibold text-ink">{cap.title}</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-muted">{cap.short}</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-accent-2 opacity-0 transition-opacity group-hover:opacity-100">
+              Learn more →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Small runs -->
+  <section class="mx-auto max-w-6xl px-5 pb-20 sm:px-8">
+    <div class="reveal overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12">
+      <div class="grid items-start gap-10 lg:grid-cols-[1fr_1.4fr]">
+        <div>
+          <SectionHeading
+            eyebrow="Partnerships, not order sizes"
+            title="Every great brand started small. We remember that."
+            lead="Some of our strongest partnerships began with a handful of pieces and a founder's conviction. We don't measure a relationship by its first order — we build it from there, and grow together."
+          />
+          <a
+            href="/contact/"
+            class="mt-7 inline-block rounded-full bg-accent px-7 py-3 text-sm font-bold text-accent-ink transition-all hover:-translate-y-0.5 hover:bg-accent-strong"
+          >
+            Begin the conversation
+          </a>
+        </div>
+        <GrowthJourney />
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="border-y border-line bg-sunken">
+    <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="How we work"
+          title="From tech pack to shipped cartons"
+          lead="A five-step process with honest communication at every stage — no surprises at delivery."
+          align="center"
+        />
+      </div>
+      <div class="reveal mt-11">
+        <ProcessSteps />
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality -->
+  <section class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2">
+    <div class="reveal">
+      <SectionHeading
+        eyebrow="Quality"
+        title="Inspected at every stage, not just the end"
+        lead="Our production runs on daily tracking by style, stage and shift — the same operational discipline shows up in the garments we ship."
+      />
+      <ul class="mt-8 space-y-5">
+        {
+          qualityPoints.slice(0, 3).map((point) => (
+            <li class="flex gap-3.5">
+              <span class="mt-1 grid size-5 shrink-0 place-items-center rounded-full bg-accent-soft">
+                <svg class="size-3 text-accent-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="text-[15px] font-semibold text-ink">{point.title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-muted">{point.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <PhotoSlot
+      variant="inspect"
+      src="/images/sewing-hands.jpg"
+      alt="Hands guiding fabric through a sewing machine"
+      label="Attention at every seam"
+      ratio="4 / 3.4"
+      class="reveal"
+    />
+  </section>
+
+  <!-- Clients -->
+  <section class="border-t border-line">
+    <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="Trusted by"
+          title="Brands that produce with us"
+          lead="We already manufacture for some of Pakistan's most recognised brands — and we're ready for yours."
+          align="center"
+        />
+      </div>
+      <div class="reveal mt-10">
+        <ClientLogos />
+      </div>
+      <p class="mt-8 text-center">
+        <a href="/clients/" class="text-sm font-semibold text-accent-2 transition-colors hover:text-ink">
+          Meet our clients →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <CTA />
+</Base>

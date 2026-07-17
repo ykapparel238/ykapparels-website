@@ -1,0 +1,227 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { site } from '../data/site';
+import { capabilities } from '../data/content';
+
+// TODO: create a free access key at https://web3forms.com (takes 1 minute,
+// verifies contact@ykapparels.com) and replace the placeholder below.
+const WEB3FORMS_ACCESS_KEY = 'YOUR-WEB3FORMS-ACCESS-KEY';
+---
+
+<Base
+  title="Contact — Start a Production Inquiry | YK Apparels"
+  description="Start a production inquiry with YK Apparels, Lahore. Send your tech pack or reference and get honest feedback on feasibility, pricing and timelines."
+>
+  <section class="mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 lg:pt-20">
+    <SectionHeading
+      eyebrow="Contact"
+      title="Start a production inquiry"
+      lead="Tell us what you want to make. A tech pack is ideal, but a reference photo and target quantity is enough to start the conversation."
+    />
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+      <!-- Form -->
+      <form id="inquiry-form" class="rounded-3xl border border-line bg-surface p-7 sm:p-9" novalidate>
+        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+        <input type="hidden" name="subject" value="New production inquiry — ykapparels.com" />
+        <input type="hidden" name="from_name" value="YK Apparels Website" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" />
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="field">
+            <span>Your name *</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Full name" />
+          </label>
+          <label class="field">
+            <span>Brand / company *</span>
+            <input type="text" name="company" required autocomplete="organization" placeholder="Brand or company name" />
+          </label>
+          <label class="field">
+            <span>Email *</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@brand.com" />
+          </label>
+          <label class="field">
+            <span>Country</span>
+            <input type="text" name="country" autocomplete="country-name" placeholder="Where you're based" />
+          </label>
+          <label class="field">
+            <span>Product interest</span>
+            <select name="product_interest">
+              <option value="">Select a category</option>
+              {capabilities.map((cap) => <option value={cap.title}>{cap.title}</option>)}
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Estimated quantity</span>
+            <input type="text" name="quantity" placeholder="e.g. 500–1,000 pieces" />
+          </label>
+          <label class="field sm:col-span-2">
+            <span>Tell us about your project *</span>
+            <textarea
+              name="message"
+              rows="5"
+              required
+              placeholder="Style details, timeline, target price — anything that helps us give you a useful answer."></textarea>
+          </label>
+        </div>
+
+        <label class="mt-6 flex items-start gap-3 text-sm leading-relaxed text-body">
+          <input
+            type="checkbox"
+            name="consent"
+            required
+            class="mt-1 size-4 shrink-0 accent-[var(--accent)]"
+          />
+          <span>
+            I agree that YK Apparels stores and processes the details above to respond to my
+            inquiry, as described in the
+            <a href="/privacy/" class="font-semibold text-accent-2 underline underline-offset-2">Privacy Policy</a>. *
+          </span>
+        </label>
+
+        <p id="form-status" class="mt-5 hidden rounded-xl px-4 py-3 text-sm" role="status"></p>
+
+        <button
+          type="submit"
+          class="mt-6 w-full rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-ink transition-colors hover:bg-accent-strong disabled:opacity-60 sm:w-auto"
+        >
+          Send inquiry
+        </button>
+        <p class="mt-4 text-xs leading-relaxed text-muted">
+          We reply within 1–2 business days. Your details are only used to respond to this inquiry
+          — never sold or shared. See our <a href="/privacy/" class="underline underline-offset-2">Privacy Policy</a>.
+        </p>
+      </form>
+
+      <!-- Direct contact -->
+      <aside class="space-y-4">
+        <a
+          href={site.whatsappHref}
+          rel="noopener"
+          target="_blank"
+          class="block rounded-3xl border border-line bg-surface p-7 transition-colors hover:border-accent"
+        >
+          <div class="flex items-center gap-3">
+            <span class="grid size-10 place-items-center rounded-full bg-accent-soft">
+              <svg class="size-5 text-accent" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/>
+              </svg>
+            </span>
+            <div>
+              <h2 class="text-[15px] font-semibold text-ink">WhatsApp — fastest reply</h2>
+              <p class="text-sm text-muted">+{site.whatsapp}</p>
+            </div>
+          </div>
+        </a>
+
+        <div class="rounded-3xl border border-line bg-surface p-7">
+          <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Direct</h2>
+          <ul class="mt-4 space-y-3.5 text-sm">
+            <li>
+              <p class="text-xs text-muted">Email</p>
+              <a href={`mailto:${site.email}`} class="font-medium text-ink transition-colors hover:text-accent">{site.email}</a>
+            </li>
+            <li>
+              <p class="text-xs text-muted">Phone</p>
+              <a href={site.phoneHref} class="font-medium text-ink transition-colors hover:text-accent">{site.phone}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-3xl border border-line bg-surface p-7">
+          <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Facility</h2>
+          <p class="mt-4 text-sm leading-relaxed text-body">
+            {site.address.street},<br />
+            {site.address.city}, {site.address.country}
+          </p>
+          <a
+            href={site.mapsHref}
+            rel="noopener"
+            target="_blank"
+            class="mt-4 inline-block text-sm font-semibold text-accent transition-colors hover:text-accent-strong"
+          >
+            Open in Google Maps →
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .field span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    transition: border-color 150ms ease;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+</style>
+
+<script>
+  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+
+  function showStatus(ok: boolean, message: string) {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove('hidden');
+    status.style.background = ok ? 'var(--accent-soft)' : 'color-mix(in srgb, #b91c1c 12%, transparent)';
+    status.style.color = ok ? 'var(--accent-strong)' : '#b91c1c';
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]');
+    if (button) button.disabled = true;
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      const result = await response.json();
+      if (result.success) {
+        form.reset();
+        showStatus(true, 'Thank you — your inquiry has been sent. We reply within 1–2 business days.');
+      } else {
+        showStatus(false, 'Something went wrong sending the form. Please email us directly or use WhatsApp.');
+      }
+    } catch {
+      showStatus(false, 'Could not reach the form service. Please email us directly or use WhatsApp.');
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
+</script>

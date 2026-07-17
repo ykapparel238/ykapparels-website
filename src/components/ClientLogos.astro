@@ -1,0 +1,25 @@
+---
+import { clients } from '../data/content';
+
+interface Props {
+  showNotes?: boolean;
+}
+const { showNotes = false } = Astro.props;
+---
+
+<div class:list={[showNotes ? 'grid gap-4 sm:grid-cols-3' : 'flex flex-wrap items-center justify-center gap-3.5']}>
+  {
+    clients.map((client) =>
+      showNotes ? (
+        <div class="rounded-2xl border border-line bg-surface p-7">
+          <p class="font-display text-2xl font-semibold text-ink">{client.name}</p>
+          <p class="mt-2.5 text-sm leading-relaxed text-muted">{client.note}</p>
+        </div>
+      ) : (
+        <span class="font-display rounded-full border border-line bg-surface px-6 py-2.5 text-lg font-semibold text-muted">
+          {client.name}
+        </span>
+      ),
+    )
+  }
+</div>

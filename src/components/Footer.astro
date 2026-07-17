@@ -1,0 +1,99 @@
+---
+import Logo from './Logo.astro';
+import { site, nav, gaMeasurementId } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-sunken">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1.2fr]">
+    <div>
+      <a href="/" aria-label="YK Apparels — home"><Logo /></a>
+      <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted">
+        A knitwear and apparel production facility in Lahore, Pakistan — manufacturing for local and
+        international brands since {site.founded}.
+      </p>
+      <div class="mt-5 flex gap-3">
+        <a href={site.socials.facebook} class="social-link" aria-label="Facebook" rel="noopener" target="_blank">
+          <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2.1-.1-2.1 0-3.6 1.3-3.6 3.7V11H8.3v3h2.4v7h2.8Z"/></svg>
+        </a>
+        <a href={site.socials.instagram} class="social-link" aria-label="Instagram" rel="noopener" target="_blank">
+          <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href={site.socials.linkedin} class="social-link" aria-label="LinkedIn" rel="noopener" target="_blank">
+          <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.5 8.8H3.6V20h2.9V8.8ZM5 7.4a1.7 1.7 0 1 0 0-3.4 1.7 1.7 0 0 0 0 3.4Zm6.6 6.7c0-1.2.6-2 1.8-2 1.1 0 1.6.8 1.6 2V20h2.9v-6.3c0-2.9-1.5-4.3-3.6-4.3-1.7 0-2.4.9-2.8 1.6V8.8H8.6c0 .8 0 11.2 0 11.2h2.9v-5.9Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label="Footer">
+      <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Explore</h3>
+      <ul class="mt-4 space-y-2.5">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm text-body transition-colors hover:text-accent">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div>
+      <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Contact</h3>
+      <ul class="mt-4 space-y-3 text-sm text-body">
+        <li>
+          <a href={`mailto:${site.email}`} class="transition-colors hover:text-accent">{site.email}</a>
+        </li>
+        <li>
+          <a href={site.phoneHref} class="transition-colors hover:text-accent">{site.phone}</a>
+        </li>
+        <li>
+          <a href={site.whatsappHref} class="transition-colors hover:text-accent" rel="noopener" target="_blank">
+            WhatsApp us
+          </a>
+        </li>
+        <li class="leading-relaxed text-muted">
+          {site.address.street},<br />
+          {site.address.city}, {site.address.country}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-line">
+    <div class="mx-auto flex max-w-6xl flex-col gap-1.5 px-5 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <p>© {year} {site.name}. All rights reserved.</p>
+      <p class="flex flex-wrap gap-x-4 gap-y-1">
+        <a href="/privacy/" class="transition-colors hover:text-accent">Privacy Policy</a>
+        {
+          gaMeasurementId && (
+            <button type="button" data-cookie-settings class="cursor-pointer transition-colors hover:text-accent">
+              Cookie settings
+            </button>
+          )
+        }
+        <span>Knitwear & apparel manufacturing — {site.address.city}, {site.address.country}</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .social-link {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .social-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+</style>
