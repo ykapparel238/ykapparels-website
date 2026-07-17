@@ -1,9 +1,12 @@
 ---
 import '../styles/global.css';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { site, defaultTheme } from '../data/site';
+import { faqs } from '../data/content';
 
 interface Props {
   title: string;
@@ -13,16 +16,29 @@ interface Props {
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
+const logoImage = new URL('/apple-touch-icon.png', Astro.site);
 
-const jsonLd = {
-  '@context': 'https://schema.org',
+const organization = {
   '@type': ['Organization', 'LocalBusiness'],
+  '@id': `${site.url}/#organization`,
   name: site.name,
   description: site.description,
+  slogan: 'Designs in. Garments out.',
   url: site.url,
+  logo: String(logoImage),
+  image: String(ogImage),
   email: site.email,
   telephone: site.phone,
   foundingDate: String(site.founded),
+  priceRange: '$$',
+  areaServed: 'Worldwide',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: site.email,
+    telephone: site.phone,
+    availableLanguage: ['en', 'ur'],
+  },
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street,
@@ -37,6 +53,44 @@ const jsonLd = {
   hasMap: site.mapsHref,
   sameAs: Object.values(site.socials),
 };
+
+// Breadcrumb trail for inner pages (Home → Page)
+const pageLabels: Record<string, string> = {
+  '/capabilities/': 'Capabilities',
+  '/about/': 'About & Facility',
+  '/clients/': 'Clients',
+  '/contact/': 'Contact',
+  '/privacy/': 'Privacy Policy',
+};
+const path = Astro.url.pathname;
+const breadcrumbs =
+  path !== '/' && pageLabels[path]
+    ? {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${site.url}/` },
+          { '@type': 'ListItem', position: 2, name: pageLabels[path], item: `${site.url}${path}` },
+        ],
+      }
+    : null;
+
+// FAQ schema only where the full FAQ section lives
+const faqSchema =
+  path === '/capabilities/'
+    ? {
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }
+    : null;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [organization, breadcrumbs, faqSchema].filter(Boolean),
+};
 ---
 
 <!doctype html>
@@ -48,15 +102,25 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#14563e" />
+
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={interLatin} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={frauncesLatin} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="YK Apparels — knitwear manufacturer in Lahore, Pakistan" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

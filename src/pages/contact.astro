@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import FAQ from '../components/FAQ.astro';
 import { site } from '../data/site';
 import { capabilities } from '../data/content';
 
@@ -10,11 +11,12 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR-WEB3FORMS-ACCESS-KEY';
 ---
 
 <Base
-  title="Contact — Start a Production Inquiry | YK Apparels"
-  description="Start a production inquiry with YK Apparels, Lahore. Send your tech pack or reference and get honest feedback on feasibility, pricing and timelines."
+  title="Contact a Knitwear Manufacturer in Lahore | YK Apparels"
+  description="Start a production inquiry with YK Apparels, a garment manufacturer in Lahore, Pakistan. Send a tech pack or reference and get honest feasibility and pricing feedback."
 >
   <section class="mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 lg:pt-20">
     <SectionHeading
+      as="h1"
       eyebrow="Contact"
       title="Start a production inquiry"
       lead="Tell us what you want to make. A tech pack is ideal, but a reference photo and target quantity is enough to start the conversation."
@@ -146,6 +148,16 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR-WEB3FORMS-ACCESS-KEY';
           </a>
         </div>
       </aside>
+    </div>
+
+    <div class="mx-auto mt-16 max-w-3xl">
+      <h2 class="font-display text-center text-2xl font-semibold text-ink">Before you write — quick answers</h2>
+      <div class="mt-7">
+        <FAQ limit={3} />
+      </div>
+      <p class="mt-5 text-center text-sm text-muted">
+        More questions answered on our <a href="/capabilities/" class="font-semibold text-accent-2 underline underline-offset-2">capabilities page</a>.
+      </p>
     </div>
   </section>
 </Base>

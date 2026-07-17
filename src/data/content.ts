@@ -1,3 +1,5 @@
+import type { ImageKey } from './images';
+
 /*
   All page copy lives here so text edits never touch markup.
   Values marked TODO are placeholders awaiting real figures from YK Apparels.
@@ -9,7 +11,7 @@ export interface Capability {
   short: string;
   long: string;
   details: string[];
-  photo: string;
+  photo: ImageKey;
   photoAlt: string;
   art: 'sweater' | 'polo' | 'frock' | 'kurta' | 'embroidery' | 'yarn';
 }
@@ -18,27 +20,27 @@ export const capabilities: Capability[] = [
   {
     slug: 'sweaters-knitwear',
     art: 'sweater',
-    photo: '/images/knit-texture.jpg',
+    photo: 'knit-texture',
     photoAlt: 'Folded fine-gauge knit sweaters',
     title: 'Sweaters & Knitwear',
     short: 'Flat-knit sweaters and knit garments in fine-gauge yarns, from classic crews to fashion knits.',
-    long: 'Our core strength. We produce flat-knit sweaters and knitwear across gauges and yarn compositions — lambswool, acrylic blends, cotton and specialty yarns — with in-house linking, mending and finishing.',
+    long: 'Our core strength as a sweater manufacturer. We produce flat-knit sweaters and knitwear across gauges and yarn compositions — lambswool, acrylic blends, cotton and specialty yarns — with in-house linking, mending and finishing.',
     details: ['Crew necks, cardigans, turtlenecks, vests', 'Multiple gauges and yarn blends', 'In-house linking and finishing'],
   },
   {
     slug: 'knitted-polos',
     art: 'polo',
-    photo: '/images/tees-hanging.jpg',
+    photo: 'tees-hanging',
     photoAlt: 'Knitted shirts hanging on a garment rack',
     title: 'Knitted Polo Shirts',
     short: 'Performance and classic knitted polos engineered for fit, hand-feel and durability.',
-    long: 'Knitted polos built for repeat orders: consistent collars, precise plackets and tested shrinkage control so size runs stay true across production lots.',
+    long: 'Knitted polo shirt manufacturing built for repeat orders: consistent collars, precise plackets and tested shrinkage control so size runs stay true across production lots.',
     details: ['Classic and performance styles', 'Consistent collar and placket construction', 'Tested shrinkage control'],
   },
   {
     slug: 'event-team-knits',
     art: 'sweater',
-    photo: '/images/event-knits.jpg',
+    photo: 'event-knits',
     photoAlt: 'Colourful cable-knit scarves in team colours',
     title: 'Event, Festival & Team Knits',
     short: 'Custom sweaters and knitted pieces for events, festivals and sports teams — branded, short-run, delivered on date.',
@@ -48,17 +50,17 @@ export const capabilities: Capability[] = [
   {
     slug: 'kids-wear',
     art: 'frock',
-    photo: '/images/kids-clothes.jpg',
+    photo: 'kids-clothes',
     photoAlt: 'Kids garments on wooden hangers',
     title: 'Kids Wear',
     short: 'Frocks and children’s garments where comfort, safety and softness come first.',
-    long: 'Children’s wear demands gentler yarns, secure trims and stricter finishing checks. Our kids lines are handled with dedicated QC attention on seams, trims and skin-contact comfort.',
+    long: 'Kids wear manufacturing demands gentler yarns, secure trims and stricter finishing checks. Our kids lines are handled with dedicated QC attention on seams, trims and skin-contact comfort.',
     details: ['Frocks, sets and knit basics', 'Secure trims and safe finishing', 'Soft, skin-friendly yarn selection'],
   },
   {
     slug: 'kurta-shalwar',
     art: 'kurta',
-    photo: '/images/floral-textile.jpg',
+    photo: 'floral-textile',
     photoAlt: 'Delicate floral textile for traditional wear',
     title: 'Kurta Shalwar & Traditional Wear',
     short: 'Traditional silhouettes with modern tailoring standards and consistent sizing.',
@@ -68,7 +70,7 @@ export const capabilities: Capability[] = [
   {
     slug: 'embroidery',
     art: 'embroidery',
-    photo: '/images/embroidery.jpg',
+    photo: 'embroidery',
     photoAlt: 'Hand embroidery detail on fabric',
     title: 'Embroidery',
     short: 'In-house embroidery adding texture, branding and detail to any garment program.',
@@ -78,11 +80,11 @@ export const capabilities: Capability[] = [
   {
     slug: 'fabric-sourcing',
     art: 'yarn',
-    photo: '/images/knit-grey.jpg',
+    photo: 'knit-grey',
     photoAlt: 'Rolls of knit fabric and yarn',
     title: 'Fabric & Yarn Sourcing',
     short: 'Trusted supplier network for yarns and fabrics that meet your spec and price point.',
-    long: 'Through an established supplier network in Pakistan we source yarns and fabrics against your specification — with lab dips, quality checks and honest guidance on cost versus performance.',
+    long: 'Through an established supplier network across Pakistan’s textile industry we source yarns and fabrics against your specification — with lab dips, quality checks and honest guidance on cost versus performance.',
     details: ['Established local supplier network', 'Lab dips and pre-production checks', 'Cost vs. performance guidance'],
   },
 ];
@@ -154,7 +156,7 @@ export const qualityPoints = [
 ] as const;
 
 export const orderInfo = [
-  { label: 'Minimum order', value: 'From 5 pieces', note: 'Per style — and sampling starts from a single piece.' },
+  { label: 'Minimum order (MOQ)', value: 'From 5 pieces', note: 'One of the lowest MOQs among clothing manufacturers in Pakistan — and sampling starts from a single piece.' },
   { label: 'Sampling', value: '7–14 days', note: 'Proto and fit samples, revised until approved.' },
   { label: 'Production lead time', value: '30–60 days', note: 'Depending on style complexity and quantity.' },
 ] as const;
@@ -174,5 +176,37 @@ export const smallRuns = [
     audience: 'Growing together',
     moq: 'Repeat & scale',
     text: 'When it works, we grow with you — repeat runs on the same lines, to the same measurements, with the same hand-feel. Scaling with us means never starting over.',
+  },
+] as const;
+
+export const faqs = [
+  {
+    q: 'What is your minimum order quantity (MOQ)?',
+    a: 'Our MOQ is 5 pieces per style — one of the lowest minimum order quantities among clothing manufacturers in Pakistan. Startups can launch a collection with five pieces per style, and event or team orders can start from as few as two. When you are ready to scale, the same lines run hundreds or thousands of pieces.',
+  },
+  {
+    q: 'How does sampling work?',
+    a: 'Every program starts with a sample. Send us your tech pack — or even a reference photo — and we develop a proto sample within roughly 7–14 days, then revise it with you until it is approved for production. One-off samples and prototypes are welcome; you do not need a production commitment to sample with us.',
+  },
+  {
+    q: 'What are your production lead times?',
+    a: 'Typical production lead time is 30–60 days after sample approval, depending on style complexity, quantity and yarn availability. We track output daily by style, stage and shift, so the date we commit to is a date we can defend — and you get honest updates, not surprises.',
+  },
+  // TODO: confirm real shipping terms (FOB/CIF, ports) with YK Apparels
+  {
+    q: 'Do you ship internationally?',
+    a: 'Yes. We regularly work with international brands and ship worldwide from Lahore, Pakistan, with full export documentation. Shipping terms are agreed per order — ask us about FOB or door-to-door options for your destination when you send your inquiry.',
+  },
+  {
+    q: 'What products do you manufacture?',
+    a: 'We are a knitwear manufacturer first: flat-knit sweaters and cardigans, knitted polo shirts, kids wear, kurta shalwar and traditional wear, plus custom event, festival and team knits. Embroidery is done in-house, and we source yarn and fabric through our supplier network in Pakistan.',
+  },
+  {
+    q: 'Do you work with new brands and startups?',
+    a: 'Gladly — some of our strongest partnerships began with a founder and a handful of pieces. With a 5-piece MOQ, sampling from a single piece and honest feasibility feedback before you commit, we are built to be the first manufacturer a new brand works with, and the last one it needs.',
+  },
+  {
+    q: 'How do I start working with YK Apparels?',
+    a: 'Send an inquiry through our contact form or WhatsApp with whatever you have — a tech pack is ideal, but a reference photo and a target quantity is enough. We reply within 1–2 business days with honest feedback on feasibility, pricing and timelines, then move to sampling.',
   },
 ] as const;

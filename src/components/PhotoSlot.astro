@@ -1,21 +1,36 @@
 ---
 /*
-  Illustrated figure that becomes a photo the moment `src` is provided —
-  the layout never changes. Until then it shows themed knitwear line art,
-  so the site looks finished without photography.
+  Photo figure with responsive AVIF/WebP via astro:assets. Pass `src` as a key
+  from src/data/images.ts. Without `src` it falls back to themed line art, so
+  the layout works before photography exists.
 */
+import { Picture } from 'astro:assets';
 import Illustration from './Illustration.astro';
-import type { IllustrationVariant } from '../data/illustrations';
+import type { IllustrationVariant } from './Illustration.astro';
+import { images, type ImageKey } from '../data/images';
 
 interface Props {
   variant?: IllustrationVariant;
-  src?: string;
+  src?: ImageKey;
   alt?: string;
   label: string;
   ratio?: string; // CSS aspect-ratio value, e.g. "4 / 3"
+  sizes?: string; // responsive sizes hint matched to layout
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'auto';
   class?: string;
 }
-const { variant = 'sweater', src, alt = '', label, ratio = '4 / 3', class: className = '' } = Astro.props;
+const {
+  variant = 'sweater',
+  src,
+  alt = '',
+  label,
+  ratio = '4 / 3',
+  sizes = '(min-width: 1024px) 45vw, 92vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className = '',
+} = Astro.props;
 ---
 
 <figure
@@ -25,7 +40,16 @@ const { variant = 'sweater', src, alt = '', label, ratio = '4 / 3', class: class
   {
     src ? (
       <>
-        <img src={src} alt={alt} class="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+        <Picture
+          src={images[src]}
+          alt={alt}
+          formats={['avif', 'webp']}
+          widths={[400, 700, 1000, 1400]}
+          sizes={sizes}
+          loading={loading}
+          fetchpriority={fetchpriority}
+          class="absolute inset-0 h-full w-full object-cover"
+        />
         <figcaption class="absolute bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-white/20 bg-black/45 px-3.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
           {label}
         </figcaption>
@@ -48,6 +72,16 @@ const { variant = 'sweater', src, alt = '', label, ratio = '4 / 3', class: class
 </figure>
 
 <style>
+  /* astro Picture renders <picture><img/></picture>; make the img fill the frame */
+  figure :global(picture) {
+    position: absolute;
+    inset: 0;
+  }
+  figure :global(picture img) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
   .corner-tick {
     position: absolute;
     width: 14px;

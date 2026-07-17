@@ -24,26 +24,29 @@ const values = [
 ---
 
 <Base
-  title="About & Facility — YK Apparels, Lahore"
-  description="YK Apparels has been manufacturing knitwear and apparel in Lahore, Pakistan since 2015. Learn about our facility, our quality process and how we work."
+  title="About YK Apparels — Knitwear Manufacturer in Lahore"
+  description="YK Apparels has manufactured knitwear and apparel in Lahore, Pakistan since 2015. See our production facility, quality process and how we work with brands."
 >
   <section class="mx-auto grid max-w-6xl items-center gap-12 px-5 pt-16 pb-12 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:pt-20">
     <div>
       <SectionHeading
+        as="h1"
         eyebrow="About us"
-        title="A production facility built on repeat orders"
+        title="A knitwear manufacturer built on repeat orders"
         lead={`YK Apparels has been manufacturing knitwear and apparel in Lahore since ${site.founded}. We grew the way good manufacturers do — one delivered order at a time, for brands that kept coming back.`}
       />
       <p class="mt-6 max-w-xl leading-relaxed text-muted">
         Today we produce for some of Pakistan's most recognised high-street brands and are expanding
         our partnerships with international labels. What hasn't changed is how we operate: honest
         feasibility answers, disciplined production tracking, and quality checked at every stage —
-        not just at final inspection.
+        not just at final inspection. Explore our
+        <a href="/capabilities/" class="font-semibold text-accent-2 underline underline-offset-2">knitwear manufacturing capabilities</a>
+        or <a href="/contact/" class="font-semibold text-accent-2 underline underline-offset-2">start a production inquiry</a>.
       </p>
     </div>
     <PhotoSlot
       variant="machine"
-      src="/images/factory-machines.jpg"
+      src="factory-machines"
       alt="Rows of textile machinery with yarn bobbins"
       label="Our facility"
       ratio="4 / 4.4"
@@ -62,21 +65,21 @@ const values = [
       <div class="mt-11 grid gap-4 sm:grid-cols-3">
         <PhotoSlot
           variant="machine"
-          src="/images/workshop.jpg"
+          src="workshop"
           alt="Production floor with rows of sewing stations"
           label="Production floor"
           ratio="4 / 3"
         />
         <PhotoSlot
           variant="embroidery"
-          src="/images/sewing-machine.jpg"
+          src="sewing-machine"
           alt="Sewing machine needle stitching fabric"
           label="Stitching & linking"
           ratio="4 / 3"
         />
         <PhotoSlot
           variant="carton"
-          src="/images/sweaters-stack.jpg"
+          src="sweaters-stack"
           alt="Finished sweaters folded and stacked"
           label="Finishing & packing"
           ratio="4 / 3"

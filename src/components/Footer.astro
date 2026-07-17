@@ -3,15 +3,26 @@ import Logo from './Logo.astro';
 import { site, nav, gaMeasurementId } from '../data/site';
 
 const year = new Date().getFullYear();
+
+// keyword-anchored internal links to capability sections
+const whatWeMake = [
+  { slug: 'sweaters-knitwear', label: 'Sweater manufacturing' },
+  { slug: 'knitted-polos', label: 'Knitted polo shirts' },
+  { slug: 'event-team-knits', label: 'Event & team knits' },
+  { slug: 'kids-wear', label: 'Kids wear manufacturing' },
+  { slug: 'kurta-shalwar', label: 'Kurta shalwar & traditional wear' },
+  { slug: 'embroidery', label: 'Embroidery services' },
+  { slug: 'fabric-sourcing', label: 'Yarn & fabric sourcing' },
+] as const;
 ---
 
 <footer class="border-t border-line bg-sunken">
-  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.4fr_1fr_1.2fr]">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
     <div>
       <a href="/" aria-label="YK Apparels — home"><Logo /></a>
       <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-        A knitwear and apparel production facility in Lahore, Pakistan — manufacturing for local and
-        international brands since {site.founded}.
+        A knitwear manufacturer and production facility in Lahore, Pakistan — producing for
+        international and Pakistani brands since {site.founded}.
       </p>
       <div class="mt-5 flex gap-3">
         <a href={site.socials.facebook} class="social-link" aria-label="Facebook" rel="noopener" target="_blank">
@@ -33,6 +44,21 @@ const year = new Date().getFullYear();
           nav.map((item) => (
             <li>
               <a href={item.href} class="text-sm text-body transition-colors hover:text-accent">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <nav aria-label="What we make">
+      <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">What we make</h3>
+      <ul class="mt-4 space-y-2.5">
+        {
+          whatWeMake.map((item) => (
+            <li>
+              <a href={`/capabilities/#${item.slug}`} class="text-sm text-body transition-colors hover:text-accent">
                 {item.label}
               </a>
             </li>

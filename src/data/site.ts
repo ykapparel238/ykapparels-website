@@ -19,9 +19,9 @@ export const gaMeasurementId = '';
 export const site = {
   name: 'YK Apparels',
   legalName: 'YK Apparels',
-  tagline: 'Knitwear & apparel manufacturing partner in Lahore, Pakistan',
+  tagline: 'Knitwear manufacturer in Lahore, Pakistan',
   description:
-    'YK Apparels is a knitwear and apparel production facility in Lahore, Pakistan, manufacturing sweaters, knitted polos, kids wear and traditional wear for local and international brands since 2015.',
+    'YK Apparels is a knitwear and garment manufacturer in Lahore, Pakistan, producing sweaters, knitted polos, kids wear and traditional wear for international and Pakistani brands since 2015 — with low MOQs from 5 pieces per style.',
   url: 'https://ykapparels.com',
   founded: 2015,
   email: 'contact@ykapparels.com',

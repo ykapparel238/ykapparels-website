@@ -5,16 +5,18 @@ import PhotoSlot from '../components/PhotoSlot.astro';
 import CTA from '../components/CTA.astro';
 import { capabilities, orderInfo } from '../data/content';
 import GrowthJourney from '../components/GrowthJourney.astro';
+import FAQ from '../components/FAQ.astro';
 ---
 
 <Base
-  title="Capabilities — Sweaters, Knitted Polos, Kids Wear & More | YK Apparels"
-  description="Production capabilities at YK Apparels: flat-knit sweaters, knitted polo shirts, kids wear, kurta shalwar, in-house embroidery and fabric sourcing in Lahore, Pakistan."
+  title="Sweater & Knitwear Manufacturing Capabilities | YK Apparels"
+  description="Sweater manufacturing, knitted polos, kids wear, traditional wear, embroidery and yarn sourcing — seven garment manufacturing capabilities in Lahore, Pakistan."
 >
   <section class="mx-auto max-w-6xl px-5 pt-16 pb-4 sm:px-8 lg:pt-20">
     <SectionHeading
+      as="h1"
       eyebrow="Capabilities"
-      title="What we produce"
+      title="Knitwear & garment manufacturing capabilities"
       lead="Seven capabilities under one roof, one quality loop from yarn to carton. Every program below runs with inline inspection and daily production tracking."
     />
   </section>
@@ -86,7 +88,20 @@ import GrowthJourney from '../components/GrowthJourney.astro';
     </div>
   </section>
 
-  <div class="pt-20">
+  <!-- FAQ -->
+  <section class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+    <SectionHeading
+      eyebrow="Questions"
+      title="Frequently asked questions"
+      lead="The answers international and Pakistani brands ask us most — MOQs, sampling, lead times and how to start."
+      align="center"
+    />
+    <div class="mx-auto mt-10 max-w-3xl">
+      <FAQ />
+    </div>
+  </section>
+
+  <div>
     <CTA
       title="Don't see your product here?"
       text="If it's knit or sewn, chances are we can produce it or point you to someone who can. Ask us — we answer honestly."

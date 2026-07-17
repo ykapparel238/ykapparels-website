@@ -65,6 +65,30 @@ The site is fully static — any static host works. Two easy options:
 After connecting the domain, update DNS at the registrar as the host instructs.
 Every `git push` then redeploys automatically.
 
+## SEO — after every deploy that matters
+
+The site ships with maximum on-page SEO (keyword-mapped titles/H1s, FAQ,
+Organization/LocalBusiness/BreadcrumbList/FAQPage schema, AVIF/WebP responsive
+images, font preloads, security/cache headers). The ranking levers that live
+OUTSIDE the repo — do these once, right after go-live:
+
+1. **Google Search Console** (biggest 30-day lever): search.google.com/search-console →
+   add property `ykapparels.com` (Domain type) → verify via the DNS TXT record in
+   Cloudflare → Sitemaps → submit `https://ykapparels.com/sitemap-index.xml` →
+   URL Inspection → "Request indexing" for all 6 pages on day one.
+2. **Google Business Profile**: claim the existing Maps listing (already linked from
+   the site), set category "Clothing manufacturer / Garment manufacturer", add the
+   website URL and facility photos. This drives "…Lahore" local-pack results.
+3. **Bing Webmaster Tools**: bing.com/webmasters → "Import from Google Search Console".
+4. **Backlinks**: add the website URL to the Facebook/Instagram/LinkedIn profiles,
+   WhatsApp Business profile, and any supplier/industry directories.
+5. **www redirect**: Cloudflare dashboard → Rules → Redirect Rules → create
+   "www.ykapparels.com/* → https://ykapparels.com/$1" (301). Also ensure a proxied
+   DNS record exists for `www` so the rule can fire. (Not possible in `_redirects` —
+   host-based rules must be zone-level.)
+6. **Validate rich results**: search.google.com/test/rich-results on `/` and
+   `/capabilities/` after deploy.
+
 ### Regenerating the OG image
 
 If you edit `scripts/og.svg`:

@@ -1,0 +1,38 @@
+---
+/*
+  Zero-JS FAQ accordion using native <details>/<summary>.
+  All answer text is in the DOM — fully crawlable.
+*/
+import { faqs } from '../data/content';
+
+interface Props {
+  limit?: number;
+  class?: string;
+}
+const { limit, class: className = '' } = Astro.props;
+const items = limit ? faqs.slice(0, limit) : faqs;
+---
+
+<div class:list={['space-y-3', className]}>
+  {
+    items.map((faq) => (
+      <details class="faq group rounded-2xl border border-line bg-surface">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-[15px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+          {faq.q}
+          <svg
+            class="size-4 shrink-0 text-accent-2 transition-transform group-open:rotate-45"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </summary>
+        <p class="px-6 pb-5 text-sm leading-relaxed text-muted">{faq.a}</p>
+      </details>
+    ))
+  }
+</div>

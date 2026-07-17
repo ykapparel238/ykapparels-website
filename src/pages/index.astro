@@ -12,8 +12,8 @@ import { capabilities, stats, qualityPoints } from '../data/content';
 ---
 
 <Base
-  title="YK Apparels — Knitwear & Apparel Manufacturing in Lahore, Pakistan"
-  description="Knitwear and apparel production facility in Lahore, Pakistan. Sweaters, knitted polos, kids wear and traditional wear for local and international brands since 2015."
+  title="Knitwear Manufacturer in Lahore, Pakistan | YK Apparels"
+  description="YK Apparels is a knitwear manufacturer in Lahore, Pakistan producing sweaters, knitted polos and kids wear for international and Pakistani brands — MOQs from 5 pieces."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden" style="background: linear-gradient(160deg, var(--hero-grad-a), var(--hero-grad-b) 62%);">
@@ -30,8 +30,8 @@ import { capabilities, stats, qualityPoints } from '../data/content';
     <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:py-28">
       <div>
         <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-          <span class="size-1.5 rounded-full bg-accent-2"></span>
-          Lahore, Pakistan · Since {site.founded}
+          <span class="size-1.5 rounded-full bg-accent-2" aria-hidden="true"></span>
+          Knitwear Manufacturer in Lahore, Pakistan · Since {site.founded}
         </p>
         <h1 class="text-[3rem] font-black uppercase leading-[0.95] tracking-tight text-ink sm:text-[4.2rem] lg:text-[4.8rem]">
           Designs in.<br />
@@ -60,18 +60,23 @@ import { capabilities, stats, qualityPoints } from '../data/content';
       <div class="grid grid-cols-2 gap-5">
         <PhotoSlot
           variant="sweater"
-          src="/images/sweaters-pile.jpg"
-          alt="Cream and sage fine-gauge knit sweaters"
+          src="sweaters-pile"
+          alt="Fine-gauge knit sweaters manufactured by YK Apparels"
           label="Fine-gauge knits"
           ratio="3 / 4"
+          sizes="(min-width: 1024px) 24vw, 45vw"
+          loading="eager"
+          fetchpriority="high"
           class="mt-10 -rotate-2 transition-transform duration-500 hover:rotate-0"
         />
         <PhotoSlot
           variant="yarn"
-          src="/images/yarn-spools.jpg"
-          alt="Rows of colourful yarn cones in the facility"
+          src="yarn-spools"
+          alt="Rows of colourful yarn cones at our knitwear production facility"
           label="Yarn to garment"
           ratio="3 / 4"
+          sizes="(min-width: 1024px) 24vw, 45vw"
+          loading="eager"
           class="rotate-2 transition-transform duration-500 hover:rotate-0"
         />
       </div>
@@ -198,7 +203,7 @@ import { capabilities, stats, qualityPoints } from '../data/content';
     </div>
     <PhotoSlot
       variant="inspect"
-      src="/images/sewing-hands.jpg"
+      src="sewing-hands"
       alt="Hands guiding fabric through a sewing machine"
       label="Attention at every seam"
       ratio="4 / 3.4"
