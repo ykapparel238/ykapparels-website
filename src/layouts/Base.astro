@@ -5,6 +5,7 @@ import frauncesLatin from '@fontsource-variable/fraunces/files/fraunces-latin-wg
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
+import MobileActionBar from '../components/MobileActionBar.astro';
 import { site, defaultTheme } from '../data/site';
 
 interface Props {
@@ -147,7 +148,7 @@ const jsonLd = {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
@@ -183,6 +184,8 @@ const jsonLd = {
          Priority: visitor's stored choice > configured default > system preference. -->
     <script is:inline define:vars={{ defaultTheme }}>
       (() => {
+        // Progressive enhancement flag: .reveal animations only activate with JS present
+        document.documentElement.classList.add('js');
         const stored = localStorage.getItem('theme');
         let theme;
         if (stored === 'light' || stored === 'dark') {
@@ -193,6 +196,9 @@ const jsonLd = {
           theme = defaultTheme;
         }
         document.documentElement.dataset.theme = theme;
+        // keep mobile browser chrome in sync with the active theme
+        const tc = document.querySelector('meta[name="theme-color"]');
+        if (tc) tc.content = theme === 'dark' ? '#0a1512' : '#14563e';
       })();
     </script>
   </head>
@@ -202,6 +208,7 @@ const jsonLd = {
       <slot />
     </main>
     <Footer />
+    {path !== '/contact/' && <MobileActionBar />}
     <ConsentBanner />
     <script>
       type ConversionDetail = { name: string; location?: string };
@@ -234,9 +241,21 @@ const jsonLd = {
               }
             }
           },
-          { threshold: 0.12 },
+          // rootMargin pre-triggers reveals just below the fold so fast mobile
+          // scrolling never lands on still-hidden content
+          { threshold: 0.05, rootMargin: '0px 0px 12% 0px' },
         );
         revealables.forEach((el) => observer.observe(el));
+        // Watchdog: above-fold reveals fire within milliseconds normally. If
+        // nothing has revealed after 2s the observer is stalled/broken — show
+        // everything rather than leave content invisible.
+        if (revealables.length > 0) {
+          setTimeout(() => {
+            if (!document.querySelector('.reveal.revealed')) {
+              revealables.forEach((el) => el.classList.add('revealed'));
+            }
+          }, 2000);
+        }
       } else {
         revealables.forEach((el) => el.classList.add('revealed'));
       }

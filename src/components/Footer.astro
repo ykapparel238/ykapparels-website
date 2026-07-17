@@ -36,11 +36,11 @@ const forBrands = [
 
     <nav aria-label="Footer">
       <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Explore</h3>
-      <ul class="mt-4 space-y-2.5">
+      <ul class="mt-4 space-y-0.5 sm:space-y-2.5">
         {
           nav.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-body transition-colors hover:text-accent">
+              <a href={item.href} class="block py-2 text-sm text-body transition-colors hover:text-accent sm:inline sm:py-0">
                 {item.label}
               </a>
             </li>
@@ -51,11 +51,11 @@ const forBrands = [
 
     <nav aria-label="For brands">
       <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">For brands</h3>
-      <ul class="mt-4 space-y-2.5">
+      <ul class="mt-4 space-y-0.5 sm:space-y-2.5">
         {
           forBrands.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-body transition-colors hover:text-accent">
+              <a href={item.href} class="block py-2 text-sm text-body transition-colors hover:text-accent sm:inline sm:py-0">
                 {item.label}
               </a>
             </li>
@@ -90,10 +90,10 @@ const forBrands = [
     <div class="mx-auto flex max-w-6xl flex-col gap-1.5 px-5 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
       <p>© {year} {site.name}. All rights reserved.</p>
       <p class="flex flex-wrap gap-x-4 gap-y-1">
-        <a href="/privacy/" class="transition-colors hover:text-accent">Privacy Policy</a>
+        <a href="/privacy/" class="inline-block py-1.5 -my-1.5 transition-colors hover:text-accent sm:py-0 sm:my-0">Privacy Policy</a>
         {
           gaMeasurementId && (
-            <button type="button" data-cookie-settings class="cursor-pointer transition-colors hover:text-accent">
+            <button type="button" data-cookie-settings class="inline-block cursor-pointer py-1.5 -my-1.5 transition-colors hover:text-accent sm:py-0 sm:my-0">
               Cookie settings
             </button>
           )

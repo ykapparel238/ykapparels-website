@@ -77,12 +77,31 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Only matches devices whose primary input can hover precisely (mouse/trackpad) */
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
+
 body {
   background-color: var(--bg);
   color: var(--body);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   transition: background-color 200ms ease, color 200ms ease;
+  /* Notched-phone landscape: keep content out of the safe areas (0 elsewhere) */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Keyboard focus ring (pointer clicks unaffected) */
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
+
+/* Avoid double-tap-zoom misfires on rapid taps */
+a,
+button,
+summary {
+  touch-action: manipulation;
 }
 
 ::selection {
@@ -98,13 +117,14 @@ body {
 
 /* ————— Motion ————— */
 
-/* Scroll reveal: elements with .reveal fade/rise in when they enter the viewport */
-.reveal {
+/* Scroll reveal: elements with .reveal fade/rise in when they enter the viewport.
+   Gated behind html.js (set before paint) so content stays visible without JS. */
+.js .reveal {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal.revealed {
+.js .reveal.revealed {
   opacity: 1;
   transform: none;
 }
@@ -127,7 +147,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     transition: none;

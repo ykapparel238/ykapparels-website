@@ -56,3 +56,12 @@ export const nav = [
   { label: 'Clients', href: '/clients/' },
   { label: 'Contact', href: '/contact/' },
 ] as const;
+
+/*
+  Primary navigation. SEO landing pages (custom knitwear, guides) are reached
+  from search, the homepage, capabilities and the footer — putting them in the
+  header made them read as general site sections and crowded the menu.
+*/
+export const headerNav = nav.filter(
+  (item) => !['/custom-knitwear-manufacturer/', '/guides/'].includes(item.href),
+);

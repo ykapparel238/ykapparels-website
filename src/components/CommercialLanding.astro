@@ -1,5 +1,12 @@
 ---
+/*
+  Shared template for all high-intent SEO landing pages (custom knitwear,
+  private label, low MOQ, Pakistan, Asia). One clear story in the site's own
+  design language: hero → highlights → stitched-thread journey → FAQ →
+  related links → CTA panel. Content lives in src/data/commercial-pages.ts.
+*/
 import Base from '../layouts/Base.astro';
+import SectionHeading from './SectionHeading.astro';
 import PhotoSlot from './PhotoSlot.astro';
 import FAQ from './FAQ.astro';
 import CTA from './CTA.astro';
@@ -29,28 +36,46 @@ const serviceSchema = {
   title={page.title}
   description={page.description}
   canonicalPath={canonicalPath}
-  breadcrumbs={[{ name: page.h1, href: canonicalPath }]}
+  breadcrumbs={[{ name: page.eyebrow, href: canonicalPath }]}
   faqItems={page.faqs}
   structuredData={[serviceSchema]}
 >
-  <section class="border-b border-line bg-sunken">
+  <!-- Hero -->
+  <section
+    class="relative overflow-hidden border-b border-line"
+    style="background: linear-gradient(160deg, var(--hero-grad-a), var(--hero-grad-b) 62%);"
+  >
     <div class="mx-auto max-w-6xl px-5 pt-6 sm:px-8">
       <nav aria-label="Breadcrumb" class="text-xs text-muted">
         <ol class="flex flex-wrap items-center gap-2">
-          <li><a href="/" class="transition-colors hover:text-accent">Home</a></li>
+          <li><a href="/" class="inline-block py-1.5 -my-1.5 transition-colors hover:text-accent">Home</a></li>
           <li aria-hidden="true">/</li>
           <li aria-current="page" class="text-body">{page.eyebrow}</li>
         </ol>
       </nav>
     </div>
-    <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:py-20">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 py-12 sm:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:py-16">
       <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-2">{page.eyebrow}</p>
-        <h1 class="font-display mt-4 max-w-3xl text-4xl font-semibold leading-tight text-ink sm:text-5xl">{page.h1}</h1>
-        <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">{page.lead}</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/contact/" class="rounded-full bg-accent px-7 py-3.5 text-sm font-bold text-accent-ink transition-colors hover:bg-accent-strong">Discuss your product</a>
-          <a href={site.whatsappHref} rel="noopener" target="_blank" class="rounded-full border border-line bg-surface px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-accent-2 hover:text-accent-2">Ask on WhatsApp</a>
+        <SectionHeading as="h1" eyebrow={page.eyebrow} title={page.h1} lead={page.lead} />
+        <div class="mt-9 flex flex-wrap gap-3.5">
+          <a
+            href="/contact/"
+            data-track-event="inquiry_cta_click"
+            data-track-location={`landing_${page.slug}`}
+            class="rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-accent-ink transition-all hover:-translate-y-0.5 hover:bg-accent-strong active:scale-[0.98]"
+          >
+            Start an inquiry
+          </a>
+          <a
+            href={site.whatsappHref}
+            rel="noopener"
+            target="_blank"
+            data-track-event="whatsapp_click"
+            data-track-location={`landing_${page.slug}`}
+            class="rounded-full border border-line bg-surface px-8 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-accent-2 hover:text-accent-2 active:scale-[0.98]"
+          >
+            Ask on WhatsApp
+          </a>
         </div>
       </div>
       <PhotoSlot
@@ -58,7 +83,7 @@ const serviceSchema = {
         variant="sweater"
         alt={page.imageAlt}
         label={page.imageLabel}
-        ratio="4 / 3"
+        ratio="5 / 4"
         sizes="(min-width: 1024px) 42vw, 92vw"
         loading="eager"
         fetchpriority="high"
@@ -66,65 +91,135 @@ const serviceSchema = {
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-    <div class="grid gap-4 md:grid-cols-3">
-      {page.highlights.map((item) => (
-        <article class="rounded-2xl border border-line bg-surface p-7">
-          <h2 class="font-display text-xl font-semibold text-ink">{item.title}</h2>
-          <p class="mt-3 text-sm leading-relaxed text-muted">{item.text}</p>
-        </article>
-      ))}
+  <!-- Highlights -->
+  <section class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        page.highlights.map((item, i) => (
+          <article
+            class="reveal rounded-2xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent-2/60"
+            style={`transition-delay: ${(i % 3) * 70}ms;`}
+          >
+            <span class="font-display text-sm font-semibold text-accent-2 opacity-70">{String(i + 1).padStart(2, '0')}</span>
+            <h2 class="font-display mt-2 text-xl font-semibold text-ink">{item.title}</h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-muted">{item.text}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
 
+  <!-- The journey: the page's sections on the site's stitched-thread signature -->
   <section class="border-y border-line bg-sunken">
-    <div class="mx-auto max-w-6xl space-y-6 px-5 py-16 sm:px-8">
-      {page.sections.map((section, index) => (
-        <article class="grid gap-7 rounded-3xl border border-line bg-surface p-7 sm:p-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent-2">{String(index + 1).padStart(2, '0')}</p>
-            <h2 class="font-display mt-3 text-2xl font-semibold text-ink sm:text-3xl">{section.title}</h2>
-            <p class="mt-4 leading-relaxed text-muted">{section.text}</p>
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+      <div class="reveal">
+        <SectionHeading
+          eyebrow="How it works"
+          title="One clear path from idea to production"
+          lead="No hidden stages, no vague promises — this is how the work actually moves."
+        />
+      </div>
+      <ol class="relative mt-12 max-w-3xl">
+        <span
+          class="pointer-events-none absolute bottom-8 left-[1.32rem] top-6 border-l-2 border-dashed border-accent-2/35"
+          aria-hidden="true"></span>
+        {
+          page.sections.map((section) => (
+            <li class="group relative flex gap-5 pb-10">
+              <span class="z-10 mt-1 grid size-11 shrink-0 place-items-center rounded-full border-2 border-accent-2/50 bg-surface transition-all duration-300 group-hover:scale-110 group-hover:border-accent-2">
+                <svg
+                  class="size-4 text-accent-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 8l7 7 7-7" />
+                </svg>
+              </span>
+              <div>
+                <h3 class="font-display text-2xl font-semibold leading-tight text-accent-2">{section.title}</h3>
+                <p class="mt-2.5 max-w-xl text-sm leading-relaxed text-muted">{section.text}</p>
+                <ul class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2">
+                  {section.points.map((point) => (
+                    <li class="flex items-start gap-2.5 text-sm text-body">
+                      <span class="mt-2 size-1.5 shrink-0 rounded-full bg-accent-2" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+        <li class="relative flex gap-5">
+          <span class="z-10 mt-1 grid size-11 shrink-0 place-items-center rounded-full bg-accent-2">
+            <svg
+              class="size-4"
+              style="color: var(--surface);"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
+          </span>
+          <div class="flex-1 rounded-2xl bg-accent-soft px-6 py-5">
+            <p class="font-display text-2xl font-semibold leading-tight text-ink">…then we make it, together</p>
+            <p class="mt-2 max-w-md text-sm leading-relaxed text-body">
+              Send whatever you have — a tech pack, a reference garment, or just the idea. We reply
+              within 1–2 business days with honest feasibility feedback.
+            </p>
           </div>
-          <ul class="grid content-center gap-3 sm:grid-cols-2">
-            {section.points.map((point) => (
-              <li class="flex gap-3 rounded-xl border border-line bg-bg p-4 text-sm leading-relaxed text-body">
-                <span class="mt-2 size-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
-                {point}
-              </li>
-            ))}
-          </ul>
-        </article>
-      ))}
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section class="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
-    <div>
-      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-2">Buyer questions</p>
-      <h2 class="font-display mt-3 text-3xl font-semibold text-ink">What brands ask before starting</h2>
-      <p class="mt-4 leading-relaxed text-muted">Clear answers early make sampling and production more predictable. Ask about anything specific to your product in the inquiry.</p>
+  <!-- FAQ -->
+  <section class="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+    <div class="reveal">
+      <SectionHeading eyebrow="Questions" title="Before you write" align="center" />
     </div>
-    <FAQ items={page.faqs} />
+    <div class="mx-auto mt-10 max-w-3xl">
+      <FAQ items={page.faqs} />
+    </div>
   </section>
 
+  <!-- Related -->
   <section class="border-t border-line bg-sunken">
-    <div class="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-      <p class="text-xs font-semibold uppercase tracking-[0.22em] text-accent-2">Continue your research</p>
-      <h2 class="font-display mt-3 text-3xl font-semibold text-ink">Related manufacturing information</h2>
-      <div class="mt-8 grid gap-4 md:grid-cols-3">
-        {page.related.map((item) => (
-          <a href={item.href} class="group rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent-2">
-            <h3 class="font-display text-lg font-semibold text-ink group-hover:text-accent-2">{item.label}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
-            <span class="mt-4 inline-block text-sm font-semibold text-accent">Read more →</span>
-          </a>
-        ))}
+    <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Keep planning</p>
+      <div class="mt-5 grid gap-4 sm:grid-cols-3">
+        {
+          page.related.map((item) => (
+            <a
+              href={item.href}
+              class="group rounded-2xl border border-line bg-surface p-6 transition-all hover:-translate-y-1 hover:border-accent-2/60"
+            >
+              <h2 class="font-display text-lg font-semibold text-ink">{item.label}</h2>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              <span class="mt-3 inline-block text-sm font-semibold text-accent-2 transition-opacity can-hover:opacity-0 can-hover:group-hover:opacity-100">
+                Continue →
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  <div class="pt-20">
-    <CTA title="Bring us the product you want to make" text="Send the product type, reference or tech pack, quantity and target date. We’ll review feasibility before asking you to commit." />
+  <div class="pt-16 lg:pt-20">
+    <CTA
+      title="Ready to develop the first sample?"
+      text="Send the product type, reference or tech pack, quantity and target date. We'll start with the decisions that affect feasibility."
+    />
   </div>
 </Base>

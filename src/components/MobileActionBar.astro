@@ -1,0 +1,63 @@
+---
+/*
+  Mobile-only sticky bottom action bar: WhatsApp + Start an inquiry.
+  Hidden at sm+ (desktop untouched). Slides away when the footer is in view
+  and whenever the consent banner is open (html[data-consent-open]).
+  Not rendered on /contact/ — Base.astro handles that.
+*/
+import { site } from '../data/site';
+---
+
+<div
+  id="mobile-action-bar"
+  class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 backdrop-blur-md transition-transform duration-300 motion-reduce:transition-none sm:hidden"
+  style="padding-bottom: env(safe-area-inset-bottom);"
+>
+  <div class="flex gap-2.5 px-4 py-2.5">
+    <a
+      href={site.whatsappHref}
+      rel="noopener"
+      target="_blank"
+      data-track-event="whatsapp_click"
+      data-track-location="mobile_action_bar"
+      class="flex flex-1 items-center justify-center gap-2 rounded-full border border-line bg-bg py-3 text-sm font-semibold text-ink active:scale-[0.98]"
+    >
+      <svg class="size-4.5 text-accent-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a13 13 0 0 1-1.5-.5c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l1-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/>
+      </svg>
+      WhatsApp
+    </a>
+    <a
+      href="/contact/"
+      data-track-event="inquiry_cta_click"
+      data-track-location="mobile_action_bar"
+      class="flex flex-1 items-center justify-center rounded-full bg-accent py-3 text-sm font-bold text-accent-ink active:scale-[0.98]"
+    >
+      Start an inquiry
+    </a>
+  </div>
+</div>
+
+<style>
+  /* Slide out of the way while the consent banner needs the bottom edge */
+  :global(html[data-consent-open]) #mobile-action-bar {
+    transform: translateY(100%);
+  }
+</style>
+
+<script>
+  // Hide the bar when the footer is visible (it duplicates the footer's contact
+  // links and would cover them). Bar is visible by default; JS only ever hides.
+  const bar = document.getElementById('mobile-action-bar');
+  const footer = document.querySelector('footer');
+  if (bar && footer && 'IntersectionObserver' in window) {
+    new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          bar.classList.toggle('translate-y-full', entry.isIntersecting);
+        }
+      },
+      { threshold: 0.05 },
+    ).observe(footer);
+  }
+</script>

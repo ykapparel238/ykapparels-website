@@ -1,6 +1,5 @@
 ---
 import CommercialLanding from '../components/CommercialLanding.astro';
-import CustomKnitwearLanding from '../components/CustomKnitwearLanding.astro';
 import { commercialPages, type CommercialPage } from '../data/commercial-pages';
 
 export function getStaticPaths() {
@@ -17,4 +16,4 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-{page.slug === 'custom-knitwear-manufacturer' ? <CustomKnitwearLanding page={page} /> : <CommercialLanding page={page} />}
+<CommercialLanding page={page} />

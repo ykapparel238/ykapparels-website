@@ -43,6 +43,22 @@ import FAQ from '../components/FAQ.astro';
                 </li>
               ))}
             </ul>
+            {cap.slug === 'sweaters-knitwear' && (
+              <p class="mt-6 text-sm text-muted">
+                Developing your own style from scratch?{' '}
+                <a href="/custom-knitwear-manufacturer/" class="font-semibold text-accent-2 underline underline-offset-2 transition-colors hover:text-ink">
+                  See the custom knitwear workflow
+                </a>
+              </p>
+            )}
+            {cap.slug === 'event-team-knits' && (
+              <p class="mt-6 text-sm text-muted">
+                Only need a small run?{' '}
+                <a href="/low-moq-clothing-manufacturer/" class="font-semibold text-accent-2 underline underline-offset-2 transition-colors hover:text-ink">
+                  How low-MOQ production works
+                </a>
+              </p>
+            )}
           </div>
           <PhotoSlot
             variant={cap.art}

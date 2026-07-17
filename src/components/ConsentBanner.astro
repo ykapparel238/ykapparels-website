@@ -15,7 +15,7 @@ import { gaMeasurementId } from '../data/site';
       role="dialog"
       aria-label="Cookie consent"
     >
-      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:px-8">
+      <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:flex-row sm:items-center sm:px-8">
         <p class="flex-1 text-sm leading-relaxed text-body">
           We'd like to use <strong class="text-ink">Google Analytics</strong> to understand how
           visitors use this site. It only runs if you agree, and you can change your mind anytime
@@ -80,9 +80,12 @@ import { gaMeasurementId } from '../data/site';
 
         function hideBanner() {
           banner?.classList.add('hidden');
+          // let the mobile action bar reclaim the bottom edge
+          delete document.documentElement.dataset.consentOpen;
         }
         function showBanner() {
           banner?.classList.remove('hidden');
+          document.documentElement.dataset.consentOpen = 'true';
         }
 
         function applyChoice(choice) {

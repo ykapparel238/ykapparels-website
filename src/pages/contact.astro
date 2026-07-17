@@ -23,10 +23,15 @@ const formEnabled = WEB3FORMS_ACCESS_KEY.length > 0;
     />
 
     <div class="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-      <!-- Form -->
-      {
-        formEnabled ? (
-      <form id="inquiry-form" class="rounded-3xl border border-line bg-surface p-7 sm:p-9" novalidate>
+      <!-- Form: delivers by email when the Web3Forms key is configured,
+           otherwise opens WhatsApp pre-filled with the same inquiry. -->
+      <form
+        id="inquiry-form"
+        class="rounded-3xl border border-line bg-surface p-7 sm:p-9"
+        novalidate
+        data-delivery={formEnabled ? 'email' : 'whatsapp'}
+        data-whatsapp={site.whatsapp}
+      >
         <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
         <input type="hidden" name="subject" value="New production inquiry — ykapparels.com" />
         <input type="hidden" name="from_name" value="YK Apparels Website" />
@@ -93,36 +98,17 @@ const formEnabled = WEB3FORMS_ACCESS_KEY.length > 0;
 
         <button
           type="submit"
-          class="mt-6 w-full rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-ink transition-colors hover:bg-accent-strong disabled:opacity-60 sm:w-auto"
+          class="mt-6 w-full rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-accent-ink transition-colors hover:bg-accent-strong active:scale-[0.98] disabled:opacity-60 sm:w-auto"
         >
-          Send inquiry
+          {formEnabled ? 'Send inquiry' : 'Send inquiry via WhatsApp'}
         </button>
         <p class="mt-4 text-xs leading-relaxed text-muted">
-          Your details are only used to respond to this inquiry — never sold or shared. See our
+          {formEnabled
+            ? 'Your details are only used to respond to this inquiry — never sold or shared. See our'
+            : 'Your inquiry opens in WhatsApp, pre-filled and ready to send — the fastest way to reach us. Your details are never sold or shared. See our'}
           <a href="/privacy/" class="underline underline-offset-2">Privacy Policy</a>.
         </p>
       </form>
-        ) : (
-          <div class="rounded-3xl border border-line bg-surface p-7 sm:p-9">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-accent-2">Inquiry form setup in progress</p>
-            <h2 class="font-display mt-3 text-2xl font-semibold text-ink">Discuss your project directly for now</h2>
-            <p class="mt-4 max-w-xl leading-relaxed text-muted">
-              The online form will open after the receiving mailbox is verified. Until then, send your
-              product type, reference or tech pack, quantity and target date through WhatsApp for the fastest response.
-            </p>
-            <a
-              href={site.whatsappHref}
-              rel="noopener"
-              target="_blank"
-              data-track-event="whatsapp_click"
-              data-track-location="contact_form_fallback"
-              class="mt-7 inline-flex rounded-full bg-accent px-7 py-3.5 text-sm font-bold text-accent-ink transition-colors hover:bg-accent-strong"
-            >
-              Start on WhatsApp
-            </a>
-          </div>
-        )
-      }
 
       <!-- Direct contact -->
       <aside class="space-y-4">
@@ -152,11 +138,11 @@ const formEnabled = WEB3FORMS_ACCESS_KEY.length > 0;
           <ul class="mt-4 space-y-3.5 text-sm">
             <li>
               <p class="text-xs text-muted">Email</p>
-              <a href={`mailto:${site.email}`} data-track-event="email_click" data-track-location="contact_sidebar" class="font-medium text-ink transition-colors hover:text-accent">{site.email}</a>
+              <a href={`mailto:${site.email}`} data-track-event="email_click" data-track-location="contact_sidebar" class="inline-block py-1.5 -my-1.5 font-medium text-ink transition-colors hover:text-accent">{site.email}</a>
             </li>
             <li>
               <p class="text-xs text-muted">Phone</p>
-              <a href={site.phoneHref} data-track-event="phone_click" data-track-location="contact_sidebar" class="font-medium text-ink transition-colors hover:text-accent">{site.phone}</a>
+              <a href={site.phoneHref} data-track-event="phone_click" data-track-location="contact_sidebar" class="inline-block py-1.5 -my-1.5 font-medium text-ink transition-colors hover:text-accent">{site.phone}</a>
             </li>
           </ul>
         </div>
@@ -248,9 +234,37 @@ const formEnabled = WEB3FORMS_ACCESS_KEY.length > 0;
     status.style.color = ok ? 'var(--accent-strong)' : '#b91c1c';
   }
 
+  function buildWhatsAppMessage(data: FormData): string {
+    const field = (name: string) => String(data.get(name) ?? '').trim();
+    const lines = [
+      'New production inquiry from ykapparels.com',
+      '',
+      `Name: ${field('name')}`,
+      `Brand/Company: ${field('company')}`,
+      `Email: ${field('email')}`,
+      field('country') && `Country: ${field('country')}`,
+      field('product_interest') && `Product interest: ${field('product_interest')}`,
+      field('quantity') && `Estimated quantity: ${field('quantity')}`,
+      field('target_date') && `Target date: ${field('target_date')}`,
+      '',
+      `Project details: ${field('message')}`,
+    ];
+    return lines.filter((line) => line !== false && line !== undefined).join('\n');
+  }
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
+
+    // No email key configured yet → deliver the same inquiry through WhatsApp,
+    // pre-filled so the visitor only has to press send.
+    if (form.dataset.delivery === 'whatsapp') {
+      const text = encodeURIComponent(buildWhatsAppMessage(new FormData(form)));
+      window.open(`https://wa.me/${form.dataset.whatsapp}?text=${text}`, '_blank', 'noopener');
+      window.dispatchEvent(new CustomEvent('yk:conversion', { detail: { name: 'generate_lead', location: 'contact_form_whatsapp' } }));
+      showStatus(true, 'WhatsApp is opening with your inquiry pre-filled — just press send to deliver it.');
+      return;
+    }
 
     const button = form.querySelector<HTMLButtonElement>('button[type=submit]');
     if (button) button.disabled = true;
