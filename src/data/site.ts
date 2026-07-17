@@ -38,9 +38,10 @@ export const site = {
   mapsHref:
     'https://www.google.com/maps/place/YK+APPAREL/@31.4486916,74.2556485,18z/data=!4m15!1m8!3m7!1s0x3919ab499cd98c13:0x5428db0101be0aaa!2sRaiwind+Rd,+Pakistan!3b1!8m2!3d31.3582862!4d74.2354641!16s%2Fg%2F1tj5jjt7!3m5!1s0x3919017a33627295:0x34ed2725c6e8ce5f!8m2!3d31.4487359!4d74.2556698!16s%2Fg%2F11xd9ylxy5?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D',
   socials: {
-    facebook: 'https://www.facebook.com/ykapparels',
-    instagram: 'https://www.instagram.com/ykapparels',
-    linkedin: 'https://www.linkedin.com/company/ykapparels',
+    // Add verified YK Apparels profile URLs here when they are ready.
+    facebook: '',
+    instagram: '',
+    linkedin: '',
   },
 } as const;
 
