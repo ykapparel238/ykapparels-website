@@ -96,25 +96,19 @@ import { capabilities, stats, qualityPoints } from '../data/content';
 
   <!-- Capabilities -->
   <section class="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-    <div class="reveal flex flex-wrap items-end justify-between gap-6">
+    <div class="reveal">
       <SectionHeading
         eyebrow="What we make"
         title="Capabilities built around knit"
-        lead="Seven production capabilities under one roof — so your program stays in one quality loop from yarn to carton."
+        lead="Seven production capabilities under one roof — so your program stays in one quality loop from yarn to carton. Here are three; the rest are one click away."
       />
-      <a href="/capabilities/" class="text-sm font-semibold text-accent-2 transition-colors hover:text-ink">
-        Explore capabilities →
-      </a>
     </div>
     <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
-        capabilities.map((cap, i) => (
+        capabilities.slice(0, 3).map((cap, i) => (
           <a
             href={`/capabilities/#${cap.slug}`}
-            class:list={[
-              'reveal group relative overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent-2/60',
-              i === capabilities.length - 1 && capabilities.length % 3 === 1 && 'lg:col-span-3',
-            ]}
+            class="reveal group relative overflow-hidden rounded-2xl border border-line bg-surface p-7 transition-all hover:-translate-y-1 hover:border-accent-2/60"
             style={`transition-delay: ${(i % 3) * 70}ms;`}
           >
             <span class="font-display text-sm font-semibold text-accent-2 opacity-70">{String(i + 1).padStart(2, '0')}</span>
@@ -127,6 +121,14 @@ import { capabilities, stats, qualityPoints } from '../data/content';
         ))
       }
     </div>
+    <p class="reveal mt-9 text-center">
+      <a
+        href="/capabilities/"
+        class="inline-block rounded-full border border-line bg-surface px-8 py-3.5 text-sm font-semibold text-ink transition-all hover:-translate-y-0.5 hover:border-accent-2 hover:text-accent-2"
+      >
+        Explore all {capabilities.length} capabilities →
+      </a>
+    </p>
   </section>
 
   <!-- Small runs -->

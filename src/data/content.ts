@@ -36,6 +36,16 @@ export const capabilities: Capability[] = [
     details: ['Classic and performance styles', 'Consistent collar and placket construction', 'Tested shrinkage control'],
   },
   {
+    slug: 'event-team-knits',
+    art: 'sweater',
+    photo: '/images/event-knits.jpg',
+    photoAlt: 'Colourful cable-knit scarves in team colours',
+    title: 'Event, Festival & Team Knits',
+    short: 'Custom sweaters and knitted pieces for events, festivals and sports teams — branded, short-run, delivered on date.',
+    long: 'Some knits are made for a moment: a team taking the field in its colours, a festival crowd in matching merch, a company marking an occasion. We produce custom-branded sweaters and knitwear in short runs — crests and logos embroidered in-house — with the same production care as our largest programs, and always on your date.',
+    details: ['Team colours, crests and logos', 'Festival, event and corporate merch', 'Short runs with fixed delivery dates'],
+  },
+  {
     slug: 'kids-wear',
     art: 'frock',
     photo: '/images/kids-clothes.jpg',
@@ -64,16 +74,6 @@ export const capabilities: Capability[] = [
     short: 'In-house embroidery adding texture, branding and detail to any garment program.',
     long: 'Embroidery is run in-house so decorated styles never leave our quality loop. Logos, motifs and decorative work are stitched, inspected and finished under one roof.',
     details: ['Logo and motif embroidery', 'Decorative and textural work', 'Inspected within our own QC loop'],
-  },
-  {
-    slug: 'event-team-knits',
-    art: 'sweater',
-    photo: '/images/threads-box.jpg',
-    photoAlt: 'Colourful branding threads for custom knit orders',
-    title: 'Event, Festival & Team Knits',
-    short: 'Custom sweaters and knitted pieces for events, festivals and sports teams — branded, short-run, delivered on date.',
-    long: 'Some knits are made for a moment: a team taking the field in its colours, a festival crowd in matching merch, a company marking an occasion. We produce custom-branded sweaters and knitwear in short runs — crests and logos embroidered in-house — with the same production care as our largest programs, and always on your date.',
-    details: ['Team colours, crests and logos', 'Festival, event and corporate merch', 'Short runs with fixed delivery dates'],
   },
   {
     slug: 'fabric-sourcing',
