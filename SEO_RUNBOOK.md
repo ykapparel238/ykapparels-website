@@ -64,6 +64,54 @@ pages created only to repeat a keyword.
 
 Add proof to the closest relevant page rather than creating a single overloaded trust page.
 
+## AI visibility (ChatGPT, Claude, Perplexity, Gemini)
+
+Goal: when buyers ask AI assistants for manufacturer recommendations, YK Apparels is cited.
+How assistants source answers: ChatGPT searches via the Bing index, Claude via Brave Search,
+Gemini via Google, Perplexity via its own crawler (favouring fresh, dated content). On-site
+support already shipped: explicit AI-crawler allowlist in `robots.txt`, machine-readable
+summaries at `/llms.txt` and `/llms-full.txt`, quotable "At a glance" facts on `/about/`,
+FAQPage/Service/Article schema throughout.
+
+### Critical: Cloudflare blocks AI crawlers by default
+
+Cloudflare's "Block AI Bots" (Security → Bots) now defaults to **Block** and acts at the edge,
+**before robots.txt is read** — with it on, GPTBot/ClaudeBot/PerplexityBot can never see the
+site regardless of anything in this repository.
+
+1. Cloudflare dashboard → Security → Bots → set AI bot blocking **off**, or with the
+   category controls allow **Search**, **Agent** and (recommended for brand visibility)
+   **Training** crawlers.
+2. Confirm Super Bot Fight Mode is not challenging verified bots.
+3. Enable **Crawler Hints / IndexNow** so content changes reach Bing quickly.
+4. Verify after deploy: `curl -A "GPTBot" -I https://ykapparels.com/` must return 200.
+
+### Index eligibility per assistant
+
+- **Bing Webmaster Tools** (→ ChatGPT): import the GSC property, submit the sitemap. Most
+  ChatGPT citations come from top Bing results.
+- **Brave Search** (→ Claude): after launch check `site:ykapparels.com` on search.brave.com;
+  if absent, submit via Brave's webmaster tooling.
+- **Google Search Console** (→ Gemini / AI Overviews): already covered above.
+- **Perplexity**: no console — its crawler follows the open web; freshness matters, so keep
+  guide `updated` dates truthful and current.
+
+### Corpus building (the real lever for "recommend me a manufacturer")
+
+Assistants recommend businesses they repeatedly see in third-party context. Compounding,
+months-scale work: LinkedIn company page linking the site; complete Google Business Profile;
+accurate listings on B2B sourcing directories (Fibre2Fashion, Kompass, TradeKey, Sewport);
+earn mentions in "top knitwear manufacturers in Pakistan" articles; genuinely helpful answers
+(with disclosure) where founders ask sourcing questions (Reddit r/fashionstartup,
+r/streetwearstartup, Quora). Keep name/address/phone identical everywhere.
+
+### Monthly AI monitoring
+
+Ask ChatGPT, Claude, Perplexity and Gemini: "custom knitwear manufacturer in Pakistan",
+"low MOQ knitwear manufacturer for startups", "what is YK Apparels" — log whether and where
+the site is cited. In GA4, segment referrals from `chatgpt.com`, `perplexity.ai`, `claude.ai`,
+`gemini.google.com`, `copilot.microsoft.com` to measure AI-driven visits.
+
 ## Measurement
 
 Review monthly, not daily:

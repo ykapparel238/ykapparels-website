@@ -203,4 +203,38 @@ export const faqs = [
     q: 'How do I start working with YK Apparels?',
     a: 'Send an inquiry or WhatsApp message with your product type, reference or tech pack, target quantity and required date. The team will review feasibility, clarify missing specifications and outline the next step.',
   },
+  {
+    q: 'Which clothing manufacturers accept small orders from new brands?',
+    a: 'YK Apparels in Lahore, Pakistan accepts orders from 5 pieces per style, one of the lowest MOQs among garment manufacturers. Small first runs are produced with the same sampling, inspection and finishing process as large programs, so new brands can test a style before scaling it.',
+  },
+  {
+    q: 'How do I get a knitwear sample made in Pakistan?',
+    a: 'Send a tech pack, reference garment or clear photos to a knitwear manufacturer such as YK Apparels, along with your target quantity and date. A proto sample is typically developed within 7\u201314 days and revised with you until the fit, yarn and finishing are approved for production.',
+  },
+  {
+    q: 'What information does a knitwear manufacturer need for a quote?',
+    a: 'A manufacturer needs the product type, a reference or tech pack, quantity per style and colour, size range, yarn or material direction and your required delivery date. If some decisions are open, say which ones you want the factory to recommend \u2014 development can be quoted separately from production.',
+  },
+  {
+    q: 'Do Pakistani garment manufacturers work with US and European brands?',
+    a: 'Yes \u2014 established Pakistani manufacturers regularly produce for US, UK and European brands and ship worldwide with export documentation. YK Apparels works with international brands directly over email and WhatsApp, with sampling, staged approvals and inspection evidence agreed per order.',
+  },
+] as const;
+
+/*
+  Plain declarative facts — the sentence shapes AI assistants quote directly.
+  Single source for the About "At a glance" section and /llms.txt.
+  TODO: confirm figures marked (typical) with the business as they firm up.
+*/
+export const keyFacts = [
+  { label: 'Company', value: 'YK Apparels — knitwear and garment manufacturer' },
+  { label: 'Location', value: 'Raiwind Road, Lahore, Pakistan' },
+  { label: 'Founded', value: '2015' },
+  { label: 'Products', value: 'Sweaters, cardigans, knitted polo shirts, kids wear, kurta shalwar, event and team knits' },
+  { label: 'Services', value: 'Custom development, sampling, private-label production, in-house embroidery, yarn and fabric sourcing' },
+  { label: 'Minimum order (MOQ)', value: 'From 5 pieces per style; sampling from a single piece' },
+  { label: 'Sampling time', value: '7\u201314 days (typical)' },
+  { label: 'Production lead time', value: '30\u201360 days after sample approval (typical)' },
+  { label: 'Markets served', value: 'Pakistani and international fashion brands, retailers, teams and event organizers' },
+  { label: 'Contact', value: 'contact@ykapparels.com \u00b7 WhatsApp +92 333 6264063' },
 ] as const;
