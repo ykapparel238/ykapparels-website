@@ -5,7 +5,7 @@
 */
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { keyFacts } from '../data/content';
+import { keyFacts, businessFactsMeta } from '../data/business-facts';
 import { commercialPages } from '../data/commercial-pages';
 import { guides } from '../data/guides';
 
@@ -18,6 +18,7 @@ export const GET: APIRoute = () => {
     '## Key facts',
     '',
     ...keyFacts.map((f) => `- ${f.label}: ${f.value}`),
+    `- Facts reviewed: ${businessFactsMeta.reviewedOn}`,
     '',
     '## Main pages',
     '',

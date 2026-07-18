@@ -1,3 +1,5 @@
+import { businessFacts } from './business-facts';
+
 export interface Guide {
   slug: string;
   title: string;
@@ -14,6 +16,7 @@ export interface Guide {
   }>;
   faqs: ReadonlyArray<{ q: string; a: string }>;
   related: ReadonlyArray<{ href: string; label: string; text: string }>;
+  download?: { href: string; label: string; description: string };
 }
 
 export const guides: Guide[] = [
@@ -161,6 +164,187 @@ export const guides: Guide[] = [
       { href: '/custom-knitwear-manufacturer/', label: 'Custom knitwear workflow', text: 'Understand how a product moves from brief to repeat production.' },
       { href: '/private-label-clothing-manufacturer/', label: 'Private-label manufacturing', text: 'Coordinate product, branding and packaging as one program.' },
       { href: '/contact/', label: 'Send your production brief', text: 'Share your current files, quantity and target date for review.' },
+    ],
+    download: {
+      href: '/downloads/knitwear-tech-pack-template.csv',
+      label: 'Download the knitwear tech-pack template',
+      description: 'A spreadsheet-ready CSV covering product identity, measurements, yarn, gauge, construction, branding, packing and approvals.',
+    },
+  },
+  {
+    slug: 'sweater-cardigan-moq-guide',
+    title: 'Sweater and Cardigan MOQ Guide for Brands | YK Apparels',
+    description:
+      'Learn what determines sweater and cardigan MOQ, including yarn availability, colour, gauge, stitch complexity, sizing, trims and first-run planning.',
+    h1: 'What determines MOQ for sweaters and cardigans?',
+    lead:
+      'MOQ is not only a factory preference. Yarn supply, colour, machine setup, construction, sizing and branded components each create minimums or fixed work that a focused first run must absorb.',
+    published: '2026-07-17',
+    updated: '2026-07-17',
+    readTime: '7 minute read',
+    sections: [
+      {
+        title: 'Separate garment quantity from material minimums',
+        text: 'A factory may be able to make a small number of garments while a custom yarn colour, trim or packaging supplier requires more material than that run consumes. Identify each minimum before approving the product direction.',
+        points: ['Available yarn versus custom-dyed yarn', 'Number of colours in the style and range', 'Buttons, zips, labels and packaging minimums', 'Material that can be retained safely for a repeat order'],
+      },
+      {
+        title: 'Understand the setup behind each style',
+        text: 'Programming, pattern preparation, sample development, machine setup and quality references happen before output scales. More styles and colourways divide that work across smaller quantities.',
+        points: ['Gauge and stitch-program complexity', 'Separate setup for body, rib and special panels', 'Size range and grading requirements', 'Embroidery, closures and finishing operations'],
+      },
+      {
+        title: 'Design a first run that can teach you something',
+        text: 'A low-MOQ launch is most useful when it tests one clear product. Limit avoidable variation, approve a physical sample and record customer feedback against the same style before expanding.',
+        points: ['Begin with one strong silhouette', 'Use a focused colour and size range', 'Keep the approved sample and specification', 'Plan how a successful style will repeat'],
+      },
+      {
+        title: 'Ask for a quantity-specific feasibility answer',
+        text: 'Send the target pieces per style, colour and size instead of asking only for the factory minimum. A useful reply explains what works at that quantity and which decisions would need to change.',
+        points: ['Reference or tech pack', 'Pieces by style, colour and size', 'Yarn and branding requirements', 'Target delivery date and expected reorder path'],
+      },
+    ],
+    faqs: [
+      { q: 'What is YK Apparels’ sweater MOQ?', a: `${businessFacts.minimumOrder.value}. The actual style is reviewed for yarn, colour, gauge, stitch construction, sizes and trims before that quantity is confirmed.` },
+      { q: 'Does each colour have its own minimum?', a: 'Colour can create a separate yarn or dyeing minimum. State pieces per colour so available material, custom colour work and any reusable balance can be reviewed.' },
+      { q: 'Can the MOQ decrease on a repeat order?', a: 'A repeat can reuse approved development and setup information, but current material availability and supplier minimums still need confirmation.' },
+    ],
+    related: [
+      { href: '/low-moq-clothing-manufacturer/', label: 'Low-MOQ production', text: 'See how YK Apparels structures a focused first run.' },
+      { href: '/custom-sweater-manufacturer/', label: 'Sweater manufacturing', text: 'Review the development and production path for sweaters and cardigans.' },
+      { href: '/contact/', label: 'Check a target quantity', text: 'Send the style, colour and size breakdown for feasibility review.' },
+    ],
+  },
+  {
+    slug: 'knitwear-sampling-timeline-checklist',
+    title: 'Knitwear Sampling Timeline and Checklist | YK Apparels',
+    description:
+      'Plan a knitwear sample with a clear brief, yarn and gauge decisions, fit review, consolidated revisions, production approval and realistic timing.',
+    h1: 'Knitwear sampling timeline and approval checklist',
+    lead:
+      'A sample date is useful only when the starting information, material availability, review time and number of revisions are visible. This checklist separates factory work from buyer approvals.',
+    published: '2026-07-17',
+    updated: '2026-07-17',
+    readTime: '8 minute read',
+    sections: [
+      {
+        title: 'Confirm the development starting point',
+        text: 'Before timing begins, identify the exact style, sample size, reference, material direction and decisions the manufacturer is expected to recommend.',
+        points: ['Style number and current revision', 'Tech pack, reference or annotated images', 'Sample size and measurement chart', 'Yarn, colour, gauge and finish direction'],
+      },
+      {
+        title: 'Agree what the first sample must prove',
+        text: 'A prototype may be intended to validate construction and fit before final colour, labels or packaging are ready. Write down its scope so missing components are not mistaken for errors.',
+        points: ['Fit and proportion', 'Stitch and construction feasibility', 'Material hand-feel and weight', 'Components deferred to a later approval'],
+      },
+      {
+        title: 'Consolidate feedback and response dates',
+        text: 'Multiple message threads create contradictory changes. Use one numbered comment file, assign an owner and record when the factory confirms each requested revision.',
+        points: ['One feedback owner for the brand', 'Numbered comments tied to images or measurements', 'Factory confirmation before remaking', 'Separate buyer review time from factory revision time'],
+      },
+      {
+        title: 'Close every production-critical approval',
+        text: 'Do not approve bulk production while fit, material, colour, trims, artwork, labels or packing remain assumed. Record which sample or document is the final reference.',
+        points: ['Approved physical sample', 'Final measurement chart and tolerances', 'Material, colour, trims and artwork', 'Packing specification and production schedule'],
+      },
+    ],
+    faqs: [
+      { q: 'How long does knitwear sampling take?', a: `${businessFacts.samplingTime.value} is typical after the brief, material direction and scope are confirmed. Buyer review, sourcing changes and additional revisions extend the schedule.` },
+      { q: 'Can YK Apparels make one prototype?', a: `Yes. Sampling is available ${businessFacts.samplingMinimum.value.toLowerCase()}.` },
+      { q: 'Does approving a sample confirm the production date?', a: `The production plan is confirmed after approval. ${businessFacts.productionTime.value} is typical, subject to quantity, materials, complexity and agreed buyer approval dates.` },
+    ],
+    related: [
+      { href: '/knitwear-sampling-development/', label: 'Sampling service', text: 'See how YK Apparels moves from brief to production reference.' },
+      { href: '/guides/custom-knitwear-tech-pack-checklist/', label: 'Tech-pack checklist', text: 'Prepare the information needed before the timeline begins.' },
+      { href: '/contact/', label: 'Submit a sample brief', text: 'Share the files, sample size, quantity and date already known.' },
+    ],
+  },
+  {
+    slug: 'knitwear-yarn-gauge-construction',
+    title: 'Knitwear Yarn, Gauge and Construction Guide | YK Apparels',
+    description:
+      'Understand how yarn composition, count, gauge, stitch structure, density and finishing shape a custom sweater’s appearance, hand-feel, cost and durability.',
+    h1: 'A brand buyer’s guide to knitwear yarn, gauge and construction',
+    lead:
+      'Yarn, gauge and stitch structure are connected decisions. Changing one can alter weight, drape, warmth, surface appearance, production feasibility and price, so the intended result should be defined before sampling.',
+    published: '2026-07-17',
+    updated: '2026-07-17',
+    readTime: '9 minute read',
+    sections: [
+      {
+        title: 'Describe the result before naming a yarn',
+        text: 'Composition matters, but two yarns with the same fibre label can produce different softness, bulk, strength and appearance. Give the factory a physical or visual target alongside the fibre direction.',
+        points: ['Fibre composition and blend direction', 'Softness, warmth and skin-contact expectations', 'Matte, clean, fuzzy or textured surface target', 'Care, pilling and durability expectations'],
+      },
+      {
+        title: 'Use gauge to communicate scale and density',
+        text: 'Gauge describes needle density, but it does not define the garment by itself. Yarn count, stitch and machine setup determine whether the result feels fine, compact, open or bulky.',
+        points: ['Reference gauge when already tested', 'Target weight, drape or density when gauge is open', 'Separate body, rib, collar and detail requirements', 'Ask the sample record to state the proposed construction'],
+      },
+      {
+        title: 'Document stitch structures by garment area',
+        text: 'A sweater can combine structures with different stretch and take-up. Technical views should identify where each stitch starts, stops and connects to shaping or seams.',
+        points: ['Body and sleeve structure', 'Rib dimensions and recovery', 'Cables, jacquard, mesh or texture placement', 'Linking, fully-fashioned or seam construction details'],
+      },
+      {
+        title: 'Approve the interaction on a physical sample',
+        text: 'The correct specification is the combination that produces the intended garment. Review measurements, weight, stretch, recovery, appearance and finishing together before locking production.',
+        points: ['Measure before and after agreed finishing', 'Review hand-feel and surface appearance', 'Check rib and neckline recovery', 'Record the exact approved yarn and structure references'],
+      },
+    ],
+    faqs: [
+      { q: 'Do I need to specify sweater gauge in my tech pack?', a: 'Not if it is genuinely open. Describe the intended weight, drape, warmth and appearance, then ask the manufacturer to document the proposed yarn, gauge and stitch on the sample record.' },
+      { q: 'Does a higher gauge always mean better quality?', a: 'No. Gauge is a construction choice, not a quality grade. Quality depends on whether the yarn, structure, density, measurements and workmanship suit the product and remain consistent.' },
+      { q: 'Can a reference sweater be used to choose yarn and gauge?', a: 'Yes. A reference helps communicate hand-feel, density and construction, but the proposed material and structure should still be documented and approved on the new sample.' },
+    ],
+    related: [
+      { href: '/custom-sweater-manufacturer/', label: 'Custom sweaters', text: 'See how these decisions enter development and production.' },
+      { href: '/guides/custom-knitwear-tech-pack-checklist/', label: 'Tech-pack template', text: 'Record yarn, gauge and structure in a factory-ready brief.' },
+      { href: '/contact/', label: 'Review a knit reference', text: 'Send the intended product, images and material direction.' },
+    ],
+  },
+  {
+    slug: 'knitwear-quality-control-checklist',
+    title: 'Knitwear Quality-Control Checklist | YK Apparels',
+    description:
+      'Use this knitwear quality-control checklist to define approved references, measurements, workmanship, inline inspections, finishing and pre-pack evidence.',
+    h1: 'Knitwear quality-control checklist for brand buyers',
+    lead:
+      'Inspection works best when the standard is measurable and agreed before production. Use this checklist to connect the approved sample to inline checks, corrective action and final packing approval.',
+    published: '2026-07-17',
+    updated: '2026-07-17',
+    readTime: '8 minute read',
+    sections: [
+      {
+        title: 'Create an inspectable production standard',
+        text: 'The approved sample should be supported by written specifications so the production and inspection teams do not need to interpret visual preferences differently.',
+        points: ['Final sample identified by style and revision', 'Measurement chart with methods and tolerances', 'Approved yarn, colour, trims and artwork', 'Finish, label and packing requirements'],
+      },
+      {
+        title: 'Choose checkpoints based on product risk',
+        text: 'Inspect high-risk decisions at the stage where they are created. The exact checkpoints vary by garment, but waiting until packing makes recurring issues expensive to correct.',
+        points: ['Knitting structure, panels and visible defects', 'Linking, seams and construction details', 'Measurements across sizes and production stages', 'Washing, finishing, branding and trim application'],
+      },
+      {
+        title: 'Define evidence and corrective action',
+        text: 'Agree what the buyer receives and what happens when a recurring issue appears. A useful corrective-action record identifies the cause, affected quantity, immediate correction and prevention step.',
+        points: ['Photographs or measurement records required', 'Responsible contact and response window', 'Recheck after a process correction', 'Escalation rule for unresolved or repeated defects'],
+      },
+      {
+        title: 'Close the order with a pre-pack review',
+        text: 'Final inspection should confirm appearance, measurements, trims, labels, quantity and packing against the approved order record before cartons are sealed and dispatched.',
+        points: ['Final appearance and size checks', 'Branding, labels and trim confirmation', 'Folding, polybag, assortment and carton marks', 'Agreed release evidence recorded'],
+      },
+    ],
+    faqs: [
+      { q: 'Is final inspection enough for knitwear?', a: 'No. Final inspection is important, but inline checks make recurring construction and measurement issues easier to identify and correct before finishing and packing.' },
+      { q: 'What should a buyer approve before production?', a: 'Approve the physical sample, measurements and tolerances, material and colour, construction, trims, artwork, labels, finish and packing specification.' },
+      { q: 'Can an independent inspector be used?', a: 'Yes. Agree the inspection standard, timing, access, evidence and release responsibility before production so it is included in the delivery plan.' },
+    ],
+    related: [
+      { href: '/knitwear-quality-control/', label: 'YK quality workflow', text: 'See how the checklist connects to production stages.' },
+      { href: '/about/', label: 'Facility and process', text: 'Review the current production and quality approach.' },
+      { href: '/contact/', label: 'Define inspection evidence', text: 'Share the standard and reporting your program requires.' },
     ],
   },
 ];

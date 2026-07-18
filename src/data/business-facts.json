@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "approvedOn": "2026-07-17",
+    "reviewedOn": "2026-07-17",
+    "reviewDueOn": "2026-10-17"
+  },
+  "facts": {
+    "minimumOrder": {
+      "label": "Minimum order (MOQ)",
+      "value": "From 5 pieces per style",
+      "detail": "The practical quantity is confirmed against construction, yarn, colour, trims and material availability before sampling or production is committed."
+    },
+    "samplingMinimum": {
+      "label": "Sampling",
+      "value": "From a single piece",
+      "detail": "A prototype can be developed before production so fit, construction, material and finishing decisions can be reviewed and approved."
+    },
+    "samplingTime": {
+      "label": "Typical sampling time",
+      "value": "7–14 days",
+      "detail": "Timing begins after the brief, available materials and sample scope are confirmed; revisions add time and are scheduled explicitly."
+    },
+    "productionTime": {
+      "label": "Typical production time",
+      "value": "30–60 days after sample approval",
+      "detail": "The committed schedule depends on style complexity, quantity, material availability, buyer approvals and the required delivery date."
+    },
+    "markets": {
+      "label": "Markets served",
+      "value": "Pakistan, the US, UK and Europe",
+      "detail": "YK Apparels works with emerging and established fashion brands, retailers, teams and event organizers in Pakistan and international markets."
+    },
+    "internationalShipping": {
+      "label": "International orders",
+      "value": "Shipping and export support available",
+      "detail": "Destination, delivery terms, shipping responsibility and required documentation are confirmed for each order before production is committed."
+    }
+  }
+}

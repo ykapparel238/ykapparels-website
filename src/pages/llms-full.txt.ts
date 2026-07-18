@@ -5,7 +5,8 @@
 */
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { keyFacts, capabilities, orderInfo, smallRuns, processSteps, faqs, qualityPoints } from '../data/content';
+import { capabilities, orderInfo, smallRuns, processSteps, faqs, qualityPoints } from '../data/content';
+import { keyFacts, businessFactsMeta } from '../data/business-facts';
 import { commercialPages } from '../data/commercial-pages';
 import { guides } from '../data/guides';
 
@@ -18,6 +19,7 @@ export const GET: APIRoute = () => {
     '## Key facts',
     '',
     ...keyFacts.map((f) => `- ${f.label}: ${f.value}`),
+    `- Facts reviewed: ${businessFactsMeta.reviewedOn}`,
     '',
     '## Manufacturing capabilities',
     '',
@@ -65,6 +67,9 @@ export const GET: APIRoute = () => {
   out.push('## Guides', '');
   for (const guide of guides) {
     out.push(`### ${guide.h1}`, '', `${site.url}/guides/${guide.slug}/ (updated ${guide.updated})`, '', guide.lead, '');
+    if (guide.download) {
+      out.push(`Download: ${site.url}${guide.download.href}`, '', guide.download.description, '');
+    }
     for (const section of guide.sections) {
       out.push(`#### ${section.title}`, '', section.text, '', ...section.points.map((p) => `- ${p}`), '');
     }

@@ -12,6 +12,7 @@ interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
+  dateModified?: string;
   image?: string;
   imageAlt?: string;
   robots?: string;
@@ -25,6 +26,7 @@ const {
   title,
   description,
   canonicalPath = Astro.url.pathname,
+  dateModified,
   image = '/og.png',
   imageAlt = 'YK Apparels — knitwear manufacturer in Lahore, Pakistan',
   robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
@@ -51,7 +53,20 @@ const organization = {
   telephone: site.phone,
   foundingDate: String(site.founded),
   priceRange: '$$',
-  areaServed: 'Worldwide',
+  areaServed: [
+    { '@type': 'Country', name: 'Pakistan' },
+    { '@type': 'Country', name: 'United States' },
+    { '@type': 'Country', name: 'United Kingdom' },
+    { '@type': 'Place', name: 'Europe' },
+  ],
+  knowsAbout: [
+    'Custom knitwear manufacturing',
+    'Sweater and cardigan manufacturing',
+    'Knitted polo manufacturing',
+    'Knitwear sampling and product development',
+    'Private-label garment production',
+    'Knitwear quality control',
+  ],
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
@@ -94,6 +109,7 @@ const webPage = {
   about: { '@id': `${site.url}/#organization` },
   primaryImageOfPage: String(ogImage),
   inLanguage: 'en',
+  ...(dateModified ? { dateModified } : {}),
 };
 
 // Breadcrumb trail for inner pages (Home → Page)

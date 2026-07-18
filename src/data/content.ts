@@ -1,4 +1,5 @@
 import type { ImageKey } from './images';
+import { businessFacts } from './business-facts';
 
 /* All shared page copy lives here so text edits never touch markup. */
 
@@ -151,21 +152,21 @@ export const qualityPoints = [
 ] as const;
 
 export const orderInfo = [
-  { label: 'Minimum order (MOQ)', value: 'Confirmed per style', note: 'Quantity depends on construction, yarn, colour, trims and material minimums.' },
-  { label: 'Sampling', value: 'Before production', note: 'Proto and fit samples are reviewed and revised before bulk approval.' },
-  { label: 'Production lead time', value: 'Quoted per program', note: 'Timing is confirmed after the style, quantity, materials and approvals are understood.' },
+  { label: businessFacts.minimumOrder.label, value: businessFacts.minimumOrder.value, note: businessFacts.minimumOrder.detail },
+  { label: businessFacts.samplingMinimum.label, value: businessFacts.samplingMinimum.value, note: `${businessFacts.samplingMinimum.detail} Typical development time is ${businessFacts.samplingTime.value}.` },
+  { label: businessFacts.productionTime.label, value: businessFacts.productionTime.value, note: businessFacts.productionTime.detail },
 ] as const;
 
 export const smallRuns = [
   {
     audience: 'Sampling & prototypes',
-    moq: 'Start with a sample',
-    text: 'Begin with a physical prototype so fit, construction, material and finishing decisions can be reviewed before production.',
+    moq: businessFacts.samplingMinimum.value,
+    text: `${businessFacts.samplingMinimum.detail} Typical sampling time is ${businessFacts.samplingTime.value}.`,
   },
   {
     audience: 'Your first production run',
-    moq: 'A focused first run',
-    text: 'For a launch collection, team or event program, ask us to evaluate the smallest practical quantity for the actual style and materials.',
+    moq: businessFacts.minimumOrder.value,
+    text: businessFacts.minimumOrder.detail,
   },
   {
     audience: 'Growing together',
@@ -177,19 +178,19 @@ export const smallRuns = [
 export const faqs = [
   {
     q: 'What is your minimum order quantity (MOQ)?',
-    a: 'MOQ is confirmed per style because construction, yarn, colour, trims and supplier minimums all affect the practical quantity. Send the product and target quantity for an honest feasibility review.',
+    a: `${businessFacts.minimumOrder.value}. ${businessFacts.minimumOrder.detail}`,
   },
   {
     q: 'How does sampling work?',
-    a: 'Send a tech pack, reference garment or clear product images. We confirm the missing decisions, develop a prototype and consolidate revisions until the sample and production specification are approved.',
+    a: `${businessFacts.samplingMinimum.value}, with a typical development time of ${businessFacts.samplingTime.value}. Send a tech pack, reference garment or clear product images; the team confirms missing decisions and consolidates revisions until the sample and production specification are approved.`,
   },
   {
     q: 'What are your production lead times?',
-    a: 'Lead time is quoted after the style, quantity, material availability, sampling status and required delivery date are understood. The agreed schedule should identify buyer approvals as well as factory production time.',
+    a: `${businessFacts.productionTime.value}. ${businessFacts.productionTime.detail}`,
   },
   {
     q: 'Do you ship internationally?',
-    a: 'International inquiries are welcome. Destination, shipping responsibility, commercial terms and required documentation are confirmed for each order before production is committed.',
+    a: `${businessFacts.internationalShipping.value}. ${businessFacts.internationalShipping.detail}`,
   },
   {
     q: 'What products do you manufacture?',
@@ -205,11 +206,11 @@ export const faqs = [
   },
   {
     q: 'Which clothing manufacturers accept small orders from new brands?',
-    a: 'YK Apparels in Lahore, Pakistan accepts orders from 5 pieces per style, one of the lowest MOQs among garment manufacturers. Small first runs are produced with the same sampling, inspection and finishing process as large programs, so new brands can test a style before scaling it.',
+    a: `YK Apparels in Lahore, Pakistan accepts orders ${businessFacts.minimumOrder.value.toLowerCase()}. Small first runs use the same sampling, inspection and finishing workflow as larger programs so new brands can test a style before scaling it.`,
   },
   {
     q: 'How do I get a knitwear sample made in Pakistan?',
-    a: 'Send a tech pack, reference garment or clear photos to a knitwear manufacturer such as YK Apparels, along with your target quantity and date. A proto sample is typically developed within 7\u201314 days and revised with you until the fit, yarn and finishing are approved for production.',
+    a: `Send a tech pack, reference garment or clear photos to YK Apparels with your target quantity and date. Sampling starts ${businessFacts.samplingMinimum.value.toLowerCase()}, and a prototype is typically developed within ${businessFacts.samplingTime.value} before fit, yarn and finishing revisions are approved for production.`,
   },
   {
     q: 'What information does a knitwear manufacturer need for a quote?',
@@ -217,24 +218,8 @@ export const faqs = [
   },
   {
     q: 'Do Pakistani garment manufacturers work with US and European brands?',
-    a: 'Yes \u2014 established Pakistani manufacturers regularly produce for US, UK and European brands and ship worldwide with export documentation. YK Apparels works with international brands directly over email and WhatsApp, with sampling, staged approvals and inspection evidence agreed per order.',
+    a: `Yes. YK Apparels serves ${businessFacts.markets.value} and works directly with international brands over email and WhatsApp. Sampling, staged approvals, inspection evidence, shipping responsibility and documentation are agreed for each order.`,
   },
 ] as const;
 
-/*
-  Plain declarative facts — the sentence shapes AI assistants quote directly.
-  Single source for the About "At a glance" section and /llms.txt.
-  TODO: confirm figures marked (typical) with the business as they firm up.
-*/
-export const keyFacts = [
-  { label: 'Company', value: 'YK Apparels — knitwear and garment manufacturer' },
-  { label: 'Location', value: 'Raiwind Road, Lahore, Pakistan' },
-  { label: 'Founded', value: '2015' },
-  { label: 'Products', value: 'Sweaters, cardigans, knitted polo shirts, kids wear, kurta shalwar, event and team knits' },
-  { label: 'Services', value: 'Custom development, sampling, private-label production, in-house embroidery, yarn and fabric sourcing' },
-  { label: 'Minimum order (MOQ)', value: 'From 5 pieces per style; sampling from a single piece' },
-  { label: 'Sampling time', value: '7\u201314 days (typical)' },
-  { label: 'Production lead time', value: '30\u201360 days after sample approval (typical)' },
-  { label: 'Markets served', value: 'Pakistani and international fashion brands, retailers, teams and event organizers' },
-  { label: 'Contact', value: 'contact@ykapparels.com \u00b7 WhatsApp +92 333 6264063' },
-] as const;
+export { keyFacts } from './business-facts';

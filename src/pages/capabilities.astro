@@ -6,6 +6,11 @@ import CTA from '../components/CTA.astro';
 import { capabilities, orderInfo, faqs } from '../data/content';
 import GrowthJourney from '../components/GrowthJourney.astro';
 import FAQ from '../components/FAQ.astro';
+
+const capabilityLinks: Record<string, { href: string; label: string }> = {
+  'sweaters-knitwear': { href: '/custom-sweater-manufacturer/', label: 'Explore custom sweater and cardigan production' },
+  'knitted-polos': { href: '/knitted-polo-manufacturer/', label: 'Explore knitted polo manufacturing' },
+};
 ---
 
 <Base
@@ -43,11 +48,11 @@ import FAQ from '../components/FAQ.astro';
                 </li>
               ))}
             </ul>
-            {cap.slug === 'sweaters-knitwear' && (
+            {capabilityLinks[cap.slug] && (
               <p class="mt-6 text-sm text-muted">
-                Developing your own style from scratch?{' '}
-                <a href="/custom-knitwear-manufacturer/" class="font-semibold text-accent-2 underline underline-offset-2 transition-colors hover:text-ink">
-                  See the custom knitwear workflow
+                Planning this product for your brand?{' '}
+                <a href={capabilityLinks[cap.slug].href} class="font-semibold text-accent-2 underline underline-offset-2 transition-colors hover:text-ink">
+                  {capabilityLinks[cap.slug].label}
                 </a>
               </p>
             )}

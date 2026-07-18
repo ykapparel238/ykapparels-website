@@ -5,7 +5,8 @@ import PhotoSlot from '../components/PhotoSlot.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import CTA from '../components/CTA.astro';
 import { site } from '../data/site';
-import { qualityPoints, keyFacts } from '../data/content';
+import { qualityPoints } from '../data/content';
+import { keyFacts, businessFactsMeta } from '../data/business-facts';
 
 const values = [
   {
@@ -67,6 +68,9 @@ const values = [
           ))
         }
       </dl>
+      <p class="mt-5 text-xs text-muted">
+        Operating facts last reviewed <time datetime={businessFactsMeta.reviewedOn}>17 July 2026</time>.
+      </p>
     </div>
   </section>
 

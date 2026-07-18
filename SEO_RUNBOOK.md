@@ -1,133 +1,150 @@
-# SEO release and growth runbook
+# SEO and GEO release runbook
 
-This runbook applies to the current Cloudflare-hosted website only. It does not assume or preserve
-content from any previous website.
+This runbook applies to the current Cloudflare-hosted website. It treats search indexing,
+user-requested AI retrieval and model training as separate policies.
 
-## Before merging to `main`
+## Release gate
 
-1. Run `npm run verify` and require a clean result.
-2. Preview `dist/` locally and inspect the home page, navigation, five commercial pages, guides,
+1. Run `npm run verify` and require a clean build, SEO validation and Wrangler dry-run.
+2. Preview `dist/` and inspect the homepage, commercial pages, guides, downloadable template,
    contact fallback and mobile menu in light and dark mode.
-3. Confirm that the homepage slogan remains exactly “Designs in. Garments out.” with its approved
-   typography and colours.
-4. Review business claims. Do not release new numbers, client quotes, certifications or shipping
-   terms without evidence and written approval.
+3. Keep the homepage slogan exactly “Designs in. Garments out.” with its approved typography and colours.
+4. Review `src/data/business-facts.json`. Change approved figures only with business approval, update
+   `reviewedOn` and set a new `reviewDueOn` no more than 90 days later.
 5. Confirm `git diff --check` is clean and review the final diff before committing.
 
-## Cloudflare production settings
+## Cloudflare deployment
 
 - Production branch: `main`
 - Build command: `npm run build`
 - Deploy command: `npx wrangler deploy`
 - Optional variables: `PUBLIC_WEB3FORMS_ACCESS_KEY`, `PUBLIC_GA_MEASUREMENT_ID`
-- Keep `ykapparels.com` as the only canonical hostname.
+- Canonical origin: `https://ykapparels.com`
 
-The current `www.ykapparels.com` host returns a page instead of redirecting. Create a Cloudflare
-301 redirect from `https://www.ykapparels.com/*` to `https://ykapparels.com/$1` and keep the path
-and query string. This is a zone-level action and cannot be implemented reliably in this static
-repository.
+Repository redirect rules permanently map the confirmed indexed `/about-us/` URL to `/about/`.
+After deployment, inspect Search Console’s Not Found report. Add a 301 only when an old URL has a
+genuinely equivalent current page; do not redirect unrelated URLs to the homepage.
 
-## Search-engine setup after release
+The `www` hostname must be handled at zone level because static `_redirects` rules do not match
+domains. In Cloudflare Redirect Rules, create one dynamic permanent redirect:
 
-1. Add `ykapparels.com` as a Domain property in Google Search Console using a DNS TXT record.
-2. Submit `https://ykapparels.com/sitemap-index.xml`.
-3. Request indexing for the home page, five commercial pages and two initial guides.
-4. Import the verified property into Bing Webmaster Tools.
-5. Complete the Google Business Profile with the exact business name, facility address, phone,
-   website and original facility/product photographs.
-6. Add the canonical website URL to verified business profiles and relevant textile/manufacturing
-   directories. Prefer accurate, useful listings over bulk directory submissions.
+- Match: hostname equals `www.ykapparels.com`
+- Target: `https://ykapparels.com${http.request.uri.path}`
+- Preserve the query string
+- Status: 301
 
-## First 90 days of content
+Verify a single hop with:
 
-Publish two useful pieces per month and update related internal links when each goes live.
+```sh
+curl -I 'https://www.ykapparels.com/custom-knitwear-manufacturer/?source=test'
+curl -I https://ykapparels.com/about-us/
+```
 
-| Month | Topic 1 | Topic 2 |
-| --- | --- | --- |
-| 1 | Choosing a custom knitwear manufacturer in Asia | Custom knitwear tech-pack checklist |
-| 2 | What determines MOQ for sweater production? | Sweater sampling and approval checklist |
-| 3 | Knitwear quality-control checklist for brands | Comparing Pakistan garment manufacturers by product fit |
+## AI crawler policy
 
-Every article should answer a genuine buyer question, include original factory insight, link to one
-commercial page and end with a relevant production inquiry. Avoid thin city/country variations or
-pages created only to repeat a keyword.
+The approved policy is **Search Allow, Agent Allow, Training Block**.
 
-## Proof assets to collect
+1. Cloudflare → Security Settings → Configure AI bot policies:
+   - Search: Allow
+   - Agent: Allow
+   - Training: Block on all pages
+2. Keep Managed `robots.txt` enabled with `search=yes`, `ai-train=no` and `use=reference`.
+3. In AI Crawl Control, confirm OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User,
+   PerplexityBot and Perplexity-User are not blocked or challenged.
+4. Enable Crawler Hints so changed URLs are submitted through IndexNow.
+5. Do not rely on a spoofed User-Agent as proof of verified-bot access. Check Cloudflare events and
+   bot classification in addition to the response tests.
 
-- Original exterior, production-floor, machinery, sampling, inspection and finished-product photos
+Post-deploy response checks:
+
+```sh
+for bot in OAI-SearchBot ChatGPT-User Claude-SearchBot Claude-User PerplexityBot Perplexity-User; do
+  curl -A "$bot" -I https://ykapparels.com/
+done
+```
+
+The live `robots.txt` should contain Cloudflare’s managed block followed by the origin policy, with
+no disagreement: search/agent bots allowed and GPTBot, ClaudeBot and other training crawlers disallowed.
+
+## Search engines and measurement
+
+The Google Domain property is already DNS-verified.
+
+1. Submit `https://ykapparels.com/sitemap-index.xml` in Google Search Console.
+2. Request indexing for the homepage, commercial knitwear pages and the guide index; allow the
+   sitemap and internal links to discover the remaining pages.
+3. Import the verified property into Bing Webmaster Tools and submit the same sitemap.
+4. Confirm IndexNow activity in Bing after Cloudflare Crawler Hints is enabled.
+5. Create a GA4 property and set `PUBLIC_GA_MEASUREMENT_ID=G-...` in the Cloudflare production
+   environment. Redeploy and accept analytics in a test browser.
+6. In GA4, mark `generate_lead` as a key event. Review `whatsapp_click`, `email_click`,
+   `phone_click`, `inquiry_cta_click` and `resource_download` as supporting events.
+7. Test one successful form or WhatsApp fallback inquiry and confirm the event location identifies
+   the originating page or component.
+
+Review monthly:
+
+- Search Console queries, impressions, clicks, average position and indexed pages
+- Bing crawl/index status and IndexNow submissions
+- GA4 qualified leads and assisted contact actions by landing page and source
+- Core Web Vitals field data once the site has enough traffic
+- AI citation baseline in `GEO_MONITORING.csv`
+
+## 90-day knitwear program
+
+The site now provides focused commercial coverage for custom knitwear, sweaters and cardigans,
+knitted polos, private label, low MOQ, sampling and quality control. The guide library covers factory
+selection, tech packs, MOQ, sampling, yarn/gauge/construction and quality control.
+
+Do not add more indexable pages until the current set is indexed and receiving query data. During the
+first 90 days, improve proof and distribution instead of publishing keyword variations:
+
+### Days 1–30: index and establish the entity
+
+- Complete Google Business Profile with the exact site name, address, phone, URL and original photos.
+- Create verified LinkedIn, Instagram and Facebook profiles. Add URLs to `site.socials` only after
+  each profile is public, accurate and controlled by the business.
+- Submit Search Console and Bing sitemaps; inspect the new URLs after recrawl.
+- Share the downloadable knitwear tech-pack template through verified business channels.
+
+### Days 31–60: add product proof
+
+- Replace or supplement generic imagery with approved factory exterior, machinery, sampling,
+  inspection and finished-product photography.
+- Add product-specific examples to the closest sweater, polo, sampling or quality page.
+- Publish exact capacity or certificate details only when a current source document is available.
+- Request permission before publishing client logos, names, quotations or case studies.
+
+### Days 61–90: earn independent corroboration
+
+- Create accurate profiles on reputable textile/manufacturing directories selected for real buyer
+  use and indexability; avoid bulk directory packages.
+- Seek links or mentions from approved clients, textile associations, trade events and useful expert
+  contributions.
+- Refresh pages only when facts, evidence or buyer guidance materially improve; never change dates
+  solely to simulate freshness.
+- Compare query and citation results against the first `GEO_MONITORING.csv` baseline.
+
+## Proof backlog
+
+- Facility exterior and production-floor photos
+- Machinery, sampling, inspection and finished-product photos
 - Short factory walkthrough video
 - Machine types, workforce and realistic monthly capacity ranges
-- Exact MOQ and lead-time rules by product category
-- Supported shipping terms and documentation
-- Current certification files with scope and expiry dates
+- Shipping terms and documentation actually supported
+- Current certificates with scope and expiry dates
 - Approved client logos, case studies and attributable quotes
 
-Add proof to the closest relevant page rather than creating a single overloaded trust page.
+Place each proof item on the page where it supports a buyer decision. Avoid an overloaded “trust” page.
 
-## AI visibility (ChatGPT, Claude, Perplexity, Gemini)
+## Acceptance and rollback
 
-Goal: when buyers ask AI assistants for manufacturer recommendations, YK Apparels is cited.
-How assistants source answers: ChatGPT searches via the Bing index, Claude via Brave Search,
-Gemini via Google, Perplexity via its own crawler (favouring fresh, dated content). On-site
-support already shipped: explicit AI-crawler allowlist in `robots.txt`, machine-readable
-summaries at `/llms.txt` and `/llms-full.txt`, quotable "At a glance" facts on `/about/`,
-FAQPage/Service/Article schema throughout.
+- `npm run verify` passes with zero SEO warnings.
+- Apex pages return 200; `www` and `/about-us/` return single-hop 301 responses.
+- Search/agent bots are accessible and training crawlers are disallowed by both origin and edge policy.
+- The sitemap contains canonical HTML pages only.
+- Structured data matches visible page content.
+- GA4 records the intended conversion events after consent.
+- Mobile field targets: LCP under 2.5 seconds, INP under 200 ms and CLS under 0.1 at the 75th percentile.
 
-### Critical: Cloudflare blocks AI crawlers by default
-
-Cloudflare's "Block AI Bots" (Security → Bots) now defaults to **Block** and acts at the edge,
-**before robots.txt is read** — with it on, GPTBot/ClaudeBot/PerplexityBot can never see the
-site regardless of anything in this repository.
-
-1. Cloudflare dashboard → Security → Bots → set AI bot blocking **off**, or with the
-   category controls allow **Search**, **Agent** and (recommended for brand visibility)
-   **Training** crawlers.
-2. Confirm Super Bot Fight Mode is not challenging verified bots.
-3. Enable **Crawler Hints / IndexNow** so content changes reach Bing quickly.
-4. Verify after deploy: `curl -A "GPTBot" -I https://ykapparels.com/` must return 200.
-
-### Index eligibility per assistant
-
-- **Bing Webmaster Tools** (→ ChatGPT): import the GSC property, submit the sitemap. Most
-  ChatGPT citations come from top Bing results.
-- **Brave Search** (→ Claude): after launch check `site:ykapparels.com` on search.brave.com;
-  if absent, submit via Brave's webmaster tooling.
-- **Google Search Console** (→ Gemini / AI Overviews): already covered above.
-- **Perplexity**: no console — its crawler follows the open web; freshness matters, so keep
-  guide `updated` dates truthful and current.
-
-### Corpus building (the real lever for "recommend me a manufacturer")
-
-Assistants recommend businesses they repeatedly see in third-party context. Compounding,
-months-scale work: LinkedIn company page linking the site; complete Google Business Profile;
-accurate listings on B2B sourcing directories (Fibre2Fashion, Kompass, TradeKey, Sewport);
-earn mentions in "top knitwear manufacturers in Pakistan" articles; genuinely helpful answers
-(with disclosure) where founders ask sourcing questions (Reddit r/fashionstartup,
-r/streetwearstartup, Quora). Keep name/address/phone identical everywhere.
-
-### Monthly AI monitoring
-
-Ask ChatGPT, Claude, Perplexity and Gemini: "custom knitwear manufacturer in Pakistan",
-"low MOQ knitwear manufacturer for startups", "what is YK Apparels" — log whether and where
-the site is cited. In GA4, segment referrals from `chatgpt.com`, `perplexity.ai`, `claude.ai`,
-`gemini.google.com`, `copilot.microsoft.com` to measure AI-driven visits.
-
-## Measurement
-
-Review monthly, not daily:
-
-- Search Console impressions, clicks, average position and queries by landing page
-- Indexed pages and crawl issues
-- Contact-form submissions, WhatsApp clicks, email clicks and phone clicks
-- Qualified inquiries by product, country and order stage
-- Core Web Vitals field data once enough traffic exists
-
-Top-five rankings cannot be guaranteed. The near-term target is sustained movement for specific,
-high-intent queries; broader “garment manufacturer in Asia” visibility requires accumulated proof,
-useful content, relevant mentions and time.
-
-## Rollback
-
-SEO work is isolated on `codex/seo-foundation`. Before merge, the production site remains on
-`main`. After merge, revert the merge commit if a production issue is found; do not rewrite shared
-branch history.
+If a release fails, revert the release commit and redeploy. Do not rewrite shared `main` history.

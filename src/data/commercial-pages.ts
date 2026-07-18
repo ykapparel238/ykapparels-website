@@ -1,7 +1,9 @@
 import type { ImageKey } from './images';
+import { businessFacts } from './business-facts';
 
 export interface CommercialPage {
   slug: string;
+  updated: string;
   title: string;
   description: string;
   eyebrow: string;
@@ -21,6 +23,7 @@ export interface CommercialPage {
 export const commercialPages: CommercialPage[] = [
   {
     slug: 'custom-knitwear-manufacturer',
+    updated: '2026-07-17',
     title: 'Custom Knitwear Manufacturer in Pakistan | YK Apparels',
     description:
       'Develop custom sweaters, knitted polos and branded knitwear with a Lahore manufacturer supporting sampling, sourcing, production and finishing.',
@@ -101,6 +104,7 @@ export const commercialPages: CommercialPage[] = [
   },
   {
     slug: 'private-label-clothing-manufacturer',
+    updated: '2026-07-17',
     title: 'Private Label Clothing Manufacturer in Pakistan | YK Apparels',
     description:
       'Private-label knitwear and garment production for growing brands, from product development and sampling to branding, quality control and packing.',
@@ -148,6 +152,7 @@ export const commercialPages: CommercialPage[] = [
   },
   {
     slug: 'low-moq-clothing-manufacturer',
+    updated: '2026-07-17',
     title: 'Low MOQ Clothing Manufacturer for Brands | YK Apparels',
     description:
       'Develop samples and focused small production runs with a low-MOQ garment manufacturer in Lahore, Pakistan, then repeat and scale approved styles.',
@@ -162,7 +167,7 @@ export const commercialPages: CommercialPage[] = [
     audience: 'New brands, capsule collections, teams, events and product tests',
     highlights: [
       { title: 'Sample before production', text: 'Use a prototype to test construction, fit and presentation before deciding whether the style is ready for production.' },
-      { title: 'A practical minimum per style', text: 'The lowest workable quantity is reviewed against product complexity, material availability and branding requirements.' },
+      { title: businessFacts.minimumOrder.value, text: businessFacts.minimumOrder.detail },
       { title: 'A path to repeat orders', text: 'The same approved specification can support replenishment and larger runs when the product proves itself.' },
     ],
     sections: [
@@ -183,7 +188,7 @@ export const commercialPages: CommercialPage[] = [
       },
     ],
     faqs: [
-      { q: 'Is the same low MOQ available for every garment?', a: 'No. Material, construction, colour and branding requirements determine the feasible minimum for each style. Share your target quantity so it can be reviewed before sampling.' },
+      { q: 'What is the minimum order for a knitwear style?', a: `${businessFacts.minimumOrder.value}. Material, construction, colour and branding requirements still determine whether a specific brief is feasible at that quantity.` },
       { q: 'Why can a low-MOQ unit cost be higher?', a: 'Pattern, programming, sampling, machine setup, sourcing and quality-control work are spread across fewer garments. Reusing approved materials and specifications can make repeat runs more efficient.' },
       { q: 'Can I increase quantity after the first run?', a: 'Yes, subject to material continuity and production planning. Keeping the approved sample, measurement chart and material references makes a repeat or scaled order more controlled.' },
     ],
@@ -195,6 +200,7 @@ export const commercialPages: CommercialPage[] = [
   },
   {
     slug: 'garment-manufacturer-pakistan',
+    updated: '2026-07-17',
     title: 'Garment Manufacturer in Pakistan for Global Brands | YK Apparels',
     description:
       'Work with a Lahore, Pakistan garment manufacturer specializing in knitwear, sampling, small runs, embroidery, sourcing and repeat production.',
@@ -242,6 +248,7 @@ export const commercialPages: CommercialPage[] = [
   },
   {
     slug: 'garment-manufacturer-asia',
+    updated: '2026-07-17',
     title: 'Choosing a Garment Manufacturer in Asia | YK Apparels',
     description:
       'A practical guide for brands comparing garment manufacturers in Asia, covering product fit, sampling, MOQ, quality control, communication and factory proof.',
@@ -285,6 +292,198 @@ export const commercialPages: CommercialPage[] = [
       { href: '/garment-manufacturer-pakistan/', label: 'Manufacturing in Pakistan', text: 'Understand YK Apparels’ location and product fit.' },
       { href: '/custom-knitwear-manufacturer/', label: 'Custom knitwear specialist', text: 'Review the knitwear development workflow.' },
       { href: '/contact/', label: 'Evaluate a real program', text: 'Send your product and quantity for a feasibility discussion.' },
+    ],
+  },
+  {
+    slug: 'custom-sweater-manufacturer',
+    updated: '2026-07-17',
+    title: 'Custom Sweater Manufacturer in Pakistan | YK Apparels',
+    description:
+      'Develop private-label sweaters and cardigans with a Pakistan manufacturer supporting yarn selection, gauge, sampling, linking, finishing and repeat production.',
+    eyebrow: 'Sweaters and cardigans',
+    h1: 'Custom sweaters and cardigans built from yarn to approved fit',
+    lead:
+      'YK Apparels develops flat-knit sweaters and cardigans for emerging and established brands, connecting yarn, gauge, stitch structure, measurements and finishing through one documented approval path.',
+    image: 'sweaters-pile',
+    imageAlt: 'Folded custom sweaters showing varied knit structures and colours',
+    imageLabel: 'Flat-knit development for brands',
+    serviceType: 'Custom sweater and cardigan manufacturing',
+    audience: 'US, UK and European fashion brands developing private-label sweaters and cardigans',
+    highlights: [
+      { title: 'Product-specific development', text: 'Crew necks, cardigans, turtlenecks and vests are reviewed by silhouette, gauge, yarn, stitch and intended wear.' },
+      { title: 'Sample from one piece', text: 'A physical sample establishes fit, hand-feel, colour and workmanship before production begins.' },
+      { title: 'Repeat-order references', text: 'Approved measurements, yarn references, construction notes and finish standards create a controlled starting point for reorders.' },
+    ],
+    sections: [
+      {
+        title: 'Translate the design into knit decisions',
+        text: 'A sweater sketch does not define density, drape or construction. The development brief connects the desired appearance to the yarn, gauge and stitch choices that create it.',
+        points: ['Silhouette, base size and grade rules', 'Yarn composition, colour and hand-feel target', 'Body and rib gauge or density direction', 'Neckline, placket, cuff, hem and closure details'],
+      },
+      {
+        title: 'Approve the whole garment, not only the artwork',
+        text: 'Sampling should test how measurements, weight, stretch, recovery and finishing work together. Comments are consolidated into one revision record before the production sample is approved.',
+        points: ['Point-of-measure review', 'Colour and yarn confirmation', 'Stitch, linking and trim inspection', 'Wash, appearance and finishing review'],
+      },
+      {
+        title: 'Protect consistency in production and reorders',
+        text: 'Production is checked against the approved sample and specification at knitting, linking, finishing and pre-pack stages. Retained references reduce avoidable variation when a style repeats.',
+        points: ['Inline workmanship checks', 'Measurement audits by size', 'Approved trim and label references', 'Post-order notes retained for replenishment'],
+      },
+    ],
+    faqs: [
+      { q: 'What is the MOQ for custom sweaters?', a: `${businessFacts.minimumOrder.value}. Yarn availability, colour, gauge, stitch complexity and trims determine whether a particular sweater is feasible at that starting quantity.` },
+      { q: 'How long does a sweater sample take?', a: `Typical sampling time is ${businessFacts.samplingTime.value} after the brief, yarn direction and sample scope are confirmed. Revisions are scheduled separately.` },
+      { q: 'Can you manufacture private-label cardigans?', a: 'Yes. Cardigan development can include custom measurements, yarn and stitch direction, buttons or closures, labels, embroidery and packing requirements.' },
+    ],
+    related: [
+      { href: '/guides/knitwear-yarn-gauge-construction/', label: 'Yarn and gauge guide', text: 'Understand how material and construction choices affect the finished sweater.' },
+      { href: '/knitwear-sampling-development/', label: 'Sampling and development', text: 'Plan the path from product brief to approved reference.' },
+      { href: '/contact/', label: 'Request a sweater review', text: 'Send the style, quantity, sizes, yarn direction and target date.' },
+    ],
+  },
+  {
+    slug: 'knitted-polo-manufacturer',
+    updated: '2026-07-17',
+    title: 'Knitted Polo Manufacturer in Pakistan | YK Apparels',
+    description:
+      'Develop private-label knitted polo shirts in Pakistan with controlled collars, plackets, measurements, shrinkage, branding, sampling and repeat production.',
+    eyebrow: 'Knitted polo production',
+    h1: 'Knitted polo shirts developed for fit, structure and repeatability',
+    lead:
+      'YK Apparels helps brands define the fabric or knit direction, collar, placket, fit, branding and finish that make a polo consistent from the approved sample through repeat orders.',
+    image: 'tees-hanging',
+    imageAlt: 'Knitted polo-style garments hanging for production review',
+    imageLabel: 'Collar, placket and fit control',
+    serviceType: 'Private-label knitted polo shirt manufacturing',
+    audience: 'Fashion, uniform, team and event brands in Pakistan, the US, UK and Europe',
+    highlights: [
+      { title: 'Collar and placket discipline', text: 'Dimensions, reinforcement, button spacing and alignment are defined before production so the front presentation stays consistent.' },
+      { title: 'Fit measured, not assumed', text: 'A base-size chart, grade rules and tolerances turn a visual fit direction into a production standard.' },
+      { title: 'Brand details included early', text: 'Embroidery, labels, buttons, trims and packing are approved with the garment instead of being added at the end.' },
+    ],
+    sections: [
+      {
+        title: 'Build a complete polo specification',
+        text: 'A useful brief describes the customer and use as well as the appearance. Material, weight, stretch, fit and care expectations affect construction and sourcing decisions.',
+        points: ['Material or yarn composition and colour', 'Base-size measurements and size range', 'Collar, cuff and placket construction', 'Buttons, labels, embroidery and packing'],
+      },
+      {
+        title: 'Use sampling to control fit and presentation',
+        text: 'The prototype is checked for balance, collar shape, placket alignment, sleeve and body measurements, branding placement and the effect of finishing.',
+        points: ['Fit and measurement review', 'Collar recovery and appearance', 'Placket stability and alignment', 'Branding scale and placement approval'],
+      },
+      {
+        title: 'Prepare the style for repeat orders',
+        text: 'Approved measurements, material references and workmanship checkpoints are retained so later production can return to the same defined standard.',
+        points: ['Incoming material confirmation', 'Inline seam and measurement checks', 'Appearance review after finishing', 'Pre-pack audit against the approved style'],
+      },
+    ],
+    faqs: [
+      { q: 'What is the minimum order for knitted polos?', a: `${businessFacts.minimumOrder.value}. The final feasible quantity depends on material, colour, collar and cuff requirements, buttons, embroidery and labels.` },
+      { q: 'Can a logo be embroidered in-house?', a: 'Yes. Logo artwork, stitch direction, dimensions, placement and thread colours are approved as part of the product specification.' },
+      { q: 'Can I start with a knitted polo sample?', a: `Yes. Sampling is available ${businessFacts.samplingMinimum.value.toLowerCase()}, with a typical development time of ${businessFacts.samplingTime.value} after the scope is confirmed.` },
+    ],
+    related: [
+      { href: '/guides/custom-knitwear-tech-pack-checklist/', label: 'Tech-pack checklist', text: 'Prepare measurements, construction, branding and approval details.' },
+      { href: '/knitwear-quality-control/', label: 'Quality control', text: 'See the checkpoints that protect measurements and presentation.' },
+      { href: '/contact/', label: 'Brief a polo program', text: 'Share the product reference, sizes, quantity, branding and delivery target.' },
+    ],
+  },
+  {
+    slug: 'knitwear-sampling-development',
+    updated: '2026-07-17',
+    title: 'Knitwear Sampling and Development | YK Apparels',
+    description:
+      'Develop a knitwear sample in Pakistan from a tech pack, reference or concept, with documented decisions for yarn, gauge, fit, construction and production approval.',
+    eyebrow: 'Sampling and development',
+    h1: 'Turn a knitwear concept into an approvable production reference',
+    lead:
+      'Sampling is where an idea becomes measurable. YK Apparels helps brands identify missing decisions, develop the first physical piece and consolidate revisions before production is approved.',
+    image: 'sewing-hands',
+    imageAlt: 'Hands reviewing garment construction during knitwear sample development',
+    imageLabel: 'Decisions made before production',
+    serviceType: 'Knitwear sampling and product development',
+    audience: 'Emerging and established brands preparing custom knitwear for production',
+    highlights: [
+      { title: businessFacts.samplingMinimum.value, text: businessFacts.samplingMinimum.detail },
+      { title: businessFacts.samplingTime.value, text: 'Typical first-sample timing after the brief, available materials and development scope are confirmed.' },
+      { title: 'One revision record', text: 'Fit, material, construction, colour, trims and presentation comments are consolidated so every change can be confirmed.' },
+    ],
+    sections: [
+      {
+        title: 'Begin with the strongest information available',
+        text: 'A tech pack is ideal, but a reference garment, annotated images or a clear sketch can begin feasibility review. The first response should identify what is fixed, missing or open to recommendation.',
+        points: ['Product type and intended customer', 'Reference, sketch or technical files', 'Target quantity, size range and date', 'Material, branding and finish direction'],
+      },
+      {
+        title: 'Separate sample decisions from production assumptions',
+        text: 'The sample establishes what is technically and visually approved. Bulk price, quantity, material continuity and timing are confirmed against that approved result rather than guessed too early.',
+        points: ['Proposed yarn, gauge or fabric recorded', 'Measurements and construction reviewed', 'Colour, trims and artwork confirmed', 'Open risks listed before approval'],
+      },
+      {
+        title: 'Close revisions with a production-ready record',
+        text: 'Each revision should have one consolidated comment set and a clear status. The final sample, measurement chart and supporting specifications become the reference for production checks.',
+        points: ['Numbered comments and version control', 'Approval owner for each component', 'Final sample and specification sign-off', 'Production timing confirmed after approval'],
+      },
+    ],
+    faqs: [
+      { q: 'Can you make a sample without a complete tech pack?', a: 'Yes. Send the clearest reference available with dimensions, target quantity, size range and date. Missing decisions will be identified before development begins.' },
+      { q: 'How many pieces are required for sampling?', a: businessFacts.samplingMinimum.value + '. The sample scope and cost are confirmed before work starts.' },
+      { q: 'How quickly can bulk production begin?', a: `${businessFacts.productionTime.value} is typical after sample approval. The committed schedule is confirmed for the actual style, quantity, materials and buyer approval dates.` },
+    ],
+    related: [
+      { href: '/guides/knitwear-sampling-timeline-checklist/', label: 'Sampling checklist', text: 'Prepare the decisions and approval stages before development begins.' },
+      { href: '/custom-sweater-manufacturer/', label: 'Sweaters and cardigans', text: 'Apply the process to flat-knit product development.' },
+      { href: '/contact/', label: 'Submit a sample brief', text: 'Send the files and references already available for review.' },
+    ],
+  },
+  {
+    slug: 'knitwear-quality-control',
+    updated: '2026-07-17',
+    title: 'Knitwear Quality Control for Brands | YK Apparels',
+    description:
+      'Understand YK Apparels’ knitwear quality-control workflow for approved materials, measurements, workmanship, inline checks, finishing and pre-pack inspection.',
+    eyebrow: 'Quality and repeatability',
+    h1: 'Knitwear quality control tied to an approved product standard',
+    lead:
+      'Quality is easier to control when it is defined before production. YK Apparels uses the approved sample, measurement chart, material references and packing instructions as the standard for inline and final checks.',
+    image: 'sewing-machine',
+    imageAlt: 'Close view of garment stitching during an inline quality check',
+    imageLabel: 'Check quality where work happens',
+    serviceType: 'Knitwear quality control and production inspection',
+    audience: 'Fashion brands and sourcing teams managing custom knitwear and repeat orders',
+    highlights: [
+      { title: 'Approved reference first', text: 'The final sample and written specification define what production is expected to reproduce.' },
+      { title: 'Checks at handoffs', text: 'Measurements and workmanship are reviewed during production stages so recurring issues can be corrected before packing.' },
+      { title: 'Repeat-order learning', text: 'Retained references and post-order notes give replenishment programs a controlled starting point.' },
+    ],
+    sections: [
+      {
+        title: 'Define what acceptable means',
+        text: 'A general instruction to make the product high quality is not inspectable. The specification should identify measurements, tolerances, construction, appearance, trims, labels and packing requirements.',
+        points: ['Approved physical sample', 'Measurement chart and tolerances', 'Material, colour and trim references', 'Artwork, finish and packing standards'],
+      },
+      {
+        title: 'Inspect during production, not only after it',
+        text: 'Inline checks make the cause of a problem easier to identify. Knitting, linking, stitching, washing, finishing and packing are reviewed at the stage where correction is still practical.',
+        points: ['Workmanship at production handoffs', 'Measurements across the size run', 'Colour, trim and branding consistency', 'Corrective action for recurring issues'],
+      },
+      {
+        title: 'Complete a pre-pack audit',
+        text: 'Before cartons are closed, the order is reviewed against the approved appearance, measurements, labels, trims and packing specification, with any agreed inspection evidence prepared for the buyer.',
+        points: ['Final appearance and measurement review', 'Label and trim confirmation', 'Folding, polybag and carton checks', 'Inspection outcome recorded before dispatch'],
+      },
+    ],
+    faqs: [
+      { q: 'What is checked on a knitwear order?', a: 'Checks cover the approved material and colour, measurements, stitch and seam workmanship, linking, trims, branding, finishing, labels and packing requirements applicable to the style.' },
+      { q: 'Can buyers request inspection evidence?', a: 'Yes. Agree the required photographs, measurements, reports or independent inspection before production so responsibilities and timing are included in the order plan.' },
+      { q: 'How do repeat orders stay consistent?', a: 'The approved sample, measurement chart, material and trim references, packing record and post-order notes are retained as the starting standard for replenishment.' },
+    ],
+    related: [
+      { href: '/guides/knitwear-quality-control-checklist/', label: 'Buyer QC checklist', text: 'Use a practical checklist before approving production and packing.' },
+      { href: '/about/', label: 'Facility and process', text: 'See where production and quality stages take place.' },
+      { href: '/contact/', label: 'Discuss inspection needs', text: 'Share the product standard and evidence your order requires.' },
     ],
   },
 ];
