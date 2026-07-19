@@ -23,7 +23,7 @@ export const GET: APIRoute = () => {
     '## Main pages',
     '',
     `- [Home](${site.url}/): Knitwear manufacturer in Lahore, Pakistan — overview, capabilities and clients.`,
-    `- [Capabilities](${site.url}/capabilities/): Seven manufacturing capabilities, order basics (MOQ, sampling, lead times) and FAQ.`,
+    `- [Capabilities](${site.url}/capabilities/): Eight manufacturing capabilities, order basics (MOQ, sampling, lead times) and FAQ.`,
     `- [About & Facility](${site.url}/about/): Company history, production facility and quality process.`,
     `- [Clients](${site.url}/clients/): Pakistani brands YK Apparels manufactures for.`,
     `- [Contact](${site.url}/contact/): Production inquiry form, WhatsApp, email, phone and facility map.`,

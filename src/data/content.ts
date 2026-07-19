@@ -46,6 +46,16 @@ export const capabilities: Capability[] = [
     details: ['Team colours, crests and logos', 'Festival, event and corporate merch', 'Short runs with fixed delivery dates'],
   },
   {
+    slug: 'knitted-uniforms',
+    art: 'polo',
+    photo: 'sweaters-stack',
+    photoAlt: 'Folded knitted uniform garments ready for dispatch',
+    title: 'Knitted Uniforms',
+    short: 'School, corporate and team uniforms in knit — consistent colour, sizing and durability across repeat runs.',
+    long: 'Uniform programmes need the same garment made identically, intake after intake. We produce knitted uniform sweaters, cardigans, tank tops and polos for schools, institutions and companies — with locked colour standards, complete size ranges and hard-wearing construction built for daily use and easy replenishment.',
+    details: ['School, corporate and institutional programmes', 'Locked colours and complete size ranges', 'Durable construction for daily wear'],
+  },
+  {
     slug: 'kids-wear',
     art: 'frock',
     photo: 'kids-clothes',
