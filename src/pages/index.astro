@@ -45,6 +45,8 @@ import { capabilities, stats, qualityPoints } from '../data/content';
         <div class="mt-10 flex flex-wrap gap-3.5">
           <a
             href="/contact/"
+            data-track-event="inquiry_cta_click"
+            data-track-location="homepage_hero"
             class="rounded-full bg-accent px-8 py-3.5 text-sm font-bold text-accent-ink transition-all hover:-translate-y-0.5 hover:bg-accent-strong active:scale-[0.98]"
           >
             Start an inquiry
@@ -105,7 +107,7 @@ import { capabilities, stats, qualityPoints } from '../data/content';
       <SectionHeading
         eyebrow="What we make"
         title="Capabilities built around knit"
-        lead="Eight production capabilities under one roof — so your program stays in one quality loop from yarn to carton. Here are three; the rest are one click away."
+        lead={`${capabilities.length} production capabilities under one roof — so your program stays in one quality loop from yarn to carton. Here are three; the rest are one click away.`}
       />
     </div>
     <div class="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -133,6 +135,13 @@ import { capabilities, stats, qualityPoints } from '../data/content';
       >
         Explore all {capabilities.length} capabilities →
       </a>
+    </p>
+    <p class="reveal mx-auto mt-6 max-w-3xl text-center text-sm leading-relaxed text-muted">
+      Looking for a focused program?{' '}
+      <a href="/custom-sweater-manufacturer/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">Custom sweaters and cardigans</a>,{' '}
+      <a href="/knitted-polo-manufacturer/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">knitted polos</a>,{' '}
+      <a href="/knitwear-sampling-development/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">sampling and development</a>, or{' '}
+      <a href="/knitwear-quality-control/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">quality control</a>.
     </p>
   </section>
 
@@ -187,6 +196,8 @@ import { capabilities, stats, qualityPoints } from '../data/content';
           />
           <a
             href="/contact/"
+            data-track-event="inquiry_cta_click"
+            data-track-location="homepage_small_runs"
             class="mt-7 inline-block rounded-full bg-accent px-7 py-3 text-sm font-bold text-accent-ink transition-all hover:-translate-y-0.5 hover:bg-accent-strong"
           >
             Begin the conversation

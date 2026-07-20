@@ -10,6 +10,8 @@ const pageLinks = new Map();
 const factsManifest = JSON.parse(readFileSync(join(root, 'src/data/business-facts.json'), 'utf8'));
 const commercialSource = readFileSync(join(root, 'src/data/commercial-pages.ts'), 'utf8');
 const guidesSource = readFileSync(join(root, 'src/data/guides.ts'), 'utf8');
+const contentSource = readFileSync(join(root, 'src/data/content.ts'), 'utf8');
+const capabilityCount = (contentSource.match(/^  \{\n    slug:/gm) ?? []).length;
 const servicePaths = new Set(
   [...commercialSource.matchAll(/slug:\s*'([^']+)'/g)].map((match) => `/${match[1]}/`),
 );
@@ -84,6 +86,11 @@ for (const file of htmlFiles) {
   const canonical = firstMatch(html, /<link\s+rel="canonical"\s+href="([^"]*)"/i);
   const h1Count = (html.match(/<h1\b/gi) ?? []).length;
   const noindex = robots.includes('noindex');
+
+  for (const [, alt] of html.matchAll(/<img\b[^>]*\balt="([^"]*)"/gi)) {
+    if (!alt.trim()) errors.push(`${path}: image is missing useful alt text`);
+  }
+  if (/aria-disabled=/i.test(html)) errors.push(`${path}: avoid aria-disabled on non-interactive content`);
 
   if (!title) errors.push(`${path}: missing title`);
   if (!description) errors.push(`${path}: missing meta description`);
@@ -200,6 +207,9 @@ if (!existsSync(join(dist, 'downloads/knitwear-tech-pack-template.csv'))) {
 }
 
 const output = walk(dist).map((file) => readFileSync(file)).join('\n');
+if (!output.includes(`${capabilityCount} production capabilities`)) {
+  errors.push(`Rendered capability count does not match the ${capabilityCount} entries in src/data/content.ts`);
+}
 for (const staleClaim of ['one of the lowest MOQs', 'MOQ is confirmed per style', 'Lead time is quoted after']) {
   if (output.includes(staleClaim)) errors.push(`Conflicting or unsupported business claim emitted: ${staleClaim}`);
 }

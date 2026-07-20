@@ -15,7 +15,7 @@ const capabilityLinks: Record<string, { href: string; label: string }> = {
 
 <Base
   title="Sweater & Knitwear Manufacturing Capabilities | YK Apparels"
-  description="Sweaters, knitted polos, uniforms, kids wear, traditional wear, embroidery and yarn sourcing — eight garment manufacturing capabilities in Lahore, Pakistan."
+  description={`${capabilities.length} garment manufacturing capabilities in Lahore, Pakistan, including sweaters, knitted polos, uniforms, kids wear, traditional wear, embroidery and yarn sourcing.`}
   faqItems={faqs}
 >
   <section class="mx-auto max-w-6xl px-5 pt-16 pb-4 sm:px-8 lg:pt-20">
@@ -23,7 +23,7 @@ const capabilityLinks: Record<string, { href: string; label: string }> = {
       as="h1"
       eyebrow="Capabilities"
       title="Knitwear & garment manufacturing capabilities"
-      lead="Eight capabilities under one roof, one quality loop from yarn to carton. Every program below runs with inline inspection and daily production tracking."
+      lead={`${capabilities.length} capabilities under one roof, one quality loop from yarn to carton. Every program below runs with inline inspection and daily production tracking.`}
     />
   </section>
 
@@ -43,7 +43,7 @@ const capabilityLinks: Record<string, { href: string; label: string }> = {
             <ul class="mt-6 space-y-2.5">
               {cap.details.map((detail) => (
                 <li class="flex items-center gap-3 text-sm text-body">
-                  <span class="size-1.5 shrink-0 rounded-full bg-accent" />
+                  <span class="size-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
                   {detail}
                 </li>
               ))}
@@ -97,6 +97,12 @@ const capabilityLinks: Record<string, { href: string; label: string }> = {
           ))
         }
       </div>
+      <p class="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-muted">
+        Need help developing the product or protecting a repeat order?{' '}
+        <a href="/knitwear-sampling-development/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">Review the sampling workflow</a>{' '}
+        or{' '}
+        <a href="/knitwear-quality-control/" class="font-semibold text-accent-2 underline underline-offset-2 hover:text-ink">see the knitwear quality-control service</a>.
+      </p>
 
       <div class="mx-auto mt-12 max-w-4xl rounded-3xl border border-line bg-surface p-8 sm:p-10">
         <h3 class="font-display text-2xl font-semibold text-ink">Growing together, from the first piece</h3>

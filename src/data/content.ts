@@ -123,7 +123,7 @@ export const processSteps = [
 export const stats = [
   { value: '2015', label: 'Operating since' },
   { value: '10+', label: 'Years of production' },
-  { value: '7', label: 'Production capabilities' },
+  { value: String(capabilities.length), label: 'Production capabilities' },
   { value: '5', label: 'Steps from brief to delivery' },
 ] as const;
 

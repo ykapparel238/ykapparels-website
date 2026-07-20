@@ -48,6 +48,8 @@ const isActive = (href: string) =>
 
       <a
         href="/contact/"
+        data-track-event="inquiry_cta_click"
+        data-track-location="header_desktop"
         class="hidden rounded-full bg-accent px-4.5 py-2 text-sm font-semibold text-accent-ink transition-colors hover:bg-accent-strong sm:inline-block"
       >
         Start an inquiry
@@ -87,7 +89,7 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href="/contact/" class="mt-3 mb-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-ink active:scale-[0.98]">
+      <a href="/contact/" data-track-event="inquiry_cta_click" data-track-location="header_mobile" class="mt-3 mb-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-ink active:scale-[0.98]">
         Start an inquiry
       </a>
       </nav>

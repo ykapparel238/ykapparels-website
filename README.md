@@ -36,6 +36,11 @@ Both variables are optional and must be set in Cloudflare rather than committed:
 - `PUBLIC_WEB3FORMS_ACCESS_KEY` enables the inquiry form after the receiving email is verified.
 - `PUBLIC_GA_MEASUREMENT_ID` enables GA4 and its consent banner when it matches `G-...`.
 
+For the production SEO measurement plan, set `PUBLIC_GA_MEASUREMENT_ID` in the Cloudflare
+production environment, redeploy, accept analytics in a test browser, and mark `generate_lead`
+as a GA4 key event. Supporting contact events include `inquiry_cta_click`, `whatsapp_click`,
+`email_click`, `phone_click`, and `resource_download`.
+
 Without the form key, the contact page intentionally offers WhatsApp instead of displaying a
 broken form. Without a valid analytics ID, no analytics script or consent banner is emitted.
 
