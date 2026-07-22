@@ -14,13 +14,13 @@
   --sunken: #efeadb;
   --ink: #10291f;
   --body: #37473e;
-  --muted: #64735f;
+  --muted: #5b6a56; /* WCAG AA on bg + sunken (was #64735f) */
   --line: #ded6bf;
   --accent: #14563e;
   --accent-strong: #0d3f2d;
   --accent-ink: #f8f5ec;
   --accent-soft: #e6e8d3;
-  --accent-2: #96702a;
+  --accent-2: #8a6626; /* WCAG AA on bg (was #96702a) */
   --panel: #0e291f;
   --panel-ink: #f4efdd;
   --panel-muted: #a9bcaa;
@@ -95,6 +95,25 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent-2);
   outline-offset: 2px;
+}
+
+/* Skip-to-content: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 150ms ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 /* Avoid double-tap-zoom misfires on rapid taps */

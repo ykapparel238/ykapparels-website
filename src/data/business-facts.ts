@@ -38,5 +38,6 @@ export const keyFacts = [
   },
   { label: businessFacts.productionTime.label, value: `${businessFacts.productionTime.value} (typical)` },
   { label: businessFacts.markets.label, value: businessFacts.markets.value },
+  { label: businessFacts.solarCapacity.label, value: businessFacts.solarCapacity.value },
   { label: 'Contact', value: 'contact@ykapparels.com · WhatsApp +92 333 6264063' },
 ] as const;

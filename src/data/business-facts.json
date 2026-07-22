@@ -34,6 +34,11 @@
       "label": "International orders",
       "value": "Shipping and export support available",
       "detail": "Destination, delivery terms, shipping responsibility and required documentation are confirmed for each order before production is committed."
+    },
+    "solarCapacity": {
+      "label": "On-site solar capacity",
+      "value": "29.25 kWp installed solar capacity",
+      "detail": "The installation uses 50 panels rated at 585 W each. Actual electricity generation varies with sunlight, orientation, system uptime and conversion losses."
     }
   }
 }

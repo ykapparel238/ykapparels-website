@@ -50,9 +50,10 @@ Social icons are intentionally visible but disabled until verified profile URLs 
 ## Content and proof policy
 
 Do not publish unverified certifications, production capacity, lead times, minimum quantities,
-export terms, client quotes or performance numbers. Add exact claims only after the business can
-provide current evidence and approves the public wording. The client brand list also requires
-permission to display.
+export terms, renewable-energy output, client quotes or performance numbers. Add exact claims only
+after the business can provide current evidence and approves the public wording. Installed solar
+capacity is not the same as measured electricity generation; publish generation figures only from
+the inverter or energy-monitoring record. The client brand list also requires permission to display.
 
 Facility and product photography should progressively replace the current licensed stock images.
 This is the largest remaining on-site trust improvement.
