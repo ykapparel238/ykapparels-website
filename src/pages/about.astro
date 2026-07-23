@@ -8,6 +8,39 @@ import { site } from '../data/site';
 import { qualityPoints } from '../data/content';
 import { keyFacts, businessFactsMeta } from '../data/business-facts';
 
+// Line-art icon per fact, matched by keyword — purely presentational.
+const factIcons: Record<string, string> = {
+  calendar: '<rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/>',
+  pin: '<path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  tag: '<path d="M3.6 12 12 3.6h7.4V11L11 19.4 3.6 12Z"/><circle cx="15.5" cy="8" r="1.2"/>',
+  grid: '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/>',
+  spark: '<path d="M12 3l1.9 4.8L18.7 9.7l-4.8 1.9L12 16.4l-1.9-4.8L5.3 9.7l4.8-1.9L12 3Z"/>',
+  box: '<path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="M4 7l8 4 8-4M12 11.2V21"/>',
+  ruler: '<rect x="3.5" y="8" width="17" height="8" rx="1.5"/><path d="M8 8v3M12 8v4M16 8v3"/>',
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 2"/>',
+  globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.6 12h16.8M12 3.6c2.6 2.6 2.6 14.2 0 16.8M12 3.6c-2.6 2.6-2.6 14.2 0 16.8"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/>',
+  chat: '<path d="M4 5h16v11H8l-4 4V5Z"/>',
+  dot: '<circle cx="12" cy="12" r="3.2"/>',
+};
+function iconFor(label: string): string {
+  const l = label.toLowerCase();
+  if (l.includes('found')) return factIcons.calendar;
+  if (l.includes('location')) return factIcons.pin;
+  if (l.includes('company')) return factIcons.tag;
+  // order matters: check 'sample' and 'production' before 'minimum'/'product'
+  if (l.includes('sample') || l.includes('sampling')) return factIcons.ruler;
+  if (l.includes('production') || l.includes('lead')) return factIcons.clock;
+  if (l.includes('product')) return factIcons.grid;
+  if (l.includes('service')) return factIcons.spark;
+  if (l.includes('minimum') || l.includes('moq') || l.includes('order')) return factIcons.box;
+  if (l.includes('market')) return factIcons.globe;
+  if (l.includes('solar') || l.includes('energy') || l.includes('power') || l.includes('capacity'))
+    return factIcons.sun;
+  if (l.includes('contact')) return factIcons.chat;
+  return factIcons.dot;
+}
+
 const values = [
   {
     title: 'Honest answers first',
@@ -54,24 +87,41 @@ const values = [
     />
   </section>
 
-  <!-- At a glance: plain facts, easy for buyers (and AI assistants) to quote -->
-  <section class="mx-auto max-w-6xl px-5 pb-14 sm:px-8" aria-label="YK Apparels at a glance">
-    <div class="rounded-3xl border border-line bg-surface p-7 sm:p-10">
-      <SectionHeading eyebrow="At a glance" title="The facts, in one place" />
-      <dl class="mt-8 grid gap-x-10 gap-y-5 sm:grid-cols-2">
-        {
-          keyFacts.map((fact) => (
-            <div class="grid grid-cols-[9.5rem_1fr] gap-3 border-b border-line pb-4">
-              <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{fact.label}</dt>
-              <dd class="text-sm leading-relaxed text-body">{fact.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
-      <p class="mt-5 text-xs text-muted">
-        Operating facts last reviewed <time datetime={businessFactsMeta.reviewedOn}>17 July 2026</time>.
-      </p>
+  <!-- At a glance: iconed fact cards, easy for buyers (and AI assistants) to quote -->
+  <section class="mx-auto max-w-6xl px-5 pb-16 sm:px-8" aria-label="YK Apparels at a glance">
+    <div class="reveal">
+      <SectionHeading
+        eyebrow="At a glance"
+        title="Everything a buyer checks first"
+        lead="The facts brands ask for before an inquiry — location, products, minimums and timings, in one place."
+      />
     </div>
+    <dl class="mt-8 grid rounded-2xl border border-line bg-surface px-6 sm:grid-cols-2 sm:gap-x-12 sm:px-8">
+      {
+        keyFacts.map((fact) => (
+          <div class="flex items-start gap-3 border-b border-line py-3.5 last:border-b-0 sm:[&:nth-last-child(2)]:border-b-0">
+            <svg
+              class="mt-0.5 size-4 shrink-0 text-accent-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              set:html={iconFor(fact.label)}
+            />
+            <div class="min-w-0">
+              <dt class="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{fact.label}</dt>
+              <dd class="mt-0.5 text-sm font-medium leading-snug text-ink">{fact.value}</dd>
+            </div>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="mt-4 text-xs text-muted">
+      Operating facts last reviewed <time datetime={businessFactsMeta.reviewedOn}>17 July 2026</time>.
+    </p>
   </section>
 
   <!-- Facility -->
