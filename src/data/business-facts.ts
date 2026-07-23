@@ -19,10 +19,20 @@ export const commercialFactKeys: ReadonlyArray<BusinessFactKey> = [
   'productionTime',
 ];
 
+// Ordered so the "At a glance" grid pairs equal-length facts on the same row:
+// short one-liners first (3 rows), then two-line facts, then the long lists.
 export const keyFacts = [
-  { label: 'Company', value: 'YK Apparels — custom knitwear and garment manufacturer' },
   { label: 'Location', value: 'Raiwind Road, Lahore, Pakistan' },
   { label: 'Founded', value: '2015' },
+  { label: businessFacts.minimumOrder.label, value: businessFacts.minimumOrder.value },
+  {
+    label: 'Sample minimum and timing',
+    value: `${businessFacts.samplingMinimum.value}; ${businessFacts.samplingTime.value} typical`,
+  },
+  { label: businessFacts.markets.label, value: businessFacts.markets.value },
+  { label: businessFacts.solarCapacity.label, value: businessFacts.solarCapacity.value },
+  { label: 'Company', value: 'YK Apparels — custom knitwear and garment manufacturer' },
+  { label: businessFacts.productionTime.label, value: `${businessFacts.productionTime.value} (typical)` },
   {
     label: 'Products',
     value: 'Sweaters, cardigans, knitted polo shirts, kids wear, kurta shalwar, event and team knits',
@@ -31,13 +41,5 @@ export const keyFacts = [
     label: 'Services',
     value: 'Custom development, sampling, private-label production, in-house embroidery, yarn and fabric sourcing',
   },
-  { label: businessFacts.minimumOrder.label, value: businessFacts.minimumOrder.value },
-  {
-    label: 'Sample minimum and timing',
-    value: `${businessFacts.samplingMinimum.value}; ${businessFacts.samplingTime.value} typical`,
-  },
-  { label: businessFacts.productionTime.label, value: `${businessFacts.productionTime.value} (typical)` },
-  { label: businessFacts.markets.label, value: businessFacts.markets.value },
-  { label: businessFacts.solarCapacity.label, value: businessFacts.solarCapacity.value },
   { label: 'Contact', value: 'contact@ykapparels.com · WhatsApp +92 333 6264063' },
 ] as const;
