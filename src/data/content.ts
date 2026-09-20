@@ -23,7 +23,11 @@ export const capabilities: Capability[] = [
     title: 'Sweaters & Knitwear',
     short: 'Flat-knit sweaters and knit garments in fine-gauge yarns, from classic crews to fashion knits.',
     long: 'Our core strength as a sweater manufacturer. We produce flat-knit sweaters and knitwear across gauges and yarn compositions — lambswool, acrylic blends, cotton and specialty yarns — with in-house linking, mending and finishing.',
-    details: ['Crew necks, cardigans, turtlenecks, vests', 'Multiple gauges and yarn blends', 'In-house linking and finishing'],
+    details: [
+      'Crew necks, cardigans, turtlenecks, vests',
+      `${businessFacts.gaugeRange.value} machines, multiple yarn blends`,
+      'In-house linking and finishing',
+    ],
   },
   {
     slug: 'knitted-polos',
@@ -197,6 +201,10 @@ export const faqs = [
   {
     q: 'What are your production lead times?',
     a: `${businessFacts.productionTime.value}. ${businessFacts.productionTime.detail}`,
+  },
+  {
+    q: 'What knitting gauges do you work with?',
+    a: `${businessFacts.gaugeRange.value}. ${businessFacts.gaugeRange.detail}`,
   },
   {
     q: 'Do you ship internationally?',

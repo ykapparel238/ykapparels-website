@@ -25,6 +25,11 @@
       "value": "60–90 days after sample approval",
       "detail": "The committed schedule depends on style complexity, quantity, material availability, buyer approvals and the required delivery date."
     },
+    "gaugeRange": {
+      "label": "Knitting gauges",
+      "value": "7, 10, 12 and 14 gauge",
+      "detail": "The suitable gauge for a style is confirmed against the desired hand-feel, yarn and construction before sampling."
+    },
     "markets": {
       "label": "Markets served",
       "value": "Pakistan, the US, UK and Europe",

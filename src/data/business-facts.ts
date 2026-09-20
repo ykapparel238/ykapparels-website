@@ -25,6 +25,7 @@ export const keyFacts = [
   { label: 'Location', value: 'Raiwind Road, Lahore, Pakistan' },
   { label: 'Founded', value: '2015' },
   { label: businessFacts.minimumOrder.label, value: businessFacts.minimumOrder.value },
+  { label: businessFacts.gaugeRange.label, value: businessFacts.gaugeRange.value },
   {
     label: 'Sample minimum and timing',
     value: `${businessFacts.samplingMinimum.value}; ${businessFacts.samplingTime.value} typical`,

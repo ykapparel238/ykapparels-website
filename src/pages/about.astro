@@ -29,7 +29,7 @@ function iconFor(label: string): string {
   if (l.includes('location')) return factIcons.pin;
   if (l.includes('company')) return factIcons.tag;
   // order matters: check 'sample' and 'production' before 'minimum'/'product'
-  if (l.includes('sample') || l.includes('sampling')) return factIcons.ruler;
+  if (l.includes('sample') || l.includes('sampling') || l.includes('gauge')) return factIcons.ruler;
   if (l.includes('production') || l.includes('lead')) return factIcons.clock;
   if (l.includes('product')) return factIcons.grid;
   if (l.includes('service')) return factIcons.spark;
