@@ -7,7 +7,7 @@
   "facts": {
     "minimumOrder": {
       "label": "Minimum order (MOQ)",
-      "value": "From 5 pieces per style",
+      "value": "From 50 pieces per style, per colour",
       "detail": "The practical quantity is confirmed against construction, yarn, colour, trims and material availability before sampling or production is committed."
     },
     "samplingMinimum": {
@@ -22,7 +22,7 @@
     },
     "productionTime": {
       "label": "Typical production time",
-      "value": "30–60 days after sample approval",
+      "value": "60–90 days after sample approval",
       "detail": "The committed schedule depends on style complexity, quantity, material availability, buyer approvals and the required delivery date."
     },
     "markets": {
